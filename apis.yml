@@ -1,8 +1,31 @@
 aid: mobile-action
 name: Mobile Action
-description: Mobile Action is a company surfaced as a portfolio company of 500-global and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  MobileAction is an app-store marketing intelligence platform used by 5,000+
+  mobile app and game companies for App Store Optimization (ASO), Apple Search
+  Ads campaign management (CMP), ad-creative intelligence across 100M+ creatives,
+  and market benchmarking. Its products include MobileAction AI, ASO
+  Intelligence, Ad Intelligence, Market Intelligence, CPP Intelligence, and
+  managed ASO/Apple Ads services. The MobileAction API exposes this intelligence
+  programmatically over a credit-metered REST interface at
+  https://api.mobileaction.co, authenticated with a per-account API key passed as
+  the `token` query parameter, spanning App Store and Google Play keyword
+  rankings, app metadata, ad creatives, Search Ads, and dashboard data. Backed by
+  500 Global.
 url: https://raw.githubusercontent.com/api-evangelist/mobile-action/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.mobileaction.co/wp-content/uploads/ma-featured-image-1.png
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
@@ -11,10 +34,35 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-apis: []
+- App Store Optimization
+- ASO
+- Mobile Marketing
+- Apple Search Ads
+- App Intelligence
+- Ad Intelligence
+- Market Intelligence
+- Analytics
+apis:
+- name: MobileAction API
+  description: >-
+    Credit-metered REST intelligence API exposing App Store and Google Play
+    keyword rankings, app metadata, ad creatives, Apple Search Ads / CPP data,
+    and dashboard resources. Authenticated with an account API key passed as the
+    `token` query parameter.
+  humanURL: https://docs.mobileaction.co/
+  baseURL: https://api.mobileaction.co
+  properties:
+  - type: Documentation
+    url: https://docs.mobileaction.co/
+  - type: GettingStarted
+    url: https://docs.mobileaction.co/guide/introduction
+  - type: Authentication
+    url: authentication/mobile-action-authentication.yml
+  - type: Conventions
+    url: conventions/mobile-action-conventions.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -23,3 +71,50 @@ maintainers:
 common:
 - type: Website
   url: https://mobileaction.co
+- type: DeveloperPortal
+  url: https://docs.mobileaction.co/
+- type: Documentation
+  url: https://docs.mobileaction.co/
+- type: APIReference
+  url: https://docs.mobileaction.co/
+- type: GettingStarted
+  url: https://docs.mobileaction.co/guide/introduction
+- type: Authentication
+  url: authentication/mobile-action-authentication.yml
+- type: Conventions
+  url: conventions/mobile-action-conventions.yml
+- type: Lifecycle
+  url: lifecycle/mobile-action-lifecycle.yml
+- type: StatusPage
+  url: https://status.mobileaction.co
+- type: Conformance
+  url: conformance/mobile-action-conformance.yml
+- type: LLMsTxt
+  url: llms/mobile-action-llms.txt
+- type: TrustCenter
+  url: security/mobile-action-trust-center.yml
+- type: Compliance
+  url: https://trust.mobileaction.co/
+- type: DomainSecurity
+  url: security/mobile-action-domain-security.yml
+- type: Support
+  url: https://helpcenter.mobileaction.co/en
+- type: Blog
+  url: https://www.mobileaction.co/blog/
+- type: Pricing
+  url: https://www.mobileaction.co/pricing/
+- type: SignUp
+  url: https://app.mobileaction.co/register
+- type: Login
+  url: https://app.mobileaction.co/
+- type: TermsOfService
+  url: https://www.mobileaction.co/terms-of-service/
+- type: PrivacyPolicy
+  url: https://www.mobileaction.co/privacy-policy/
+- type: GitHubOrganization
+  url: https://github.com/mobileaction
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 8
+  pass: local-v1
