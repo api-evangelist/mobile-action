@@ -1,0 +1,43 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.mobileaction.co/guide/introduction
+docs: https://docs.mobileaction.co/guide/introduction
+api_base_url: https://api.mobileaction.co
+authentication:
+  style: api-key
+  location: query
+  parameter: token
+  ref: authentication/mobile-action-authentication.yml
+idempotency:
+  supported: false
+  notes: No idempotency-key mechanism is documented; the API is predominantly
+    read-oriented intelligence data.
+pagination:
+  documented: false
+  notes: Result sets are scoped per endpoint by explicit parameters (app id,
+    country, date range, keyword); no global cursor/offset pagination
+    convention is published.
+rate_limiting:
+  model: credit-based
+  signaling: response-headers
+  headers:
+  - name: X-Credit-Remaining
+    meaning: Credits left in the account balance after the call.
+  - name: X-Credit-Cost
+    meaning: Credits consumed by the current call (1-200 depending on service).
+  - name: X-Credit-Reset
+    meaning: When the credit allotment resets.
+  balance_endpoint: /api-key
+  notes: Usage is metered in credits rather than requests-per-window; each
+    endpoint has a published per-call credit cost.
+versioning:
+  scheme: unversioned-host
+  notes: The production host https://api.mobileaction.co carries no version path
+    segment; changes are communicated via the docs and status page.
+error_envelope:
+  format: json
+  documented: false
+  ref: null
+cross_links:
+  authentication: authentication/mobile-action-authentication.yml
+  lifecycle: lifecycle/mobile-action-lifecycle.yml

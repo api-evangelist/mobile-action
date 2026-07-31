@@ -1,0 +1,17 @@
+generated: '2026-07-20'
+method: searched
+source: https://status.mobileaction.co
+versioning:
+  scheme: unversioned-host
+  current: null
+  docs: https://docs.mobileaction.co/guide/introduction
+  notes: Production host https://api.mobileaction.co carries no version segment.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: No published deprecation/sunset policy located.
+sla:
+  url: null
+  uptime_target: null
+status_page: https://status.mobileaction.co
+deprecated_operations: []

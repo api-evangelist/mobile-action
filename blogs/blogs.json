@@ -1,0 +1,14 @@
+{
+  "repo": "mobile-action",
+  "feeds": [
+    {
+      "source": "https://helpcenter.mobileaction.co/en",
+      "feed_url": "https://helpcenter.mobileaction.co/en",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-07-25T15:00:33Z"
+}

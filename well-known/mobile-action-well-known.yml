@@ -1,0 +1,19 @@
+generated: '2026-07-20'
+method: none
+host: https://mobileaction.co
+notes: >-
+  No .well-known discovery documents were served. The docs host
+  (docs.mobileaction.co) returns HTTP 200 for arbitrary paths (SPA index
+  fallback, identical 32KB HTML), so /security.txt, /llms.txt, /openapi.json
+  and /swagger.json on that host are NOT real documents and were not saved.
+documents:
+- path: /.well-known/security.txt
+  status: 404
+- path: /.well-known/openid-configuration
+  status: 404
+- path: /.well-known/oauth-authorization-server
+  status: 404
+- path: /.well-known/api-catalog
+  status: 404
+- path: /.well-known/ai-plugin.json
+  status: 404

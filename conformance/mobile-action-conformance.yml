@@ -1,0 +1,22 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.mobileaction.co/guide/introduction
+standards:
+- id: oauth2
+  conforms: false
+  evidence: API authenticates with a single query-parameter API key ("token"); no
+    OAuth2 flows documented.
+- id: oidc
+  conforms: false
+- id: apikey-auth
+  conforms: true
+  evidence: Documented `token` query-parameter API key on api.mobileaction.co.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: No application/problem+json error envelope documented.
+- id: soc2
+  conforms: true
+  evidence: SOC 2 named on the MobileAction Trust Center (trust.mobileaction.co).
+- id: gdpr
+  conforms: true
+  evidence: GDPR compliance named on the MobileAction Trust Center.

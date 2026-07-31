@@ -1,0 +1,27 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.mobileaction.co/guide/introduction
+docs: https://docs.mobileaction.co/guide/introduction
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+  oauth2_flows: []
+  notes: >-
+    The MobileAction API uses a single API key ("token") passed as a query
+    parameter on every request. Keys are issued per account and metered against
+    a credit balance; the remaining balance can be checked via the /api-key
+    endpoint or the X-Credit-Remaining response header. No OAuth surface is
+    documented.
+schemes:
+- name: apiKeyToken
+  type: apiKey
+  in: query
+  parameter: token
+  description: >-
+    Account API key supplied as the `token` query parameter on each request
+    against https://api.mobileaction.co. Retrieve and rotate keys from the
+    MobileAction dashboard.
+  sources:
+  - https://docs.mobileaction.co/guide/introduction

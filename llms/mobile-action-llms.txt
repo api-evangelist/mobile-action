@@ -1,0 +1,37 @@
+# MobileAction
+
+> MobileAction is an app-store marketing intelligence platform used by 5,000+ mobile app and game companies for App Store Optimization (ASO), Apple Search Ads campaign management, ad-creative intelligence, and market benchmarking. The MobileAction API exposes this intelligence programmatically over a credit-metered REST interface at https://api.mobileaction.co, authenticated with a per-account API key passed as the `token` query parameter.
+
+## API
+
+- [MobileAction API docs](https://docs.mobileaction.co/): REST intelligence API. Base URL https://api.mobileaction.co. Auth: API key via `token` query parameter. Usage metered in credits (X-Credit-Remaining / X-Credit-Cost / X-Credit-Reset headers; balance via /api-key).
+- [Getting started / introduction](https://docs.mobileaction.co/guide/introduction): base URL, authentication, and credit model.
+
+## Service areas
+
+- App Store: keyword rankings, app metadata, category/app lists (iOS).
+- Google Play Store: keyword rankings, metadata, Play Store performance.
+- Ad Intelligence: app creatives, ad badges, country distribution across 100M+ creatives.
+- Search Ads / CMP: Apple Search Ads campaign data and CPP (Custom Product Page) intelligence.
+- Dashboard: tracked apps, daily rankings, keyword management.
+- Other: app matching, visibility scores.
+
+## Docs
+
+- [Help Center](https://helpcenter.mobileaction.co/en)
+- [Mobile Growth University](https://university.mobileaction.co/)
+- [Blog](https://www.mobileaction.co/blog/)
+- [Pricing](https://www.mobileaction.co/pricing/)
+- [Status](https://status.mobileaction.co)
+- [Trust Center](https://trust.mobileaction.co/) (SOC 2, GDPR)
+- [Terms of Service](https://www.mobileaction.co/terms-of-service/)
+- [Privacy Policy](https://www.mobileaction.co/privacy-policy/)
+
+## Repo artifacts
+
+- Authentication profile: authentication/mobile-action-authentication.yml
+- API conventions: conventions/mobile-action-conventions.yml
+- Lifecycle: lifecycle/mobile-action-lifecycle.yml
+- Conformance: conformance/mobile-action-conformance.yml
+- Domain security: security/mobile-action-domain-security.yml
+- Trust center: security/mobile-action-trust-center.yml
