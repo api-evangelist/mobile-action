@@ -2,39 +2,50 @@ aid: mobile-action
 name: Mobile Action
 description: >-
   MobileAction is an app-store marketing intelligence platform used by 5,000+
-  mobile app and game companies for App Store Optimization (ASO), Apple Search
-  Ads campaign management (CMP), ad-creative intelligence across 100M+ creatives,
-  and market benchmarking. Its products include MobileAction AI, ASO
-  Intelligence, Ad Intelligence, Market Intelligence, CPP Intelligence, and
-  managed ASO/Apple Ads services. The MobileAction API exposes this intelligence
-  programmatically over a credit-metered REST interface at
+  mobile app and game companies for App Store Optimization (ASO), Apple Ads
+  campaign management (CMP), ad-creative intelligence across 90M+ creatives, CPP
+  (Custom Product Page) intelligence and market benchmarking. It is an InMobi
+  Advertising company. MobileAction publishes two machine surfaces over the same
+  intelligence core and the same credit allowance: a credit-metered REST API at
   https://api.mobileaction.co, authenticated with a per-account API key passed as
-  the `token` query parameter, spanning App Store and Google Play keyword
-  rankings, app metadata, ad creatives, Search Ads, and dashboard data. Backed by
-  500 Global.
+  the `token` query parameter, covering App Store and Google Play keyword and
+  category rankings, app metadata and version timelines, reviews and review word
+  analysis, download/revenue estimations, ad creatives, Apple Ads reporting and
+  dashboard data; and a remote MCP server at https://mcp.mobileaction.co/mcp
+  exposing 88 tools whose catalogue is readable anonymously. No OpenAPI document
+  is published. API access is enterprise-only, arranged through sales, with keys
+  issued by a Customer Success Manager. Backed by 500 Global.
 url: https://raw.githubusercontent.com/api-evangelist/mobile-action/refs/heads/main/apis.yml
 accessModel:
-  pricing: unknown
-  onboarding: self-serve
+  pricing: enterprise
+  onboarding: sales
   trial: false
   try_now: false
   public: false
-  label: Self-serve signup
-  confidence: medium
+  label: Enterprise API access arranged through sales
+  confidence: high
   source:
-  - authentication
-  generated: '2026-07-22'
-  method: derived
+  - https://docs.mobileaction.co/guide/introduction
+  - https://docs.mobileaction.co/mcp/server-setup
+  - https://www.mobileaction.co/pricing/
+  notes: >-
+    The API introduction states "This feature is available for enterprise
+    customers. Contact sales for further information," the pricing page lists API
+    Solutions as contact-us only, and the MCP setup page says the token is
+    "provided by your Customer Success Manager." The platform products (ASO
+    Intelligence, MobileAction CMP) do have self-serve tiers; the API does not.
+  generated: '2026-08-13'
+  method: searched
 image: https://www.mobileaction.co/wp-content/uploads/ma-featured-image-1.png
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - 500-global
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profiled
+x-tier-reason: mcp-server-and-documented-rest-surface-captured
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-20'
+modified: '2026-08-13'
 tags:
 - Company
 - App Store Optimization
@@ -45,6 +56,10 @@ tags:
 - Ad Intelligence
 - Market Intelligence
 - Analytics
+- MCP
+- Agent Tools
+- App Store Intelligence
+- Mobile Measurement
 apis:
 - name: MobileAction API
   description: >-
@@ -63,6 +78,31 @@ apis:
     url: authentication/mobile-action-authentication.yml
   - type: Conventions
     url: conventions/mobile-action-conventions.yml
+  - type: RateLimits
+    url: rate-limits/mobile-action-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/mobile-action-problem-types.yml
+  - type: DataModel
+    url: data-model/mobile-action-data-model.yml
+- name: MobileAction MCP Server
+  description: >-
+    Remote Model Context Protocol server exposing 88 MobileAction tools (App
+    Store and Google Play keyword/category/app intelligence, Ad Intelligence, CPP
+    Intelligence, Dashboard, Search Ads and utility services) over streamable
+    HTTP at MCP protocol 2025-06-18. Authenticated by appending the account API
+    token to the endpoint URL; calls draw from the same credit allowance as the
+    REST API. tools/list answers anonymously with full input schemas.
+  humanURL: https://docs.mobileaction.co/mcp/server-setup
+  baseURL: https://mcp.mobileaction.co/mcp
+  properties:
+  - type: MCPServer
+    url: mcp/mobile-action-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/mobile-action-tool-crosswalk.yml
+  - type: Documentation
+    url: https://docs.mobileaction.co/mcp/what-is-mcp
+  - type: GettingStarted
+    url: https://docs.mobileaction.co/mcp/server-setup
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -113,8 +153,32 @@ common:
   url: https://www.mobileaction.co/privacy-policy/
 - type: GitHubOrganization
   url: https://github.com/mobileaction
+- type: MCPServer
+  url: mcp/mobile-action-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/mobile-action-tool-crosswalk.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Packages
+  url: packages/mobile-action-packages.yml
+- type: WellKnown
+  url: well-known/mobile-action-well-known.yml
+- type: OAuthScopes
+  url: scopes/mobile-action-scopes.yml
+- type: RateLimits
+  url: rate-limits/mobile-action-rate-limits.yml
+- type: Plans
+  url: plans/mobile-action-plans-pricing.yml
+- type: DataModel
+  url: data-model/mobile-action-data-model.yml
+- type: ErrorCatalog
+  url: errors/mobile-action-problem-types.yml
+- type: LLMsTxt
+  url: llms/mobile-action-llms-published.txt
+- type: HelpCenter
+  url: https://helpcenter.mobileaction.co/en
 x-enrichment:
-  date: '2026-07-20'
+  date: '2026-08-13'
   status: enriched
-  artifacts_added: 8
+  artifacts_added: 13
   pass: local-v1
