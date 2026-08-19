@@ -1,0 +1,92 @@
+generated: '2026-08-13'
+method: searched
+source: https://registry.npmjs.org/-/v1/search?text=mobileaction + https://api.github.com/orgs/mobileaction/repos
+summary:
+  api_client_sdks: 0
+  first_party_packages: 5
+  note: 'MobileAction publishes NO first-party client library for the MobileAction API in any language.
+    The five packages below are first-party npm publications from the @mobileaction scope, but all of
+    them are internal front-end tooling (Vue UI component libraries, shared Vue modules, an ESLint config)
+    for MobileAction''s own web application — none of them wraps api.mobileaction.co. Registries probed
+    with no MobileAction API client found: npm, PyPI, RubyGems, and the public GitHub org (github.com/mobileaction
+    exposes exactly one public repo, "github-actions", a reusable Action template).'
+packages:
+- language: javascript
+  registry: npm
+  name: '@mobileaction/action-kit'
+  url: https://www.npmjs.com/package/@mobileaction/action-kit
+  install: npm install @mobileaction/action-kit
+  official: true
+  kind: ui-components
+  api_client: false
+  version: 1.59.0
+  published: '2026-07-24'
+  license: MIT
+  repository: https://github.com/mobileaction/action-kit
+  note: UI component library for the MobileAction web app. Actively maintained (~12.8k downloads/month)
+    but not an API client.
+- language: javascript
+  registry: npm
+  name: '@mobileaction/ma-ui-kit'
+  url: https://www.npmjs.com/package/@mobileaction/ma-ui-kit
+  install: npm install @mobileaction/ma-ui-kit
+  official: true
+  kind: ui-components
+  api_client: false
+  version: 1.7.7
+  published: '2022-12-28'
+  license: MIT
+  repository: https://github.com/mobileaction/ma-ui-kit
+  note: Predecessor Vue component kit; last release 2022-12-28, superseded by action-kit.
+- language: javascript
+  registry: npm
+  name: '@mobileaction/ui-modules'
+  url: https://www.npmjs.com/package/@mobileaction/ui-modules
+  install: npm install @mobileaction/ui-modules
+  official: true
+  kind: ui-modules
+  api_client: false
+  version: 3.5.0
+  published: '2023-04-19'
+  license: UNLICENSED
+  repository: https://github.com/mobileaction/ui-modules
+- language: javascript
+  registry: npm
+  name: '@mobileaction/ui-modules-project'
+  url: https://www.npmjs.com/package/@mobileaction/ui-modules-project
+  install: npm install @mobileaction/ui-modules-project
+  official: true
+  kind: ui-modules
+  api_client: false
+  version: 1.1.2
+  published: '2023-03-08'
+  license: UNLICENSED
+  repository: https://github.com/mobileaction/ui-modules
+- language: javascript
+  registry: npm
+  name: '@mobileaction/eslint-config'
+  url: https://www.npmjs.com/package/@mobileaction/eslint-config
+  install: npm install -D @mobileaction/eslint-config
+  official: true
+  kind: lint-config
+  api_client: false
+  version: 3.4.7
+  published: '2023-03-23'
+  license: UNLICENSED
+  repository: https://github.com/mobileaction/ui-modules
+registries_probed:
+- registry: npm
+  query: mobileaction
+  result: 5 first-party @mobileaction packages, none an API client
+- registry: pypi
+  query: mobileaction
+  result: 404 Not Found
+- registry: rubygems
+  query: mobileaction
+  result: not found
+- registry: github
+  query: orgs/mobileaction/repos
+  result: 1 public repo (github-actions), no SDK
+x-finding: The agent-facing surface MobileAction actually ships is the remote MCP server (mcp/mobile-action-mcp.yml),
+  not a language SDK. An integrator writes raw HTTP against https://api.mobileaction.co or points an MCP
+  client at https://mcp.mobileaction.co/mcp.

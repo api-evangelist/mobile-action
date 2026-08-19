@@ -1,0 +1,348 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.mobileaction.co/guide/introduction
+docs: https://docs.mobileaction.co/guide/introduction
+model: credit-quota
+model_note: 'MobileAction does not publish a requests-per-second/minute rate limit. Usage is metered as
+  CREDITS: each account has a credit total per reset period (hours), each endpoint costs a published number
+  of credits per request (1-200), and the balance is returned on every successful response as headers.'
+headers:
+- name: X-Credit-Cost
+  meaning: Credits the endpoint charged for this request
+  observed: true
+  observed_note: 'Observed on a live unauthenticated probe: GET https://api.mobileaction.co/appstore-keyword-ranking/284882215/US/top-keywords
+    returned HTTP 401 with x-credit-cost: 20, so the cost header is emitted even when the call is rejected.'
+- name: X-Credit-Remaining
+  meaning: Credits left in the current period
+- name: X-Credit-Reset
+  meaning: Seconds until the credit allotment resets
+retry_after: false
+standard_ratelimit_headers: false
+standard_ratelimit_headers_note: No RateLimit-* (RFC 9331 draft) or X-RateLimit-* headers were observed
+  or documented.
+exhaustion_status: null
+exhaustion_note: The docs do not state the status code returned when credits are exhausted, and it cannot
+  be observed without an authenticated key. Recorded as unknown rather than guessed.
+balance_endpoint:
+  method: GET
+  path: /api-key
+  credits: 0
+  response_fields:
+    creditTotal: Total credits per period
+    creditRemaining: Remaining credits for the current period
+    creditResetPeriod: Credit period in hours
+    creditResetTime: Remaining credit reset time in seconds
+  example_response:
+    success: true
+    data:
+      creditTotal: 4000
+      creditRemaining: 3012
+      creditResetPeriod: 24
+      creditResetTime: 511
+  note: The documented example shows a 4,000-credit allowance on a 24-hour reset period; the actual allowance
+    is set per contract.
+shared_with_mcp: true
+shared_with_mcp_note: Calls made through the remote MCP server (https://mcp.mobileaction.co/mcp) draw
+  from the SAME credit allowance as direct REST calls, and every MCP result carries a credits object with
+  cost, remaining balance and reset time.
+limit_count: 48
+limits:
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: dashboard
+  operation: Dashboard Apps
+  endpoint: GET /gateway/account/app/tracked
+  credits_per_request: 5
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: dashboard
+  operation: Daily Keyword Rankings
+  endpoint: GET /gateway/account/app/{trackId}/keywords/rankings/{countryCode}
+  credits_per_request: 50
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: dashboard
+  operation: Add Keywords
+  endpoint: POST /gateway/account/app/{trackId}/keywords/{countryCode}
+  credits_per_request: 1
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: dashboard
+  operation: Delete Keywords
+  endpoint: DELETE /gateway/account/app/{trackId}/keywords/{countryCode}
+  credits_per_request: 1
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: dashboard
+  operation: Number of Keywords
+  endpoint: GET /gateway/account/app/{trackId}/keywords/count-by-country
+  credits_per_request: 1
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: dashboard
+  operation: App Search
+  endpoint: GET /gateway/app/search
+  credits_per_request: 1
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: dashboard
+  operation: App Search By Company URL
+  endpoint: GET /gateway/app/search-by-company-url
+  credits_per_request: 10
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: dashboard
+  operation: Sales Metrics
+  endpoint: GET /gateway/account/app/{trackId}/data-history/{context}
+  credits_per_request: 1
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: dashboard
+  operation: Retention History
+  endpoint: GET /gateway/account/app/{trackId}/data-history/retention
+  credits_per_request: 1
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: dashboard
+  operation: Keyword Spot
+  endpoint: GET /gateway/account/app/{trackId}/keyword-spots/{countryCode}
+  credits_per_request: 3
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: store-keyword
+  operation: Keyword Ranking
+  endpoint: GET /{store}-keyword-ranking/{trackId}/{countryCode}/keywordrankings
+  credits_per_request: 3
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: store-keyword
+  operation: Keyword History
+  endpoint: GET /{store}-keyword-ranking/{trackId}/{countryCode}/{keyword}/keywordrankings
+  credits_per_request: 10
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: store-keyword
+  operation: Top Keywords
+  endpoint: GET /{store}-keyword-ranking/{trackId}/{countryCode}/top-keywords
+  credits_per_request: 20
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: store-keyword
+  operation: Keyword Metadata
+  endpoint: GET /{store}-keyword-ranking/{countryCode}/keyword-metadata
+  credits_per_request: 5
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: store-keyword
+  operation: List of Apps
+  endpoint: GET /{store}-keyword-ranking/{countryCode}/keyword-apps
+  credits_per_request: 5
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: store-keyword
+  operation: Organic Keywords
+  endpoint: GET /{store}-keyword-ranking/{trackId}/{countryCode}/organic-keywords
+  credits_per_request: 50
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: store-category
+  operation: Top Charts
+  endpoint: GET /{store}-category/topcharts/...
+  credits_per_request: 10
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: store-category
+  operation: Category Ranking
+  endpoint: GET /{store}-category/rankings/...
+  credits_per_request: 10
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: store-category
+  operation: Global Last Day Category Rankings
+  endpoint: GET /{store}-category/global-rankings-last-day/{trackId}
+  credits_per_request: 20
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: store-app
+  operation: App Detail
+  endpoint: GET /{store}-appinfo-v2/app/detailed/{trackId}/{countryCode}
+  credits_per_request: 5
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: store-app
+  operation: App Simple Information
+  endpoint: GET /{store}-appinfo-v2/app/simple/{countryCode}
+  credits_per_request: 1
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: store-app
+  operation: App Version List
+  endpoint: GET /{store}-appinfo-v2/versions/{trackId}/{countryCode}
+  credits_per_request: 10
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: store-app
+  operation: App Version List Detailed
+  endpoint: GET /{store}-appinfo-v2/versions/detailed/{trackId}/{countryCode}
+  credits_per_request: 50
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: store-app
+  operation: Developer Apps
+  endpoint: GET /{store}-appinfo-v2/app/developer/{developerId}/{countryCode}
+  credits_per_request: 5
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: store-app
+  operation: App Discovery
+  endpoint: POST /{store}-appinfo-v2/app/discover/{trackId}
+  credits_per_request: 1
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: store-app
+  operation: App Reviews
+  endpoint: GET /{store}-app-reviews/{trackId}/{startDate}/{endDate}
+  credits_per_request: 5
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: store-app
+  operation: App Review Analysis
+  endpoint: GET /{store}-app-reviews/word-analysis/{trackId}/{startDate}/{endDate}
+  credits_per_request: 10
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: store-app
+  operation: Download-Revenue Estimations
+  endpoint: GET /market-estimations/{store}/estimation/download-revenue
+  credits_per_request: 100
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: store-app
+  operation: Monthly Global Download-Revenue Estimations
+  endpoint: GET /market-estimations/{store}/estimation/download-revenue-last-month/{trackId}
+  credits_per_request: 2
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: ad-intelligence
+  operation: Get Creatives
+  endpoint: GET /ad-intelligence/get-creatives-by-track-id
+  credits_per_request: 200
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: ad-intelligence
+  operation: Check Badge
+  endpoint: GET /ad-intelligence/check-badge
+  credits_per_request: 5
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: ad-intelligence
+  operation: Country Distribution
+  endpoint: GET /ad-intelligence/country_distribution
+  credits_per_request: 10
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: ad-intelligence
+  operation: Creative Dimension Distribution
+  endpoint: GET /ad-intelligence/creative_dimension_distribution
+  credits_per_request: 20
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: ad-intelligence
+  operation: Creative Type Distribution
+  endpoint: GET /ad-intelligence/creative_type_distribution
+  credits_per_request: 20
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: ad-intelligence
+  operation: Language Distribution
+  endpoint: GET /ad-intelligence/language_distribution
+  credits_per_request: 10
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: ad-intelligence
+  operation: Network Distribution
+  endpoint: GET /ad-intelligence/network_distribution
+  credits_per_request: 10
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: ad-intelligence
+  operation: Top Advertisers
+  endpoint: GET /ad-intelligence/top-advertisers
+  credits_per_request: 150
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: ad-intelligence
+  operation: Ad Publisher Creative Dimension Distribution
+  endpoint: GET /ad-intelligence/ad-publisher/creative_dimension_distribution
+  credits_per_request: 50
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: search-ads
+  operation: Get Search Ads Integrations
+  endpoint: GET /searchads/info/sa-integrations
+  credits_per_request: 1
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: search-ads
+  operation: Get MMP Integrations
+  endpoint: GET /searchads/info/v2/mmp-integrations
+  credits_per_request: 1
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: search-ads
+  operation: Get Goals
+  endpoint: GET /searchads/info/goals
+  credits_per_request: 1
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: search-ads
+  operation: Get Apps
+  endpoint: GET /searchads/info/apps
+  credits_per_request: 1
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: search-ads
+  operation: Get Bid History Logs
+  endpoint: GET /searchads/bid-history-logs
+  credits_per_request: 20
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: search-ads
+  operation: Get Reports
+  endpoint: POST /searchads/reports
+  credits_per_request: 20
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: search-ads
+  operation: Paid Keywords
+  endpoint: GET /searchads-stats/paid-keywords/{trackId}/{countryCode}
+  credits_per_request: 50
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: search-ads
+  operation: Paying Apps
+  endpoint: GET /searchads-stats/paying-apps/{countryCode}
+  credits_per_request: 50
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: other
+  operation: App Match
+  endpoint: GET /app-match/app/{store}
+  credits_per_request: 10
+- scope: per-api-key
+  window: credit period (hours, per contract; 24h in the published example)
+  family: other
+  operation: Visibility Score
+  endpoint: GET /graph-data/{store}/app/visibility/{country}
+  credits_per_request: 10
+documented_maxima:
+- constraint: Max 30 days of data per request
+  applies_to:
+  - Ad Intelligence creatives and distribution endpoints
+  - App Review Analysis
+  - Download-Revenue Estimations
+  - Category Ranking history
+  - Keyword History
+- constraint: Max 100 keywords per Keyword Ranking request
+  applies_to:
+  - GET /{store}-keyword-ranking/{trackId}/{countryCode}/keywordrankings

@@ -1,0 +1,61 @@
+generated: '2026-08-13'
+method: generated
+source: mcp/mobile-action-mcp-tools-list.json (88 tools probed anonymously from https://mcp.mobileaction.co/mcp)
+  + https://docs.mobileaction.co/
+grounding: MobileAction publishes no OpenAPI, so these skills are grounded in the live MCP tool catalogue
+  instead of operationIds. Every tool name referenced in every skill appears verbatim in mcp/mobile-action-mcp-tools-list.json;
+  credit costs are quoted from the tool descriptions and from the credit table at https://docs.mobileaction.co/guide/introduction.
+skills:
+- file: mobile-action-keyword-rank-tracking.md
+  name: Track and diagnose App Store / Google Play keyword rankings
+  api: https://api.mobileaction.co
+  operations:
+  - get_credit_status
+  - dashboard_app_search
+  - appstore_top_keywords
+  - appstore_organic_keywords
+  - appstore_keyword_ranking
+  - appstore_keyword_history
+  - appstore_keyword_metadata
+  - googleplay_top_keywords
+  - googleplay_keyword_history
+- file: mobile-action-ad-creative-teardown.md
+  name: Tear down a competitor's ad creative strategy
+  api: https://api.mobileaction.co
+  operations:
+  - get_credit_status
+  - adintel_check_badge
+  - adintel_top_advertisers
+  - adintel_network_distribution
+  - adintel_country_distribution
+  - adintel_language_distribution
+  - adintel_creative_type_distribution
+  - adintel_creative_dimension_distribution
+  - adintel_get_creatives
+- file: mobile-action-review-intelligence.md
+  name: Mine app store reviews for product signal
+  api: https://api.mobileaction.co
+  operations:
+  - get_credit_status
+  - dashboard_app_search
+  - appstore_app_reviews_v2
+  - appstore_app_review_analysis
+  - googleplay_app_reviews
+  - googleplay_app_review_analysis
+  - appstore_app_version_list_detailed
+- file: mobile-action-apple-ads-reporting.md
+  name: Pull Apple Ads campaign performance and paid-keyword competition
+  api: https://api.mobileaction.co
+  operations:
+  - get_credit_status
+  - searchads_get_search_ads_integrations
+  - searchads_get_mmp_integrations
+  - searchads_get_apps
+  - searchads_get_goals
+  - searchads_get_goal
+  - searchads_get_reports
+  - searchads_get_top_apps_report
+  - searchads_get_bid_history_logs
+  - searchads_paid_keywords
+  - searchads_paying_apps
+  - cpp_by_keyword

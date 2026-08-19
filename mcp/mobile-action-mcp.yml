@@ -1,0 +1,514 @@
+generated: '2026-08-13'
+method: searched
+status: published
+source: https://docs.mobileaction.co/mcp/server-setup
+deployment:
+  mode: remote
+  endpoint: https://mcp.mobileaction.co/mcp
+  auth: api-key
+  auth_note: 'The account API token is appended to the endpoint as a ?token= query parameter (https://mcp.mobileaction.co/mcp?token=YOUR-API-TOKEN).
+    MobileAction documents the tokened URL as a credential: "Anyone with this link can query your MobileAction
+    data, so treat it like a password." No OAuth is offered — /.well-known/oauth-authorization-server
+    and /.well-known/oauth-protected-resource both return 404 on the MCP host.'
+  verified: probed
+server:
+  name: MobileAction
+  version: 3.4.7
+  transport: http
+  protocol_version: '2025-06-18'
+  url: https://mcp.mobileaction.co/mcp
+  capabilities:
+  - tools
+  - prompts
+  - resources
+  - logging
+  - experimental
+  - io.modelcontextprotocol/ui
+  instructions: 'Tools for the MobileAction API: App Store & Google Play keyword/category/app intelligence,
+    Ad Intelligence, CPP Intelligence, Dashboard, Search Ads and utility services. Every call spends credits
+    from the caller''s API key; the credit cost is stated in each tool description and every result contains
+    a ''credits'' object with the cost, remaining balance and reset time. Prefer cheap tools first and
+    check remaining credits with get_credit_status when planning many calls.'
+clients_documented:
+- client: Claude (web, desktop, mobile)
+  method: custom connector
+  docs: https://docs.mobileaction.co/mcp/connect-to-claude
+- client: ChatGPT (web)
+  method: custom app / Developer mode
+  docs: https://docs.mobileaction.co/mcp/connect-to-chatgpt
+- client: Gemini CLI
+  method: mcpServers entry in settings file
+  docs: https://docs.mobileaction.co/mcp/connect-to-gemini-cli
+metering:
+  model: credits
+  note: MCP calls draw from the same credit allowance as direct REST calls. Each tool description states
+    its credit cost and every result carries a credits object (cost, remaining balance, reset time).
+  balance_tool: get_credit_status
+requirements:
+- Active MobileAction API Solutions plan
+- MobileAction API key issued by a Customer Success Manager
+tool_count: 88
+tools_manifest: mcp/mobile-action-mcp-tools-list.json
+initialize_manifest: mcp/mobile-action-mcp-initialize.json
+tools:
+- name: adintel_get_creatives
+  family: ad-intelligence
+  description: List creatives belonging to an app, filterable by date range, country, network and
+  credits: 200
+  rest: GET /ad-intelligence/get-creatives-by-track-id
+- name: adintel_check_badge
+  family: ad-intelligence
+  description: Check if the given app is an advertiser or a publisher.
+  credits: 5
+  rest: GET /ad-intelligence/check-badge
+- name: adintel_country_distribution
+  family: ad-intelligence
+  description: Provides country distribution data for the given app. Max 30 days of data allowed
+  credits: 10
+  rest: GET /ad-intelligence/country_distribution
+- name: adintel_creative_dimension_distribution
+  family: ad-intelligence
+  description: Provides creative dimension distribution data (image, video and HTML creative
+  credits: 20
+  rest: GET /ad-intelligence/creative_dimension_distribution
+- name: adintel_creative_type_distribution
+  family: ad-intelligence
+  description: Provides creative type distribution data (image, video, HTML and playable
+  credits: 20
+  rest: GET /ad-intelligence/creative_type_distribution
+- name: adintel_language_distribution
+  family: ad-intelligence
+  description: Provides language distribution data for the given app. Max 30 days of data allowed
+  credits: 10
+  rest: GET /ad-intelligence/language_distribution
+- name: adintel_network_distribution
+  family: ad-intelligence
+  description: Provides network distribution data for the given app. Max 30 days of data allowed
+  credits: 10
+  rest: GET /ad-intelligence/network_distribution
+- name: adintel_top_advertisers
+  family: ad-intelligence
+  description: Provides a list of top advertisers, filterable by date range, country, platform,
+  credits: 150
+  rest: GET /ad-intelligence/top-advertisers
+- name: adintel_ad_publisher_creative_dimension_distribution
+  family: ad-intelligence
+  description: Provides ad publishers' media type and dimension of the given creative with
+  credits: 50
+  rest: GET /ad-intelligence/ad-publisher/creative_dimension_distribution
+- name: appstore_app_detail
+  family: app-store
+  description: Provides detailed information for an app in AppStore (name, developer, price,
+  credits: 5
+  rest: GET /appstore-appinfo-v2/app/detailed/{trackId}/{countryCode}
+- name: appstore_app_simple_information
+  family: app-store
+  description: Provides simplified information for given apps in AppStore (name, developer,
+  credits: 1
+  rest: GET /appstore-appinfo-v2/app/simple/{countryCode}
+- name: appstore_app_version_list
+  family: app-store
+  description: Provides the version list (app update timeline) of an app in AppStore, with
+  credits: 1
+  rest: GET /appstore-appinfo-v2/versions/{trackId}/{countryCode}
+- name: appstore_app_version_list_detailed
+  family: app-store
+  description: Provides the version list (app update timeline) with the changed old and new
+  credits: 50
+  rest: GET /appstore-appinfo-v2/versions/detailed/{trackId}/{countryCode}
+- name: appstore_developer_apps
+  family: app-store
+  description: Provides a list of apps owned by the given developer in the given country.
+  credits: 5
+  rest: GET /appstore-appinfo-v2/app/developer/{developerId}/{countryCode}
+- name: appstore_app_discovery
+  family: app-store
+  description: Queues the given App Store app for discovery. Returns a boolean value for
+  credits: 1
+  rest: POST /appstore-appinfo-v2/app/discover/{trackId}
+- name: appstore_app_reviews
+  family: app-store
+  description: Provides the review list of an app in AppStore. If the app is not crawled it
+  credits: 5
+  rest: GET /appstore-app-reviews/{trackId}/{startDate}/{endDate}
+- name: appstore_app_reviews_v2
+  family: app-store
+  description: Provides the paginated review list of an app in AppStore, including totals for
+  credits: 5
+  rest: GET /appstore-app-reviews/v2/{trackId}/{startDate}/{endDate}
+- name: appstore_app_review_analysis
+  family: app-store
+  description: Provides word based analysis for the reviews of a given app (word frequency,
+  credits: 10
+  rest: GET /appstore-app-reviews/word-analysis/{trackId}/{startDate}/{endDate}
+- name: appstore_download_revenue_estimations
+  family: app-store
+  description: Provides daily download-revenue estimations of an app in AppStore. Max 30 days
+  credits: 100
+  rest: GET /market-estimations/appstore/estimation/download-revenue
+- name: appstore_monthly_global_download_revenue_estimations
+  family: app-store
+  description: Provides global download-revenue estimations of an app in AppStore for the
+  credits: 2
+  rest: GET /market-estimations/appstore/estimation/download-revenue-last-month/{trackId}
+- name: appstore_featured_apps
+  family: app-store
+  description: Retrieves detailed information about how an application is featured within a
+  credits: 40
+  rest: GET /appstore-category-v2/featured-app/{trackId}/{categoryId}
+- name: appstore_featuring_analysis
+  family: app-store
+  description: Analyzes the featuring of an application across different App Store categories,
+  credits: 20
+  rest: GET /appstore-category-v2/featuring-analysis/{trackId}
+- name: appstore_top_charts
+  family: app-store
+  description: Provides top charts information for given category, country, ranking type and device.
+  credits: 10
+  rest: GET /appstore-category-v2/topcharts/{version}/{categoryId}/{countryCode}/{rankingType}/{targetDevice}
+- name: appstore_category_ranking
+  family: app-store
+  description: Provides category rankings history of an app in the App Store. Max 30 days
+  credits: 10
+  rest: GET /appstore-category-v2/rankings/{version}/{trackId}/{countryCode}
+- name: appstore_global_last_day_category_rankings
+  family: app-store
+  description: Provides global category rankings of an app in the App Store for the last day.
+  credits: 20
+  rest: GET /appstore-category-v2/global-rankings-last-day/{trackId}/{device}
+- name: appstore_keyword_ranking
+  family: app-store
+  description: Provides single day's keyword ranking for given keyword and track id of an app in AppStore.
+  credits: 3
+  rest: GET /appstore-keyword-ranking/{trackId}/{countryCode}/keywordrankings
+- name: appstore_keyword_history
+  family: app-store
+  description: Provides historic keyword ranking for given keyword and track id of an app in AppStore.
+  credits: 10
+  rest: GET /appstore-keyword-ranking/{trackId}/{countryCode}/{keyword}/keywordrankings
+- name: appstore_top_keywords
+  family: app-store
+  description: Provides single day's top keywords for given track id of an app in AppStore.
+  credits: 20
+  rest: GET /appstore-keyword-ranking/{trackId}/{countryCode}/top-keywords
+- name: appstore_keyword_metadata
+  family: app-store
+  description: Provides last day's keyword meta-data (search volume, chance scores, app counts,
+  credits: 5
+  rest: GET /appstore-keyword-ranking/{countryCode}/keyword-metadata
+- name: appstore_list_of_apps
+  family: app-store
+  description: Provides app list (IPHONE and IPAD track ids) for given keyword for AppStore.
+  credits: 5
+  rest: GET /appstore-keyword-ranking/{countryCode}/keyword-apps
+- name: appstore_organic_keywords
+  family: app-store
+  description: Provides organic keywords and their rankings for given app in AppStore.
+  credits: 50
+  rest: GET /appstore-keyword-ranking/{trackId}/{countryCode}/{device}/organic-keywords
+- name: appstore_organic_impression_share
+  family: app-store
+  description: Provides a list of organic impression shares of a keyword for App Store.
+  credits: 20
+  rest: GET /appstore-keyword-ranking/organic-impression-share/keyword/{keyword}/{countryCode}/{device}
+- name: appstore_share_of_category
+  family: app-store
+  description: Provides the top categories the searched keyword is used in metadata of apps.
+  credits: 5
+  rest: GET /appstore-keyword-ranking/share-of-category/keyword/{keyword}/{countryCode}/{device}
+- name: cpp_by_app
+  family: cpp-intelligence
+  description: Search for CPPs (Custom Product Pages) based on the application and retrieve their
+  credits: 200
+  rest: GET /searchads-stats/cpps-by-app/{trackId}
+- name: cpp_by_keyword
+  family: cpp-intelligence
+  description: Search for CPPs (Custom Product Pages) by keyword, showing which apps are running
+  credits: 200
+  rest: GET /searchads-stats/cpps-by-keyword
+- name: cpp_by_category
+  family: cpp-intelligence
+  description: Search for CPPs (Custom Product Pages) by category and retrieve their screenshots,
+  credits: 200
+  rest: GET /searchads-stats/cpps-by-category
+- name: cpp_keywords
+  family: cpp-intelligence
+  description: Retrieve a searched app's paid keywords associated with one of its CPPs.
+  credits: 200
+  rest: GET /searchads-stats/cpp-keywords/{trackId}/{cppId}
+- name: get_credit_status
+  family: account
+  description: 'Get the API key''s credit status: total credits per period, remaining'
+  rest: GET /api-key
+- name: dashboard_apps
+  family: dashboard
+  description: Get info of all apps added to the MobileAction dashboard by the user. Track ids
+  credits: 5
+  rest: GET /gateway/account/app/tracked
+- name: dashboard_daily_keyword_rankings
+  family: dashboard
+  description: Get keyword rankings and keyword metadata of the apps the user added to the
+  credits: 50
+  rest: GET /gateway/account/app/{trackId}/keywords/rankings/{countryCode}
+- name: dashboard_add_keywords
+  family: dashboard
+  description: Add keywords to the dashboard account; also starts tracking the app on the
+  credits: 1
+  rest: POST /gateway/account/app/{trackId}/keywords/{countryCode}
+- name: dashboard_delete_keywords
+  family: dashboard
+  description: Remove keywords previously added to the given app on the dashboard.
+  credits: 1
+  rest: DELETE /gateway/account/app/{trackId}/keywords/{countryCode}
+- name: dashboard_number_of_keywords
+  family: dashboard
+  description: Get the number of tracked keywords by country for the app.
+  credits: 1
+  rest: GET /gateway/account/app/{trackId}/keywords/count-by-country
+- name: dashboard_app_search
+  family: dashboard
+  description: Get a list of apps that match the given search string.
+  credits: 1
+  rest: GET /gateway/app/search
+- name: dashboard_app_search_by_company_url
+  family: dashboard
+  description: Get a list of apps that have a company url matching the given search string.
+  credits: 10
+  rest: GET /gateway/app/search-by-company-url
+- name: dashboard_sales_metrics
+  family: dashboard
+  description: Get download history, revenue history and product page view data.
+  credits: 1
+  rest: GET /gateway/account/app/{trackId}/data-history/{context}
+- name: dashboard_retention_history
+  family: dashboard
+  description: Get retention history data for the app.
+  credits: 1
+  rest: GET /gateway/account/app/{trackId}/data-history/retention
+- name: dashboard_keyword_spot
+  family: dashboard
+  description: Get keywords that describe your app on the iTunes Connect app profile.
+  credits: 3
+  rest: GET /gateway/account/app/{trackId}/keyword-spots/{countryCode}
+- name: dashboard_max_reach_and_install_estimations
+  family: dashboard
+  description: Retrieve Conversion Rate, Max Reach, and Install estimations for a list of up
+  credits: 20
+  rest: POST /gateway/keyword-estimation/v1/conversion-rate
+- name: dashboard_historical_max_reach_and_install_estimation
+  family: dashboard
+  description: Retrieve historical Max Reach, Conversion Rate, and Install estimations for a
+  credits: 30
+  rest: GET /gateway/keyword-estimation/v1/conversion-rate/historical
+- name: googleplay_app_detail
+  family: google-play-store
+  description: Provides detailed info of the apps in PlayStore.
+  credits: 5
+  rest: GET /playstore-appinfo-v2/app/detailed/{trackId}/{langCode}
+- name: googleplay_app_simple_information
+  family: google-play-store
+  description: Provides simplified information for given apps in PlayStore.
+  credits: 1
+  rest: GET /playstore-appinfo-v2/app/simple/{langCode}
+- name: googleplay_app_version_list
+  family: google-play-store
+  description: Provides version list (app update timeline) of the apps in PlayStore.
+  credits: 1
+  rest: GET /playstore-appinfo-v2/versions/{trackId}/{langCode}
+- name: googleplay_app_version_list_detailed
+  family: google-play-store
+  description: Provides version list (app update timeline) with changed values of the
+  credits: 50
+  rest: GET /playstore-appinfo-v2/versions/detailed/{trackId}/{langCode}
+- name: googleplay_developer_apps
+  family: google-play-store
+  description: Provides app details for the given developer and country in PlayStore.
+  credits: 5
+  rest: GET /playstore-appinfo-v2/app/developer/{developerName}/{langCode}
+- name: googleplay_app_discovery
+  family: google-play-store
+  description: Queues the given Google Play Store app for discovery. Returns a boolean
+  credits: 1
+  rest: POST /playstore-appinfo-v2/app/discover/{trackId}/{country}
+- name: googleplay_app_reviews
+  family: google-play-store
+  description: Provides review list of the apps in PlayStore. If the app is not crawled
+  credits: 5
+  rest: GET /playstore-app-reviews/{trackId}/{startDate}/{endDate}
+- name: googleplay_app_reviews_v2
+  family: google-play-store
+  description: Provides paginated review list of the apps. If the app is not crawled it
+  credits: 5
+  rest: GET /appstore-app-reviews/v2/{trackId}/{startDate}/{endDate}
+- name: googleplay_app_review_analysis
+  family: google-play-store
+  description: Provides word based analysis for the reviews of a given app. Max. 30
+  credits: 10
+  rest: GET /playstore-app-reviews/word-analysis/{trackId}/{startDate}/{endDate}
+- name: googleplay_download_revenue_estimations
+  family: google-play-store
+  description: Provides download-revenue estimations of an app in Google Play. Max 30
+  credits: 100
+  rest: GET /market-estimations/playstore/estimation/download-revenue
+- name: googleplay_monthly_global_download_revenue_estimations
+  family: google-play-store
+  description: Provides global download-revenue estimations of an app in PlayStore for
+  credits: 2
+  rest: GET /market-estimations/playstore/estimation/download-revenue-last-month/{trackId}
+- name: googleplay_featured_apps
+  family: google-play-store
+  description: Retrieves a list of featured applications within a specific category
+  credits: 40
+  rest: GET /playstore-category/featured-app/{trackId}/{categoryId}
+- name: googleplay_featuring_analysis
+  family: google-play-store
+  description: Analyzes the featuring of an application across different Play Store
+  credits: 20
+  rest: GET /playstore-category/featuring-analysis/{trackId}
+- name: googleplay_top_charts
+  family: google-play-store
+  description: Provides top charts information for given category, country, ranking type and device.
+  credits: 10
+  rest: GET /playstore-category/topcharts/{category}/{countryCode}/{categoryType}
+- name: googleplay_category_ranking
+  family: google-play-store
+  description: Provides category rankings history of an app in Google Play. Max 30 days of
+  credits: 10
+  rest: GET /playstore-category/{trackId}/{country}
+- name: googleplay_global_last_day_category_rankings
+  family: google-play-store
+  description: Provides global category rankings of an app in PlayStore for the last day.
+  credits: 20
+  rest: GET /playstore-category/global-rankings-last-day/{trackId}
+- name: googleplay_keyword_ranking
+  family: google-play-store
+  description: Provides single day's keyword ranking for given keyword list and track id of an app in
+    Google Play.
+  credits: 3
+  rest: GET /playstore-keyword-ranking/{trackId}/{countryCode}/keywordrankings
+- name: googleplay_keyword_history
+  family: google-play-store
+  description: Provides historic keyword ranking for given keyword and track id of an app in Google Play.
+  credits: 10
+  rest: GET /playstore-keyword-ranking/{trackId}/{countryCode}/{keyword}/keywordrankings
+- name: googleplay_top_keywords
+  family: google-play-store
+  description: Provides single day's top keywords for given track id of an app in Google Play.
+  credits: 20
+  rest: GET /playstore-keyword-ranking/{trackId}/{countryCode}/top-keywords
+- name: googleplay_keyword_metadata
+  family: google-play-store
+  description: Provides last day's keyword meta-data (search volume, chance, number of apps,
+  credits: 5
+  rest: GET /playstore-keyword-ranking/{countryCode}/keyword-metadata
+- name: googleplay_list_of_apps
+  family: google-play-store
+  description: Provides app list (track ids of ranked Play Store apps) for given keyword for Google Play.
+  credits: 5
+  rest: GET /playstore-keyword-ranking/{countryCode}/keyword-apps
+- name: googleplay_organic_keywords
+  family: google-play-store
+  description: Provides list of organic keywords and their rankings for Google Play.
+  credits: 50
+  rest: GET /playstore-keyword-ranking/{trackId}/{countryCode}/organic-keywords
+- name: googleplay_organic_impression_share
+  family: google-play-store
+  description: Provides a list of organic impression shares of a keyword for Google Play.
+  credits: 20
+  rest: GET /playstore-keyword-ranking/organic-impression-share/keyword/{keyword}/{countryCode}
+- name: googleplay_share_of_category
+  family: google-play-store
+  description: Provides the top categories in which the searched keyword is used in the metadata of apps.
+  credits: 5
+  rest: GET /playstore-keyword-ranking/share-of-category/keyword/{keyword}/{countryCode}
+- name: ma_app_match
+  family: other-services
+  description: Provides the track id of the given app's opposite market counterpart.
+  credits: 10
+  rest: GET /app-match/app/{store}
+- name: ma_visibility_score
+  family: other-services
+  description: Provides visibility scores of the apps for the given store and country.
+  credits: 10
+  rest: GET /graph-data/{store}/app/visibility/{country}
+- name: ma_historical_app_store_visibility_score
+  family: other-services
+  description: Provides historical App Store visibility scores of the apps for the given
+  credits: 10
+  rest: POST /appstore-visibility-score/visibility-score-history/apps
+- name: ma_historical_google_play_visibility_score
+  family: other-services
+  description: Provides historical Google Play visibility scores of the apps for the given
+  credits: 10
+  rest: POST /playstore-visibility-score/visibility-score-history/apps
+- name: searchads_get_search_ads_integrations
+  family: search-ads
+  description: List the Search Ads API integrations you have on SearchAds.com, including
+  credits: 1
+  rest: GET /searchads/info/sa-integrations
+- name: searchads_get_mmp_integrations
+  family: search-ads
+  description: List the MMP integrations you have on SearchAds.com.
+  credits: 1
+  rest: GET /searchads/info/v2/mmp-integrations
+- name: searchads_get_goals
+  family: search-ads
+  description: List the goals you created on SearchAds.com. Goal ids can be used to
+  credits: 1
+  rest: GET /searchads/info/goals
+- name: searchads_get_goal
+  family: search-ads
+  description: Get details of a specific goal you created on SearchAds.com.
+  credits: 1
+  rest: GET /searchads/info/goals/{id}
+- name: searchads_get_apps
+  family: search-ads
+  description: List the apps you run campaigns for on SearchAds.com.
+  credits: 1
+  rest: GET /searchads/info/apps
+- name: searchads_get_bid_history_logs
+  family: search-ads
+  description: Get logs of bid changes on SearchAds.com.
+  credits: 20
+  rest: GET /searchads/bid-history-logs
+- name: searchads_get_reports
+  family: search-ads
+  description: Get ASA + MMP reports for different data levels.
+  credits: 20
+  rest: POST /searchads/reports
+- name: searchads_get_top_apps_report
+  family: search-ads
+  description: 'Get a Search Ads TOP_APPS report: top advertising apps for the given'
+  credits: 20
+  rest: POST /searchads/reports
+- name: searchads_paid_keywords
+  family: search-ads
+  description: Get paid Apple Search Ads keywords and their impression shares for the
+  credits: 50
+  rest: GET /searchads-stats/paid-keywords/{trackId}/{countryCode}
+- name: searchads_paying_apps
+  family: search-ads
+  description: Get the track ids and impression shares of apps paying for the given
+  credits: 50
+  rest: GET /searchads-stats/paying-apps/{countryCode}
+x-evidence:
+  fetched: '2026-08-13'
+  endpoint: https://mcp.mobileaction.co/mcp
+  initialize:
+    method: POST jsonrpc initialize
+    http_status: 200
+    content_type: text/event-stream
+  tools_list:
+    method: POST jsonrpc tools/list
+    http_status: 200
+    content_type: text/event-stream
+    tools_returned: 88
+    authenticated: false
+    note: tools/list answered anonymously with full inputSchemas; only tool INVOCATION requires the ?token=
+      credential.
+  prompts_list:
+    http_status: 200
+    prompts_returned: 0
+  resources_list:
+    http_status: 200
+    resources_returned: 0

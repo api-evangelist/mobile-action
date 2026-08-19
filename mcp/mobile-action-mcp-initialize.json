@@ -1,0 +1,29 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "protocolVersion": "2025-06-18",
+    "capabilities": {
+      "experimental": {},
+      "logging": {},
+      "prompts": {
+        "listChanged": true
+      },
+      "resources": {
+        "subscribe": false,
+        "listChanged": true
+      },
+      "tools": {
+        "listChanged": true
+      },
+      "extensions": {
+        "io.modelcontextprotocol/ui": {}
+      }
+    },
+    "serverInfo": {
+      "name": "MobileAction",
+      "version": "3.4.7"
+    },
+    "instructions": "Tools for the MobileAction API: App Store & Google Play keyword/category/app intelligence, Ad Intelligence, CPP Intelligence, Dashboard, Search Ads and utility services. Every call spends credits from the caller's API key; the credit cost is stated in each tool description and every result contains a 'credits' object with the cost, remaining balance and reset time. Prefer cheap tools first and check remaining credits with get_credit_status when planning many calls."
+  }
+}

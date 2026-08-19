@@ -1,0 +1,1165 @@
+generated: '2026-08-13'
+method: derived
+source: mcp/mobile-action-mcp-tools-list.json (probed tools/list) + https://docs.mobileaction.co/ REST
+  reference
+surfaces:
+  openapi: null
+  openapi_note: MobileAction publishes no OpenAPI/Swagger document. /openapi.json, /openapi.yaml, /swagger.json,
+    /v3/api-docs, /v2/api-docs, /api-docs and /swagger-ui.html all return HTTP 404 JSON from the Spring
+    error handler on api.mobileaction.co; the Docusaurus docs host answers 200 with the same 29,479-byte
+    SPA shell for every one of those paths and is therefore not a spec.
+  graphql: null
+  mcp:
+    url: https://mcp.mobileaction.co/mcp
+    tools_list: anonymous, HTTP 200, full inputSchemas returned
+    gated: false
+  rest:
+    base_url: https://api.mobileaction.co
+    reference: https://docs.mobileaction.co/
+    machine_readable: false
+    note: The REST surface is documented in prose/tables only. Each crosswalk row binds an MCP tool to
+      the METHOD + PATH the docs publish, not to an operationId, because no spec exists to carry one.
+coverage:
+  tools_named: 88
+  tools_bound: 88
+  mcp_only: 0
+  rest_operations_documented: 88
+  binding_confidence:
+    high: 86
+    medium: 1
+    low: 1
+  by_family:
+    ad-intelligence: 9
+    app-store: 24
+    cpp-intelligence: 4
+    account: 1
+    dashboard: 12
+    google-play-store: 24
+    other-services: 4
+    search-ads: 10
+crosswalk:
+- tool: adintel_get_creatives
+  category: ad-intelligence
+  rest:
+  - GET /ad-intelligence/get-creatives-by-track-id
+  binding: rest
+  confidence: high
+  credits: 200
+  docs: https://docs.mobileaction.co/ad-intelligence/ad-intelligence-services
+  inputs:
+  - track_id
+  - page
+  - start_date
+  - end_date
+  - country_code
+  - network
+  - media_type
+- tool: adintel_check_badge
+  category: ad-intelligence
+  rest:
+  - GET /ad-intelligence/check-badge
+  binding: rest
+  confidence: high
+  credits: 5
+  docs: https://docs.mobileaction.co/ad-intelligence/ad-intelligence-services
+  inputs:
+  - track_id
+- tool: adintel_country_distribution
+  category: ad-intelligence
+  rest:
+  - GET /ad-intelligence/country_distribution
+  binding: rest
+  confidence: high
+  credits: 10
+  docs: https://docs.mobileaction.co/ad-intelligence/ad-intelligence-services
+  inputs:
+  - track_id
+  - start_date
+  - end_date
+  - media_type
+  - country_code
+- tool: adintel_creative_dimension_distribution
+  category: ad-intelligence
+  rest:
+  - GET /ad-intelligence/creative_dimension_distribution
+  binding: rest
+  confidence: high
+  credits: 20
+  docs: https://docs.mobileaction.co/ad-intelligence/ad-intelligence-services
+  inputs:
+  - track_id
+  - start_date
+  - end_date
+  - media_type
+  - country_code
+  - network
+- tool: adintel_creative_type_distribution
+  category: ad-intelligence
+  rest:
+  - GET /ad-intelligence/creative_type_distribution
+  binding: rest
+  confidence: high
+  credits: 20
+  docs: https://docs.mobileaction.co/ad-intelligence/ad-intelligence-services
+  inputs:
+  - track_id
+  - start_date
+  - end_date
+  - media_type
+  - country_code
+  - network
+- tool: adintel_language_distribution
+  category: ad-intelligence
+  rest:
+  - GET /ad-intelligence/language_distribution
+  binding: rest
+  confidence: high
+  credits: 10
+  docs: https://docs.mobileaction.co/ad-intelligence/ad-intelligence-services
+  inputs:
+  - track_id
+  - start_date
+  - end_date
+  - country_code
+- tool: adintel_network_distribution
+  category: ad-intelligence
+  rest:
+  - GET /ad-intelligence/network_distribution
+  binding: rest
+  confidence: high
+  credits: 10
+  docs: https://docs.mobileaction.co/ad-intelligence/ad-intelligence-services
+  inputs:
+  - track_id
+  - start_date
+  - end_date
+  - media_type
+  - country_code
+- tool: adintel_top_advertisers
+  category: ad-intelligence
+  rest:
+  - GET /ad-intelligence/top-advertisers
+  binding: rest
+  confidence: high
+  credits: 150
+  docs: https://docs.mobileaction.co/ad-intelligence/ad-intelligence-services
+  inputs:
+  - page
+  - start_date
+  - end_date
+  - country_code
+  - platform_id
+  - category
+  - network
+  - first_seen
+- tool: adintel_ad_publisher_creative_dimension_distribution
+  category: ad-intelligence
+  rest:
+  - GET /ad-intelligence/ad-publisher/creative_dimension_distribution
+  binding: rest
+  confidence: high
+  credits: 50
+  docs: https://docs.mobileaction.co/ad-intelligence/ad-intelligence-services
+  inputs:
+  - track_id
+  - start_date
+  - end_date
+- tool: appstore_app_detail
+  category: app-store
+  rest:
+  - GET /appstore-appinfo-v2/app/detailed/{trackId}/{countryCode}
+  binding: rest
+  confidence: high
+  credits: 5
+  docs: https://docs.mobileaction.co/app-store/app-services
+  inputs:
+  - track_id
+  - country_code
+- tool: appstore_app_simple_information
+  category: app-store
+  rest:
+  - GET /appstore-appinfo-v2/app/simple/{countryCode}
+  binding: rest
+  confidence: high
+  credits: 1
+  docs: https://docs.mobileaction.co/app-store/app-services
+  inputs:
+  - country_code
+  - track_ids
+- tool: appstore_app_version_list
+  category: app-store
+  rest:
+  - GET /appstore-appinfo-v2/versions/{trackId}/{countryCode}
+  binding: rest
+  confidence: high
+  credits: 1
+  docs: https://docs.mobileaction.co/app-store/app-services
+  inputs:
+  - track_id
+  - country_code
+  - start_date
+  - end_date
+- tool: appstore_app_version_list_detailed
+  category: app-store
+  rest:
+  - GET /appstore-appinfo-v2/versions/detailed/{trackId}/{countryCode}
+  binding: rest
+  confidence: high
+  credits: 50
+  docs: https://docs.mobileaction.co/app-store/app-services
+  inputs:
+  - track_id
+  - country_code
+  - start_date
+  - end_date
+- tool: appstore_developer_apps
+  category: app-store
+  rest:
+  - GET /appstore-appinfo-v2/app/developer/{developerId}/{countryCode}
+  binding: rest
+  confidence: high
+  credits: 5
+  docs: https://docs.mobileaction.co/app-store/app-services
+  inputs:
+  - developer_id
+  - country_code
+- tool: appstore_app_discovery
+  category: app-store
+  rest:
+  - POST /appstore-appinfo-v2/app/discover/{trackId}
+  binding: rest
+  confidence: high
+  credits: 1
+  docs: https://docs.mobileaction.co/app-store/app-services
+  inputs:
+  - track_id
+- tool: appstore_app_reviews
+  category: app-store
+  rest:
+  - GET /appstore-app-reviews/{trackId}/{startDate}/{endDate}
+  binding: rest
+  confidence: high
+  credits: 5
+  docs: https://docs.mobileaction.co/app-store/app-services
+  inputs:
+  - track_id
+  - start_date
+  - end_date
+  - rating
+  - countries
+  - text_query
+  - page
+- tool: appstore_app_reviews_v2
+  category: app-store
+  rest:
+  - GET /appstore-app-reviews/v2/{trackId}/{startDate}/{endDate}
+  binding: rest
+  confidence: high
+  credits: 5
+  docs: https://docs.mobileaction.co/app-store/app-services
+  inputs:
+  - track_id
+  - start_date
+  - end_date
+  - rating
+  - countries
+  - text_query
+  - replied_review
+  - page
+  - size
+- tool: appstore_app_review_analysis
+  category: app-store
+  rest:
+  - GET /appstore-app-reviews/word-analysis/{trackId}/{startDate}/{endDate}
+  binding: rest
+  confidence: high
+  credits: 10
+  docs: https://docs.mobileaction.co/app-store/app-services
+  inputs:
+  - track_id
+  - start_date
+  - end_date
+  - rating
+  - countries
+  - text_query
+- tool: appstore_download_revenue_estimations
+  category: app-store
+  rest:
+  - GET /market-estimations/appstore/estimation/download-revenue
+  binding: rest
+  confidence: high
+  credits: 100
+  docs: https://docs.mobileaction.co/app-store/app-services
+  inputs:
+  - track_id
+  - country
+  - start_date
+  - end_date
+  - device
+- tool: appstore_monthly_global_download_revenue_estimations
+  category: app-store
+  rest:
+  - GET /market-estimations/appstore/estimation/download-revenue-last-month/{trackId}
+  binding: rest
+  confidence: high
+  credits: 2
+  docs: https://docs.mobileaction.co/app-store/app-services
+  inputs:
+  - track_id
+- tool: appstore_featured_apps
+  category: app-store
+  rest:
+  - GET /appstore-category-v2/featured-app/{trackId}/{categoryId}
+  binding: rest
+  confidence: high
+  credits: 40
+  docs: https://docs.mobileaction.co/app-store/category-services
+  inputs:
+  - track_id
+  - category_id
+  - start_date
+  - end_date
+  - country_code
+- tool: appstore_featuring_analysis
+  category: app-store
+  rest:
+  - GET /appstore-category-v2/featuring-analysis/{trackId}
+  binding: rest
+  confidence: high
+  credits: 20
+  docs: https://docs.mobileaction.co/app-store/category-services
+  inputs:
+  - track_id
+  - start_date
+  - end_date
+  - country_code
+- tool: appstore_top_charts
+  category: app-store
+  rest:
+  - GET /appstore-category-v2/topcharts/{version}/{categoryId}/{countryCode}/{rankingType}/{targetDevice}
+  binding: rest
+  confidence: high
+  credits: 10
+  docs: https://docs.mobileaction.co/app-store/category-services
+  inputs:
+  - version
+  - category_id
+  - country_code
+  - ranking_type
+  - target_device
+  - date
+- tool: appstore_category_ranking
+  category: app-store
+  rest:
+  - GET /appstore-category-v2/rankings/{version}/{trackId}/{countryCode}
+  binding: rest
+  confidence: high
+  credits: 10
+  docs: https://docs.mobileaction.co/app-store/category-services
+  inputs:
+  - version
+  - track_id
+  - country_code
+  - hourly
+  - start_date
+  - end_date
+- tool: appstore_global_last_day_category_rankings
+  category: app-store
+  rest:
+  - GET /appstore-category-v2/global-rankings-last-day/{trackId}/{device}
+  binding: rest
+  confidence: high
+  credits: 20
+  docs: https://docs.mobileaction.co/app-store/category-services
+  inputs:
+  - track_id
+  - device
+- tool: appstore_keyword_ranking
+  category: app-store
+  rest:
+  - GET /appstore-keyword-ranking/{trackId}/{countryCode}/keywordrankings
+  binding: rest
+  confidence: high
+  credits: 3
+  docs: https://docs.mobileaction.co/app-store/keyword-services
+  inputs:
+  - track_id
+  - country_code
+  - keywords
+  - date
+- tool: appstore_keyword_history
+  category: app-store
+  rest:
+  - GET /appstore-keyword-ranking/{trackId}/{countryCode}/{keyword}/keywordrankings
+  binding: rest
+  confidence: high
+  credits: 10
+  docs: https://docs.mobileaction.co/app-store/keyword-services
+  inputs:
+  - track_id
+  - country_code
+  - keyword
+  - start_date
+  - end_date
+- tool: appstore_top_keywords
+  category: app-store
+  rest:
+  - GET /appstore-keyword-ranking/{trackId}/{countryCode}/top-keywords
+  binding: rest
+  confidence: high
+  credits: 20
+  docs: https://docs.mobileaction.co/app-store/keyword-services
+  inputs:
+  - track_id
+  - country_code
+  - date
+  - device
+  - limit
+- tool: appstore_keyword_metadata
+  category: app-store
+  rest:
+  - GET /appstore-keyword-ranking/{countryCode}/keyword-metadata
+  binding: rest
+  confidence: high
+  credits: 5
+  docs: https://docs.mobileaction.co/app-store/keyword-services
+  inputs:
+  - country_code
+  - keyword
+- tool: appstore_list_of_apps
+  category: app-store
+  rest:
+  - GET /appstore-keyword-ranking/{countryCode}/keyword-apps
+  binding: rest
+  confidence: high
+  credits: 5
+  docs: https://docs.mobileaction.co/app-store/keyword-services
+  inputs:
+  - country_code
+  - keyword
+- tool: appstore_organic_keywords
+  category: app-store
+  rest:
+  - GET /appstore-keyword-ranking/{trackId}/{countryCode}/{device}/organic-keywords
+  binding: rest
+  confidence: high
+  credits: 50
+  docs: https://docs.mobileaction.co/app-store/keyword-services
+  inputs:
+  - track_id
+  - country_code
+  - device
+  - date
+- tool: appstore_organic_impression_share
+  category: app-store
+  rest:
+  - GET /appstore-keyword-ranking/organic-impression-share/keyword/{keyword}/{countryCode}/{device}
+  binding: rest
+  confidence: high
+  credits: 20
+  docs: https://docs.mobileaction.co/app-store/keyword-services
+  inputs:
+  - keyword
+  - country_code
+  - device
+- tool: appstore_share_of_category
+  category: app-store
+  rest:
+  - GET /appstore-keyword-ranking/share-of-category/keyword/{keyword}/{countryCode}/{device}
+  binding: rest
+  confidence: high
+  credits: 5
+  docs: https://docs.mobileaction.co/app-store/keyword-services
+  inputs:
+  - keyword
+  - country_code
+  - device
+- tool: cpp_by_app
+  category: cpp-intelligence
+  rest:
+  - GET /searchads-stats/cpps-by-app/{trackId}
+  binding: rest
+  confidence: high
+  credits: 200
+  docs: https://docs.mobileaction.co/cpp-intelligence/cpp-intelligence-services
+  inputs:
+  - track_id
+  - start_date
+  - end_date
+  - page
+  - country
+- tool: cpp_by_keyword
+  category: cpp-intelligence
+  rest:
+  - GET /searchads-stats/cpps-by-keyword
+  binding: rest
+  confidence: high
+  credits: 200
+  docs: https://docs.mobileaction.co/cpp-intelligence/cpp-intelligence-services
+  inputs:
+  - keyword
+  - start_date
+  - end_date
+  - page
+  - country
+- tool: cpp_by_category
+  category: cpp-intelligence
+  rest:
+  - GET /searchads-stats/cpps-by-category
+  binding: rest
+  confidence: high
+  credits: 200
+  docs: https://docs.mobileaction.co/cpp-intelligence/cpp-intelligence-services
+  inputs:
+  - category_id
+  - start_date
+  - end_date
+  - page
+  - country
+- tool: cpp_keywords
+  category: cpp-intelligence
+  rest:
+  - GET /searchads-stats/cpp-keywords/{trackId}/{cppId}
+  binding: rest
+  confidence: high
+  credits: 200
+  docs: https://docs.mobileaction.co/cpp-intelligence/cpp-intelligence-services
+  inputs:
+  - track_id
+  - cpp_id
+  - start_date
+  - end_date
+  - page
+  - country
+- tool: get_credit_status
+  category: account
+  rest:
+  - GET /api-key
+  binding: rest
+  confidence: high
+  docs: https://docs.mobileaction.co/guide/introduction
+- tool: dashboard_apps
+  category: dashboard
+  rest:
+  - GET /gateway/account/app/tracked
+  binding: rest
+  confidence: high
+  credits: 5
+  docs: https://docs.mobileaction.co/dashboard/dashboard-services
+- tool: dashboard_daily_keyword_rankings
+  category: dashboard
+  rest:
+  - GET /gateway/account/app/{trackId}/keywords/rankings/{countryCode}
+  binding: rest
+  confidence: high
+  credits: 50
+  docs: https://docs.mobileaction.co/dashboard/dashboard-services
+  inputs:
+  - track_id
+  - country_code
+  - device
+  - date
+- tool: dashboard_add_keywords
+  category: dashboard
+  rest:
+  - POST /gateway/account/app/{trackId}/keywords/{countryCode}
+  binding: rest
+  confidence: high
+  credits: 1
+  docs: https://docs.mobileaction.co/dashboard/dashboard-services
+  inputs:
+  - track_id
+  - country_code
+  - keywords
+- tool: dashboard_delete_keywords
+  category: dashboard
+  rest:
+  - DELETE /gateway/account/app/{trackId}/keywords/{countryCode}
+  binding: rest
+  confidence: high
+  credits: 1
+  docs: https://docs.mobileaction.co/dashboard/dashboard-services
+  inputs:
+  - track_id
+  - country_code
+  - keywords
+- tool: dashboard_number_of_keywords
+  category: dashboard
+  rest:
+  - GET /gateway/account/app/{trackId}/keywords/count-by-country
+  binding: rest
+  confidence: high
+  credits: 1
+  docs: https://docs.mobileaction.co/dashboard/dashboard-services
+  inputs:
+  - track_id
+- tool: dashboard_app_search
+  category: dashboard
+  rest:
+  - GET /gateway/app/search
+  binding: rest
+  confidence: high
+  credits: 1
+  docs: https://docs.mobileaction.co/dashboard/dashboard-services
+  inputs:
+  - query
+- tool: dashboard_app_search_by_company_url
+  category: dashboard
+  rest:
+  - GET /gateway/app/search-by-company-url
+  binding: rest
+  confidence: high
+  credits: 10
+  docs: https://docs.mobileaction.co/dashboard/dashboard-services
+  inputs:
+  - query
+- tool: dashboard_sales_metrics
+  category: dashboard
+  rest:
+  - GET /gateway/account/app/{trackId}/data-history/{context}
+  binding: rest
+  confidence: high
+  credits: 1
+  docs: https://docs.mobileaction.co/dashboard/dashboard-services
+  inputs:
+  - track_id
+  - context
+  - start
+  - end
+  - country_code
+  - device
+- tool: dashboard_retention_history
+  category: dashboard
+  rest:
+  - GET /gateway/account/app/{trackId}/data-history/retention
+  binding: rest
+  confidence: high
+  credits: 1
+  docs: https://docs.mobileaction.co/dashboard/dashboard-services
+  inputs:
+  - track_id
+  - start
+  - end
+  - device
+- tool: dashboard_keyword_spot
+  category: dashboard
+  rest:
+  - GET /gateway/account/app/{trackId}/keyword-spots/{countryCode}
+  binding: rest
+  confidence: high
+  credits: 3
+  docs: https://docs.mobileaction.co/dashboard/dashboard-services
+  inputs:
+  - track_id
+  - country_code
+- tool: dashboard_max_reach_and_install_estimations
+  category: dashboard
+  rest:
+  - POST /gateway/keyword-estimation/v1/conversion-rate
+  binding: rest
+  confidence: high
+  credits: 20
+  docs: https://docs.mobileaction.co/dashboard/dashboard-services
+  inputs:
+  - track_id
+  - country
+  - keywords
+- tool: dashboard_historical_max_reach_and_install_estimation
+  category: dashboard
+  rest:
+  - GET /gateway/keyword-estimation/v1/conversion-rate/historical
+  binding: rest
+  confidence: high
+  credits: 30
+  docs: https://docs.mobileaction.co/dashboard/dashboard-services
+  inputs:
+  - track_id
+  - country
+  - keyword
+  - start_date
+  - end_date
+- tool: googleplay_app_detail
+  category: google-play-store
+  rest:
+  - GET /playstore-appinfo-v2/app/detailed/{trackId}/{langCode}
+  binding: rest
+  confidence: high
+  credits: 5
+  docs: https://docs.mobileaction.co/google-play-store/app-services
+  inputs:
+  - track_id
+  - lang_code
+- tool: googleplay_app_simple_information
+  category: google-play-store
+  rest:
+  - GET /playstore-appinfo-v2/app/simple/{langCode}
+  binding: rest
+  confidence: high
+  credits: 1
+  docs: https://docs.mobileaction.co/google-play-store/app-services
+  inputs:
+  - lang_code
+  - track_ids
+- tool: googleplay_app_version_list
+  category: google-play-store
+  rest:
+  - GET /playstore-appinfo-v2/versions/{trackId}/{langCode}
+  binding: rest
+  confidence: high
+  credits: 1
+  docs: https://docs.mobileaction.co/google-play-store/app-services
+  inputs:
+  - track_id
+  - lang_code
+  - start_date
+  - end_date
+- tool: googleplay_app_version_list_detailed
+  category: google-play-store
+  rest:
+  - GET /playstore-appinfo-v2/versions/detailed/{trackId}/{langCode}
+  binding: rest
+  confidence: high
+  credits: 50
+  docs: https://docs.mobileaction.co/google-play-store/app-services
+  inputs:
+  - track_id
+  - lang_code
+  - start_date
+  - end_date
+- tool: googleplay_developer_apps
+  category: google-play-store
+  rest:
+  - GET /playstore-appinfo-v2/app/developer/{developerName}/{langCode}
+  binding: rest
+  confidence: high
+  credits: 5
+  docs: https://docs.mobileaction.co/google-play-store/app-services
+  inputs:
+  - developer_name
+  - lang_code
+- tool: googleplay_app_discovery
+  category: google-play-store
+  rest:
+  - POST /playstore-appinfo-v2/app/discover/{trackId}/{country}
+  binding: rest
+  confidence: high
+  credits: 1
+  docs: https://docs.mobileaction.co/google-play-store/app-services
+  inputs:
+  - track_id
+  - country
+- tool: googleplay_app_reviews
+  category: google-play-store
+  rest:
+  - GET /playstore-app-reviews/{trackId}/{startDate}/{endDate}
+  binding: rest
+  confidence: high
+  credits: 5
+  docs: https://docs.mobileaction.co/google-play-store/app-services
+  inputs:
+  - track_id
+  - start_date
+  - end_date
+  - rating
+  - languages
+  - text_query
+  - page
+- tool: googleplay_app_reviews_v2
+  category: google-play-store
+  rest:
+  - GET /appstore-app-reviews/v2/{trackId}/{startDate}/{endDate}
+  binding: rest
+  confidence: low
+  credits: 5
+  docs: https://docs.mobileaction.co/google-play-store/app-services
+  inputs:
+  - track_id
+  - start_date
+  - end_date
+  - rating
+  - countries
+  - text_query
+  - replied_review
+  - page
+  - size
+  note: The Google Play page documents this paginated reviews endpoint under the /appstore-app-reviews/v2/
+    path while its own example passes a Play package id (com.whatsapp); the published path and the documented
+    store disagree, so the binding is recorded at low confidence.
+- tool: googleplay_app_review_analysis
+  category: google-play-store
+  rest:
+  - GET /playstore-app-reviews/word-analysis/{trackId}/{startDate}/{endDate}
+  binding: rest
+  confidence: high
+  credits: 10
+  docs: https://docs.mobileaction.co/google-play-store/app-services
+  inputs:
+  - track_id
+  - start_date
+  - end_date
+  - rating
+  - languages
+  - text_query
+- tool: googleplay_download_revenue_estimations
+  category: google-play-store
+  rest:
+  - GET /market-estimations/playstore/estimation/download-revenue
+  binding: rest
+  confidence: high
+  credits: 100
+  docs: https://docs.mobileaction.co/google-play-store/app-services
+  inputs:
+  - track_id
+  - country
+  - start_date
+  - end_date
+- tool: googleplay_monthly_global_download_revenue_estimations
+  category: google-play-store
+  rest:
+  - GET /market-estimations/playstore/estimation/download-revenue-last-month/{trackId}
+  binding: rest
+  confidence: high
+  credits: 2
+  docs: https://docs.mobileaction.co/google-play-store/app-services
+  inputs:
+  - track_id
+- tool: googleplay_featured_apps
+  category: google-play-store
+  rest:
+  - GET /playstore-category/featured-app/{trackId}/{categoryId}
+  binding: rest
+  confidence: high
+  credits: 40
+  docs: https://docs.mobileaction.co/google-play-store/category-services
+  inputs:
+  - track_id
+  - category_id
+  - start_date
+  - end_date
+  - country_code
+- tool: googleplay_featuring_analysis
+  category: google-play-store
+  rest:
+  - GET /playstore-category/featuring-analysis/{trackId}
+  binding: rest
+  confidence: high
+  credits: 20
+  docs: https://docs.mobileaction.co/google-play-store/category-services
+  inputs:
+  - track_id
+  - start_date
+  - end_date
+  - country_code
+- tool: googleplay_top_charts
+  category: google-play-store
+  rest:
+  - GET /playstore-category/topcharts/{category}/{countryCode}/{categoryType}
+  binding: rest
+  confidence: high
+  credits: 10
+  docs: https://docs.mobileaction.co/google-play-store/category-services
+  inputs:
+  - category
+  - country_code
+  - category_type
+  - date
+- tool: googleplay_category_ranking
+  category: google-play-store
+  rest:
+  - GET /playstore-category/{trackId}/{country}
+  binding: rest
+  confidence: high
+  credits: 10
+  docs: https://docs.mobileaction.co/google-play-store/category-services
+  inputs:
+  - track_id
+  - country_code
+  - start_date
+  - end_date
+- tool: googleplay_global_last_day_category_rankings
+  category: google-play-store
+  rest:
+  - GET /playstore-category/global-rankings-last-day/{trackId}
+  binding: rest
+  confidence: high
+  credits: 20
+  docs: https://docs.mobileaction.co/google-play-store/category-services
+  inputs:
+  - track_id
+- tool: googleplay_keyword_ranking
+  category: google-play-store
+  rest:
+  - GET /playstore-keyword-ranking/{trackId}/{countryCode}/keywordrankings
+  binding: rest
+  confidence: high
+  credits: 3
+  docs: https://docs.mobileaction.co/google-play-store/keyword-services
+  inputs:
+  - track_id
+  - country_code
+  - keywords
+  - date
+- tool: googleplay_keyword_history
+  category: google-play-store
+  rest:
+  - GET /playstore-keyword-ranking/{trackId}/{countryCode}/{keyword}/keywordrankings
+  binding: rest
+  confidence: high
+  credits: 10
+  docs: https://docs.mobileaction.co/google-play-store/keyword-services
+  inputs:
+  - track_id
+  - country_code
+  - keyword
+  - start_date
+  - end_date
+- tool: googleplay_top_keywords
+  category: google-play-store
+  rest:
+  - GET /playstore-keyword-ranking/{trackId}/{countryCode}/top-keywords
+  binding: rest
+  confidence: high
+  credits: 20
+  docs: https://docs.mobileaction.co/google-play-store/keyword-services
+  inputs:
+  - track_id
+  - country_code
+  - date
+  - limit
+- tool: googleplay_keyword_metadata
+  category: google-play-store
+  rest:
+  - GET /playstore-keyword-ranking/{countryCode}/keyword-metadata
+  binding: rest
+  confidence: high
+  credits: 5
+  docs: https://docs.mobileaction.co/google-play-store/keyword-services
+  inputs:
+  - country_code
+  - keyword
+- tool: googleplay_list_of_apps
+  category: google-play-store
+  rest:
+  - GET /playstore-keyword-ranking/{countryCode}/keyword-apps
+  binding: rest
+  confidence: high
+  credits: 5
+  docs: https://docs.mobileaction.co/google-play-store/keyword-services
+  inputs:
+  - country_code
+  - keyword
+- tool: googleplay_organic_keywords
+  category: google-play-store
+  rest:
+  - GET /playstore-keyword-ranking/{trackId}/{countryCode}/organic-keywords
+  binding: rest
+  confidence: high
+  credits: 50
+  docs: https://docs.mobileaction.co/google-play-store/keyword-services
+  inputs:
+  - track_id
+  - country_code
+  - date
+- tool: googleplay_organic_impression_share
+  category: google-play-store
+  rest:
+  - GET /playstore-keyword-ranking/organic-impression-share/keyword/{keyword}/{countryCode}
+  binding: rest
+  confidence: high
+  credits: 20
+  docs: https://docs.mobileaction.co/google-play-store/keyword-services
+  inputs:
+  - keyword
+  - country_code
+- tool: googleplay_share_of_category
+  category: google-play-store
+  rest:
+  - GET /playstore-keyword-ranking/share-of-category/keyword/{keyword}/{countryCode}
+  binding: rest
+  confidence: high
+  credits: 5
+  docs: https://docs.mobileaction.co/google-play-store/keyword-services
+  inputs:
+  - keyword
+  - country_code
+- tool: ma_app_match
+  category: other-services
+  rest:
+  - GET /app-match/app/{store}
+  binding: rest
+  confidence: high
+  credits: 10
+  docs: https://docs.mobileaction.co/other-services/app-services
+  inputs:
+  - store
+  - track_id
+- tool: ma_visibility_score
+  category: other-services
+  rest:
+  - GET /graph-data/{store}/app/visibility/{country}
+  binding: rest
+  confidence: high
+  credits: 10
+  docs: https://docs.mobileaction.co/other-services/app-services
+  inputs:
+  - store
+  - country
+  - track_ids
+- tool: ma_historical_app_store_visibility_score
+  category: other-services
+  rest:
+  - POST /appstore-visibility-score/visibility-score-history/apps
+  binding: rest
+  confidence: high
+  credits: 10
+  docs: https://docs.mobileaction.co/other-services/app-services
+  inputs:
+  - track_ids
+  - countries
+  - start_date
+  - end_date
+- tool: ma_historical_google_play_visibility_score
+  category: other-services
+  rest:
+  - POST /playstore-visibility-score/visibility-score-history/apps
+  binding: rest
+  confidence: high
+  credits: 10
+  docs: https://docs.mobileaction.co/other-services/app-services
+  inputs:
+  - track_ids
+  - countries
+  - start_date
+  - end_date
+- tool: searchads_get_search_ads_integrations
+  category: search-ads
+  rest:
+  - GET /searchads/info/sa-integrations
+  binding: rest
+  confidence: high
+  credits: 1
+  docs: https://docs.mobileaction.co/search-ads/search-ads-services
+- tool: searchads_get_mmp_integrations
+  category: search-ads
+  rest:
+  - GET /searchads/info/v2/mmp-integrations
+  binding: rest
+  confidence: high
+  credits: 1
+  docs: https://docs.mobileaction.co/search-ads/search-ads-services
+- tool: searchads_get_goals
+  category: search-ads
+  rest:
+  - GET /searchads/info/goals
+  binding: rest
+  confidence: high
+  credits: 1
+  docs: https://docs.mobileaction.co/search-ads/search-ads-services
+  inputs:
+  - track_ids
+- tool: searchads_get_goal
+  category: search-ads
+  rest:
+  - GET /searchads/info/goals/{id}
+  binding: rest
+  confidence: high
+  credits: 1
+  docs: https://docs.mobileaction.co/search-ads/search-ads-services
+  inputs:
+  - goal_id
+- tool: searchads_get_apps
+  category: search-ads
+  rest:
+  - GET /searchads/info/apps
+  binding: rest
+  confidence: high
+  credits: 1
+  docs: https://docs.mobileaction.co/search-ads/search-ads-services
+- tool: searchads_get_bid_history_logs
+  category: search-ads
+  rest:
+  - GET /searchads/bid-history-logs
+  binding: rest
+  confidence: high
+  credits: 20
+  docs: https://docs.mobileaction.co/search-ads/search-ads-services
+  inputs:
+  - org_id
+  - start_date
+  - end_date
+- tool: searchads_get_reports
+  category: search-ads
+  rest:
+  - POST /searchads/reports
+  binding: rest
+  confidence: high
+  credits: 20
+  docs: https://docs.mobileaction.co/search-ads/search-ads-services
+  inputs:
+  - report_type
+  - report_level
+  - start_date
+  - end_date
+  - org_ids
+  - goal_id
+  - app_id
+  - re_attr_type
+  - currency
+  - page
+- tool: searchads_get_top_apps_report
+  category: search-ads
+  rest:
+  - POST /searchads/reports
+  binding: rest
+  confidence: medium
+  credits: 20
+  docs: https://docs.mobileaction.co/search-ads/search-ads-services
+  inputs:
+  - start_date
+  - end_date
+  - keyword_list
+  - org_ids
+  - report_level
+  - page
+  note: No dedicated endpoint is published; the docs expose TOP_APPS as a reportType value on the Search
+    Ads reports endpoint, so the tool is a preset over that operation.
+- tool: searchads_paid_keywords
+  category: search-ads
+  rest:
+  - GET /searchads-stats/paid-keywords/{trackId}/{countryCode}
+  binding: rest
+  confidence: high
+  credits: 50
+  docs: https://docs.mobileaction.co/search-ads/search-ads-insights
+  inputs:
+  - track_id
+  - country_code
+  - start_date
+  - end_date
+- tool: searchads_paying_apps
+  category: search-ads
+  rest:
+  - GET /searchads-stats/paying-apps/{countryCode}
+  binding: rest
+  confidence: high
+  credits: 50
+  docs: https://docs.mobileaction.co/search-ads/search-ads-insights
+  inputs:
+  - country_code
+  - keyword
+  - start_date
+  - end_date
+mcp_only: []
+rest_only:
+- operation: GET /api-key
+  reason: Exposed as the get_credit_status tool, so not REST-only; listed here only because the docs place
+    it outside the service catalogue.
+  covered_by_tool: get_credit_status
+notes:
+- 'The MCP tool surface is a near-complete projection of the documented REST surface: every one of the
+  88 tools maps to a published endpoint, and no tool was found that has no REST counterpart.'
+- Tool inputSchemas use snake_case (track_id, country_code, start_date) while the REST reference uses
+  camelCase path/query names (trackId, countryCode, startDate). The MCP server performs that renaming;
+  a crosswalk row lists the MCP parameter names under inputs.
+- Credit cost is carried in the tool description text itself and is identical to the per-endpoint credit
+  table in the REST introduction guide.

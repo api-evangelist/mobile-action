@@ -1,6 +1,6 @@
-generated: '2026-07-20'
+generated: '2026-08-13'
 method: searched
-source: https://docs.mobileaction.co/guide/introduction
+source: https://docs.mobileaction.co/guide/introduction + https://docs.mobileaction.co/mcp/server-setup
 docs: https://docs.mobileaction.co/guide/introduction
 summary:
   types:
@@ -8,20 +8,56 @@ summary:
   api_key_in:
   - query
   oauth2_flows: []
-  notes: >-
-    The MobileAction API uses a single API key ("token") passed as a query
-    parameter on every request. Keys are issued per account and metered against
-    a credit balance; the remaining balance can be checked via the /api-key
-    endpoint or the X-Credit-Remaining response header. No OAuth surface is
-    documented.
+  notes: 'One credential type covers the whole product: an account API key ("token") passed as a query
+    parameter. It authenticates the REST API and, appended to the MCP endpoint URL, the remote MCP server
+    too. Keys are metered against a credit balance. No OAuth, no OIDC, no bearer token, no mTLS is offered
+    on the API. Keys are issued by MobileAction (the MCP docs say "the token provided by your Customer
+    Success Manager") rather than self-served from a developer console, and access requires an active
+    API Solutions plan.'
 schemes:
 - name: apiKeyToken
   type: apiKey
   in: query
   parameter: token
-  description: >-
-    Account API key supplied as the `token` query parameter on each request
-    against https://api.mobileaction.co. Retrieve and rotate keys from the
-    MobileAction dashboard.
+  applies_to: https://api.mobileaction.co
+  description: Account API key supplied as the `token` query parameter on every request. Balance is returned
+    on GET /api-key and on the X-Credit-Remaining response header.
   sources:
   - https://docs.mobileaction.co/guide/introduction
+- name: mcpUrlToken
+  type: apiKey
+  in: query
+  parameter: token
+  applies_to: https://mcp.mobileaction.co/mcp
+  description: 'The same account API key appended to the MCP server URL (https://mcp.mobileaction.co/mcp?token=YOUR-API-TOKEN).
+    MobileAction documents this as credential-equivalent: "Anyone with this link can query your MobileAction
+    data, so treat it like a password."'
+  sources:
+  - https://docs.mobileaction.co/mcp/server-setup
+observed_behaviour:
+- probe: GET https://api.mobileaction.co/api-key
+  result: HTTP 401, empty body
+- probe: GET https://api.mobileaction.co/api-key?token=INVALID
+  result: HTTP 401, empty body
+- probe: POST https://mcp.mobileaction.co/mcp tools/list (no token)
+  result: HTTP 200 - the tool catalogue with full input schemas is readable ANONYMOUSLY; only invocation
+    needs the key.
+not_offered:
+  oauth2: true
+  openIdConnect: true
+  mutualTLS: true
+  http_bearer: true
+  note: /.well-known/oauth-authorization-server and /.well-known/openid-configuration return 404 on both
+    api.mobileaction.co and mcp.mobileaction.co.
+unrelated_oauth_surface:
+  host: https://www.mobileaction.co
+  note: The WordPress marketing site does serve an OAuth 2.0 / OIDC discovery document with mcp:read /
+    mcp:write / mcp:woocommerce scopes. It belongs to a WordPress plugin on that site and does NOT authenticate
+    the intelligence API. Captured separately in scopes/mobile-action-scopes.yml and well-known/mobile-action-well-known.yml
+    so it is never mistaken for the API auth model.
+key_handling:
+  rotation: from the MobileAction dashboard / via Customer Success
+  transport: query string
+  risk_note: Carrying the credential in the query string means it is exposed in browser history, proxy
+    logs and server access logs, and in the MCP case it is pasted into a third-party AI client's connector
+    configuration. A header-based credential would be materially safer.

@@ -1,0 +1,60 @@
+generated: '2026-08-13'
+method: probed
+source: https://www.mobileaction.co/.well-known/openid-configuration
+applies_to: https://www.mobileaction.co (WordPress marketing site)
+does_not_apply_to:
+- https://api.mobileaction.co
+- https://mcp.mobileaction.co
+scope_note: IMPORTANT SCOPE BOUNDARY. The MobileAction intelligence API has NO OAuth surface at all -
+  it authenticates with a single ?token= API key (see authentication/mobile-action-authentication.yml),
+  and the remote MCP server carries the same key in its URL. The OAuth 2.0 / OIDC authorization server
+  described here is served by an OAuth plugin on the WordPress marketing site at www.mobileaction.co and
+  governs that site only. It is recorded because MobileAction genuinely serves the discovery document
+  from its own domain, not because it fronts the data API.
+schemes:
+- name: wordpress-site-oauth
+  type: oauth2
+  issuer: https://www.mobileaction.co
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://www.mobileaction.co/awfah-oauth/authorize
+    tokenUrl: https://www.mobileaction.co/wp-json/awfah_oauth/v1/token
+    pkce:
+    - S256
+  grant_types:
+  - authorization_code
+  - refresh_token
+  registration_endpoint: https://www.mobileaction.co/wp-json/awfah_oauth/v1/register
+  revocation_endpoint: https://www.mobileaction.co/wp-json/awfah_oauth/v1/revoke
+  jwks_uri: https://www.mobileaction.co/wp-json/awfah_oauth/v1/jwks
+  id_token_signing_alg:
+  - RS256
+  token_endpoint_auth_methods:
+  - none
+  - client_secret_post
+  - client_secret_basic
+  source: well-known/mobile-action-openid-configuration.json
+scopes:
+- scope: mcp:read
+  description: Read access for the WordPress site MCP plugin.
+  flows:
+  - authorizationCode
+  sources:
+  - well-known/mobile-action-openid-configuration.json
+- scope: mcp:write
+  description: Write access for the WordPress site MCP plugin.
+  flows:
+  - authorizationCode
+  sources:
+  - well-known/mobile-action-openid-configuration.json
+- scope: mcp:woocommerce
+  description: WooCommerce access for the WordPress site MCP plugin.
+  flows:
+  - authorizationCode
+  sources:
+  - well-known/mobile-action-openid-configuration.json
+x-evidence:
+  fetched: '2026-08-13'
+  url: https://www.mobileaction.co/.well-known/openid-configuration
+  http_status: 200
+  content_type: application/json

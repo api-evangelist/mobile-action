@@ -1,22 +1,74 @@
-generated: '2026-07-20'
+generated: '2026-08-13'
 method: searched
-source: https://docs.mobileaction.co/guide/introduction
+source: https://docs.mobileaction.co/ + https://www.mobileaction.co/security/ + https://trust.mobileaction.co/
+  + live protocol probes
 standards:
+- id: mcp
+  conforms: true
+  version: '2025-06-18'
+  evidence: Remote MCP server at https://mcp.mobileaction.co/mcp answered a JSON-RPC initialize with protocolVersion
+    2025-06-18, serverInfo MobileAction 3.4.7, and tools/list returned 88 tools with input schemas over
+    streamable HTTP (text/event-stream).
+- id: json-rpc-2.0
+  conforms: true
+  evidence: MCP transport; initialize/tools/list/prompts/list/resources/list all answered valid JSON-RPC
+    2.0.
+- id: llmstxt
+  conforms: true
+  evidence: 'https://www.mobileaction.co/llms.txt returns HTTP 200 text/plain in llms.txt link-list format
+    (H1, blockquote summary, ## sections).'
 - id: oauth2
   conforms: false
-  evidence: API authenticates with a single query-parameter API key ("token"); no
-    OAuth2 flows documented.
+  evidence: The intelligence API authenticates with a single ?token= query API key. A separate OAuth 2.0
+    server exists on the WordPress marketing site (www.mobileaction.co) but does not front the API.
 - id: oidc
   conforms: false
+  evidence: No OIDC on api.mobileaction.co or mcp.mobileaction.co (both 404 on /.well-known/openid-configuration).
+    The www host serves an OIDC discovery document for the WordPress site only.
 - id: apikey-auth
   conforms: true
-  evidence: Documented `token` query-parameter API key on api.mobileaction.co.
+  evidence: Documented `token` query-parameter API key on api.mobileaction.co; observed 401 on missing/invalid
+    key.
 - id: rfc9457-problem-details
   conforms: false
-  evidence: No application/problem+json error envelope documented.
+  evidence: No application/problem+json. A rejected request returns a bodyless 401.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on every MobileAction host.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset/Deprecation header support and no deprecation policy published.
+- id: openapi
+  conforms: false
+  evidence: No OpenAPI/Swagger document is published. Every conventional spec path 404s on api.mobileaction.co;
+    the docs host answers 200 with an SPA shell for all of them.
+- id: asyncapi
+  conforms: false
+  evidence: No event, streaming or webhook surface is documented anywhere in the REST reference or the
+    MCP tool set.
+- id: a2a
+  conforms: false
+  evidence: /.well-known/agent-card.json and /.well-known/agent.json 404 on every real host; the docs
+    and app hosts return SPA shells, not cards.
 - id: soc2
   conforms: true
-  evidence: SOC 2 named on the MobileAction Trust Center (trust.mobileaction.co).
+  version: Type II
+  evidence: MobileAction Inc. completed an AICPA SOC 2 Type II audit, audited by Prescient Assurance;
+    named on https://www.mobileaction.co/security/ and https://trust.mobileaction.co/. Report available
+    on request.
 - id: gdpr
   conforms: true
-  evidence: GDPR compliance named on the MobileAction Trust Center.
+  evidence: GDPR compliance documented on https://www.mobileaction.co/security/ (data subject rights,
+    DPAs, privacy by design, breach notification, named DPO) and on the trust center.
+- id: iso-27001
+  conforms: false
+  evidence: Not claimed on the security or trust pages.
+- id: pci-dss
+  conforms: false
+  evidence: Not claimed; MobileAction is not a payment processor.
+- id: hipaa
+  conforms: false
+  evidence: Not claimed.
+partner_programs:
+- name: Apple Ads Partner
+  evidence: Named on https://trust.mobileaction.co/ and the trust & assurance page.

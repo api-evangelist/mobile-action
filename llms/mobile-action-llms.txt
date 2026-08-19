@@ -1,20 +1,29 @@
 # MobileAction
 
-> MobileAction is an app-store marketing intelligence platform used by 5,000+ mobile app and game companies for App Store Optimization (ASO), Apple Search Ads campaign management, ad-creative intelligence, and market benchmarking. The MobileAction API exposes this intelligence programmatically over a credit-metered REST interface at https://api.mobileaction.co, authenticated with a per-account API key passed as the `token` query parameter.
+> MobileAction is an app-store marketing intelligence platform used by 5,000+ mobile app and game companies for App Store Optimization (ASO), Apple Ads campaign management, ad-creative intelligence and market benchmarking. It is an InMobi Advertising company. Two machine surfaces are published: a credit-metered REST API at https://api.mobileaction.co authenticated with an account API key in the `token` query parameter, and a remote MCP server at https://mcp.mobileaction.co/mcp exposing 88 tools over the same credit allowance. There is no OpenAPI document.
 
 ## API
 
-- [MobileAction API docs](https://docs.mobileaction.co/): REST intelligence API. Base URL https://api.mobileaction.co. Auth: API key via `token` query parameter. Usage metered in credits (X-Credit-Remaining / X-Credit-Cost / X-Credit-Reset headers; balance via /api-key).
-- [Getting started / introduction](https://docs.mobileaction.co/guide/introduction): base URL, authentication, and credit model.
+- [MobileAction API docs](https://docs.mobileaction.co/): REST intelligence API. Base URL https://api.mobileaction.co. Auth: API key via `token` query parameter. Metered in credits (X-Credit-Cost / X-Credit-Remaining / X-Credit-Reset headers; balance via GET /api-key).
+- [Getting started / introduction](https://docs.mobileaction.co/guide/introduction): base URL, authentication, the per-endpoint credit table, and the App Store / Google Play category id tables.
+- [API Solutions](https://www.mobileaction.co/api-solutions/): what the API covers and who it is for. Access is enterprise-only and arranged through sales.
+
+## MCP (remote agent surface)
+
+- [MCP server setup](https://docs.mobileaction.co/mcp/server-setup): endpoint `https://mcp.mobileaction.co/mcp`, authenticated by appending `?token=YOUR-API-TOKEN`. Treat the tokened URL as a password.
+- [What is MCP](https://docs.mobileaction.co/mcp/what-is-mcp): MCP is additive to the REST API — exploration and ad hoc analysis via MCP, production pipelines via REST. Both draw the same credits.
+- [Connect to Claude](https://docs.mobileaction.co/mcp/connect-to-claude) · [Connect to ChatGPT](https://docs.mobileaction.co/mcp/connect-to-chatgpt) · [Connect to Gemini CLI](https://docs.mobileaction.co/mcp/connect-to-gemini-cli)
+- 88 tools, MCP protocol 2025-06-18, server MobileAction 3.4.7. `tools/list` is readable anonymously; invocation requires the key.
 
 ## Service areas
 
-- App Store: keyword rankings, app metadata, category/app lists (iOS).
-- Google Play Store: keyword rankings, metadata, Play Store performance.
-- Ad Intelligence: app creatives, ad badges, country distribution across 100M+ creatives.
-- Search Ads / CMP: Apple Search Ads campaign data and CPP (Custom Product Page) intelligence.
-- Dashboard: tracked apps, daily rankings, keyword management.
-- Other: app matching, visibility scores.
+- App Store: keyword rankings and history, top keywords, keyword metadata, organic keywords, impression share, share of category, category rankings, top charts, app detail, version timeline, developer apps, reviews, review word analysis, download/revenue estimations, featuring analysis.
+- Google Play Store: the same surface under `playstore-` / `googleplay_` names, with `langCode` in place of `countryCode` on app-info endpoints.
+- Ad Intelligence: creatives, advertiser/publisher badge, and distributions by country, language, network, creative type and creative dimension. Top advertisers by category and country.
+- CPP Intelligence: Custom Product Pages by app, by keyword and by category, plus a CPP's paid keywords.
+- Search Ads / CMP: Apple Ads integrations, MMP integrations, goals, apps, ASA + MMP reports, TOP_APPS reports, bid history logs, paid keywords, paying apps.
+- Dashboard (account-scoped, the only writes): tracked apps, daily keyword rankings, add/delete tracked keywords, app search, sales metrics, retention history, keyword spots, max reach and install estimations.
+- Other: cross-store app match, visibility scores (current and historical).
 
 ## Docs
 
@@ -23,15 +32,27 @@
 - [Blog](https://www.mobileaction.co/blog/)
 - [Pricing](https://www.mobileaction.co/pricing/)
 - [Status](https://status.mobileaction.co)
-- [Trust Center](https://trust.mobileaction.co/) (SOC 2, GDPR)
+- [Trust Center](https://trust.mobileaction.co/) (SOC 2 Type II, GDPR, Apple Ads Partner)
+- [Security](https://www.mobileaction.co/security/)
 - [Terms of Service](https://www.mobileaction.co/terms-of-service/)
 - [Privacy Policy](https://www.mobileaction.co/privacy-policy/)
 
 ## Repo artifacts
 
+- Provider-published llms.txt (verbatim): llms/mobile-action-llms-published.txt
+- MCP manifest + verbatim tools/list: mcp/mobile-action-mcp.yml, mcp/mobile-action-mcp-tools-list.json
+- MCP tool -> REST crosswalk: mcp/mobile-action-tool-crosswalk.yml
+- Agent skills: skills/_index.yml
 - Authentication profile: authentication/mobile-action-authentication.yml
 - API conventions: conventions/mobile-action-conventions.yml
+- Rate limits / credit model: rate-limits/mobile-action-rate-limits.yml
+- Plans and pricing: plans/mobile-action-plans-pricing.yml
+- Data model: data-model/mobile-action-data-model.yml
+- Error behaviour: errors/mobile-action-problem-types.yml
 - Lifecycle: lifecycle/mobile-action-lifecycle.yml
 - Conformance: conformance/mobile-action-conformance.yml
+- Packages: packages/mobile-action-packages.yml
+- Well-known probe: well-known/mobile-action-well-known.yml
+- OAuth scopes (WordPress site only): scopes/mobile-action-scopes.yml
 - Domain security: security/mobile-action-domain-security.yml
 - Trust center: security/mobile-action-trust-center.yml

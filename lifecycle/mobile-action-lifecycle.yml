@@ -1,17 +1,46 @@
-generated: '2026-07-20'
+generated: '2026-08-13'
 method: searched
-source: https://status.mobileaction.co
+source: https://docs.mobileaction.co/ + https://status.mobileaction.co
 versioning:
-  scheme: unversioned-host
+  scheme: per-service-path-suffix
   current: null
   docs: https://docs.mobileaction.co/guide/introduction
-  notes: Production host https://api.mobileaction.co carries no version segment.
+  notes: 'The production host https://api.mobileaction.co carries no version segment. Versions are expressed
+    per service family instead and are not aligned with each other: appstore-appinfo-v2 / playstore-appinfo-v2
+    (v2 in the service name), appstore-app-reviews/v2/ (v2 as a path segment, alongside the still-published
+    v1 path), an explicit {version} path variable on the category ranking and top-charts endpoints, and
+    gateway/keyword-estimation/v1/. No global API version, no version header, no version negotiation.'
 deprecation:
   policy_url: null
   sunset_header: false
-  notes: No published deprecation/sunset policy located.
+  notes: 'No deprecation or sunset policy is published, and no Sunset/Deprecation response header is documented.
+    Superseded endpoints appear to be left in place indefinitely: the v1 app-reviews path is still documented
+    alongside v2, with no notice on either.'
+changelog:
+  url: null
+  notes: 'No dated changelog, release-notes or product-update feed for the API was found. Probed: the
+    docs sitemap (19 URLs, none a changelog), the help-center sitemap, and the site-wide llms.txt index
+    (3,761 lines) - no release/changelog/what-is-new page for the API exists.'
+roadmap:
+  url: null
+  notes: No public roadmap published.
 sla:
   url: null
   uptime_target: null
+  notes: No published SLA or uptime target. A status page exists but states no commitment.
 status_page: https://status.mobileaction.co
+status_page_note: 'Self-hosted uptime dashboard (HTTP 200). It is a single-page app: /history.rss, /history.atom
+  and /api/v2/summary.json all return the page HTML rather than a feed or JSON, so incident history is
+  not machine-readable.'
+support:
+  help_center: https://helpcenter.mobileaction.co/en
+  model: Customer Success Manager issues and manages API keys
+access_lifecycle:
+  self_serve: false
+  notes: API access is not self-serve. The introduction guide states the API "is available for enterprise
+    customers. Contact sales for further information," and the MCP setup page says the token is "provided
+    by your Customer Success Manager." An active API Solutions plan is a prerequisite.
 deprecated_operations: []
+corporate:
+  note: MobileAction, Inc. is an InMobi Advertising company (copyright line on mobileaction.co, 2026).
+    MobileAction also announced a partnership with Skai's Apple Search Ads business unit.

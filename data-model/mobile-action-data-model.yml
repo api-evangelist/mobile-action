@@ -1,0 +1,333 @@
+generated: '2026-08-13'
+method: derived
+source: mcp/mobile-action-mcp-tools-list.json (88 probed tool inputSchemas) + https://docs.mobileaction.co/
+  response-field tables
+note: 'Derived without an OpenAPI: MobileAction publishes no spec, so entities and fields come from the
+  MCP tool input schemas (probed) and the "Response Fields" tables on each REST service page (searched).
+  No relationship is asserted that is not visible in one of those two sources.'
+identifiers:
+- name: trackId
+  type: string
+  note: The universal join key. On the App Store it is the numeric iTunes track id (e.g. 284882215 = Facebook);
+    on Google Play it is the package name (e.g. com.facebook.katana). Almost every entity hangs off it.
+- name: countryCode
+  type: string
+  note: Two-letter storefront/country code. Google Play app endpoints take langCode in the same position.
+- name: developerId
+  type: string
+  note: Numeric on the App Store; developerName (string) on Google Play.
+- name: categoryId
+  type: integer
+  note: MobileAction-specific category ids, published as two tables (App Store 36/6000-7019, Google Play
+    0-57). Google Play only uses category names natively; the numeric ids are MobileAction's own.
+- name: cppId
+  type: string
+  note: Custom Product Page id, scoped to an app.
+- name: orgId
+  type: string
+  note: Apple Ads organisation id, used by the Search Ads / CMP endpoints.
+- name: goalId
+  type: string
+  note: MobileAction CMP conversion goal id.
+entities:
+- name: App
+  key: trackId
+  store_scoped: true
+  fields:
+  - trackId
+  - name
+  - developer
+  - developerId
+  - price
+  - categories
+  - version
+  - appKind (IPHONE|IPAD)
+  sources:
+  - appstore_app_detail
+  - appstore_app_simple_information
+  - googleplay_app_detail
+  - dashboard_app_search
+- name: AppVersion
+  key: trackId + version
+  fields:
+  - version
+  - releaseDate
+  - changed old/new metadata values
+  sources:
+  - appstore_app_version_list
+  - appstore_app_version_list_detailed
+  - googleplay_app_version_list_detailed
+- name: Developer
+  key: developerId | developerName
+  fields:
+  - developerId
+  - name
+  - apps[]
+  sources:
+  - appstore_developer_apps
+  - googleplay_developer_apps
+- name: Keyword
+  key: keyword + countryCode + store
+  fields:
+  - keyword
+  - searchVolume
+  - chanceScore
+  - numberOfApps
+  - difficulty
+  sources:
+  - appstore_keyword_metadata
+  - googleplay_keyword_metadata
+  - appstore_top_keywords
+- name: KeywordRanking
+  key: trackId + keyword + countryCode + date
+  fields:
+  - trackId
+  - keyword
+  - countryCode
+  - date (epoch ms)
+  - appKind
+  - rank
+  sources:
+  - appstore_keyword_ranking
+  - appstore_keyword_history
+  - googleplay_keyword_ranking
+  - dashboard_daily_keyword_rankings
+- name: CategoryRanking
+  key: trackId + categoryId + countryCode + date
+  fields:
+  - categoryId
+  - rankingType
+  - targetDevice
+  - rank
+  - date
+  sources:
+  - appstore_category_ranking
+  - appstore_top_charts
+  - appstore_global_last_day_category_rankings
+- name: Review
+  key: reviewId
+  fields:
+  - reviewId
+  - rating
+  - country/language
+  - text
+  - date
+  - replied
+  sources:
+  - appstore_app_reviews
+  - appstore_app_reviews_v2
+  - googleplay_app_reviews
+- name: ReviewWordAnalysis
+  key: trackId + word + window
+  fields:
+  - word
+  - averageRating
+  - frequency
+  - numReviews
+  - sentiment (distribution by rating)
+  - trend
+  sources:
+  - appstore_app_review_analysis
+  - googleplay_app_review_analysis
+- name: Estimation
+  key: trackId + country + date
+  fields:
+  - downloads
+  - revenue
+  - device
+  sources:
+  - appstore_download_revenue_estimations
+  - appstore_monthly_global_download_revenue_estimations
+  - googleplay_download_revenue_estimations
+- name: Creative
+  key: creative id
+  fields:
+  - mediaOriginalUrl
+  - mediaType (image|video|HTML|playable)
+  - dimension
+  - network
+  - countryCode
+  - firstSeen
+  - lastSeen
+  sources:
+  - adintel_get_creatives
+  - adintel_creative_type_distribution
+  - adintel_creative_dimension_distribution
+- name: Advertiser
+  key: trackId
+  fields:
+  - trackId
+  - platform
+  - category
+  - network
+  - badge (advertiser|publisher)
+  sources:
+  - adintel_top_advertisers
+  - adintel_check_badge
+- name: CustomProductPage
+  key: cppId
+  fields:
+  - cppId
+  - trackId
+  - screenshots
+  - country
+  - impressionShare
+  - keywords[]
+  sources:
+  - cpp_by_app
+  - cpp_by_keyword
+  - cpp_by_category
+  - cpp_keywords
+- name: SearchAdsAccount
+  key: orgId
+  fields:
+  - orgId
+  - integrations
+  - apps[]
+  sources:
+  - searchads_get_search_ads_integrations
+  - searchads_get_apps
+  - searchads_get_mmp_integrations
+- name: Goal
+  key: goalId
+  fields:
+  - goalId
+  - name
+  - eventList[]
+  - state (NO_RECENT_EVENT|PENDING_FIRST_EVENT|...)
+  sources:
+  - searchads_get_goals
+  - searchads_get_goal
+- name: Report
+  key: reportType + reportLevel + window
+  fields:
+  - reportType (REPORT|DAILY|SUMMARY|TOP_APPS)
+  - reportLevel
+  - ASA + MMP metrics
+  sources:
+  - searchads_get_reports
+  - searchads_get_top_apps_report
+- name: BidHistoryLog
+  key: orgId + timestamp
+  fields:
+  - orgId
+  - entity
+  - oldBid
+  - newBid
+  - timestamp
+  sources:
+  - searchads_get_bid_history_logs
+- name: VisibilityScore
+  key: trackId + country + date
+  fields:
+  - trackId
+  - country
+  - score
+  - date
+  sources:
+  - ma_visibility_score
+  - ma_historical_app_store_visibility_score
+  - ma_historical_google_play_visibility_score
+- name: TrackedApp
+  key: trackId
+  fields:
+  - trackId
+  - countries[]
+  - trackedKeywordCount
+  sources:
+  - dashboard_apps
+  - dashboard_number_of_keywords
+  - dashboard_add_keywords
+  - dashboard_delete_keywords
+  note: 'The dashboard account scope: the only WRITE surface in the whole API (add/delete tracked keywords).'
+- name: CreditStatus
+  key: api key
+  fields:
+  - creditTotal
+  - creditRemaining
+  - creditResetPeriod
+  - creditResetTime
+  sources:
+  - get_credit_status
+relationships:
+- from: App
+  to: Developer
+  type: belongs_to
+  via: developerId
+- from: Developer
+  to: App
+  type: has_many
+  via: developerId
+- from: App
+  to: AppVersion
+  type: has_many
+  via: trackId
+- from: App
+  to: KeywordRanking
+  type: has_many
+  via: trackId
+- from: Keyword
+  to: KeywordRanking
+  type: has_many
+  via: keyword + countryCode
+- from: App
+  to: CategoryRanking
+  type: has_many
+  via: trackId
+- from: App
+  to: Review
+  type: has_many
+  via: trackId
+- from: Review
+  to: ReviewWordAnalysis
+  type: has_many
+  via: trackId + window
+- from: App
+  to: Estimation
+  type: has_many
+  via: trackId
+- from: App
+  to: Creative
+  type: has_many
+  via: trackId
+- from: App
+  to: Advertiser
+  type: has_one
+  via: trackId
+  note: An app is flagged advertiser and/or publisher by adintel_check_badge.
+- from: App
+  to: CustomProductPage
+  type: has_many
+  via: trackId
+- from: CustomProductPage
+  to: Keyword
+  type: has_many
+  via: cppId
+- from: SearchAdsAccount
+  to: Goal
+  type: has_many
+  via: orgId
+- from: SearchAdsAccount
+  to: Report
+  type: has_many
+  via: orgId
+- from: SearchAdsAccount
+  to: BidHistoryLog
+  type: has_many
+  via: orgId
+- from: App
+  to: VisibilityScore
+  type: has_many
+  via: trackId + country
+- from: TrackedApp
+  to: App
+  type: belongs_to
+  via: trackId
+- from: App
+  to: App
+  type: has_one
+  via: ma_app_match
+  note: 'Cross-store counterpart: ma_app_match returns the opposite market''s trackId for the same app.'
+cardinality_note: The graph is one wide star around App/trackId. Only TrackedApp, Goal, Report and BidHistoryLog
+  are account-scoped (they need the caller's own MobileAction/Apple Ads account); everything else is market
+  intelligence about any app in either store.

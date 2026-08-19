@@ -1,0 +1,79 @@
+generated: '2026-08-13'
+method: probed
+source: live probes of https://api.mobileaction.co + https://docs.mobileaction.co/guide/introduction
+format: http-status
+format_note: MobileAction publishes NO error-code registry and NO RFC 9457 problem+json envelope. The
+  introduction guide states only that the API "use[s] HTTP response codes to indicate API errors" and
+  that "JSON will be returned in all responses from the API, including errors". Everything below is either
+  quoted from that guide or observed on a live probe; nothing is inferred from a spec, because no spec
+  exists.
+envelopes:
+- kind: success
+  shape:
+    success: true
+    data: <object>
+  example:
+    success: true
+    data:
+      creditTotal: 4000
+      creditRemaining: 3012
+      creditResetPeriod: 24
+      creditResetTime: 511
+  source: https://docs.mobileaction.co/guide/introduction
+  applies_to: GET /api-key
+  note: Most data endpoints return a bare JSON array instead of this envelope; the success/data wrapper
+    is not applied uniformly.
+- kind: error
+  shape: empty body
+  observed: true
+  note: On both a missing and an invalid token the gateway returned HTTP 401 with a zero-length body and
+    no Content-Type - not JSON, contradicting the guide's "JSON will be returned in all responses from
+    the API, including errors".
+- kind: error
+  shape:
+    timestamp: <ISO-8601>
+    path: <request path>
+    status: <int>
+    error: <reason phrase>
+    message: null
+    requestId: <id>
+  observed: true
+  applies_to: unrouted paths on api.mobileaction.co
+  example:
+    timestamp: '2026-08-13T21:35:30.251+00:00'
+    path: /openapi.json
+    status: 404
+    error: Not Found
+    message: null
+    requestId: REDACTED
+  note: Default Spring Boot error body. Returned for any path the gateway does not route; carries a requestId
+    useful for support correlation.
+problems:
+- status: 401
+  title: Unauthorized
+  observed: true
+  trigger: token query parameter missing, or present but not a valid account API key
+  body: empty (zero-length)
+  remediation: Append ?token=YOUR_API_KEY. Keys are issued per account by MobileAction; check the balance
+    with GET /api-key.
+  evidence:
+  - GET https://api.mobileaction.co/api-key -> 401
+  - GET https://api.mobileaction.co/api-key?token=INVALID -> 401
+  - 'GET https://api.mobileaction.co/appstore-keyword-ranking/284882215/US/top-keywords?date=2026-08-01
+    -> 401 (with x-credit-cost: 20)'
+- status: 404
+  title: Not Found
+  observed: true
+  trigger: path not routed by the gateway
+  body: Spring Boot error JSON (timestamp/path/status/error/message/requestId)
+  evidence:
+  - GET https://api.mobileaction.co/openapi.json -> 404
+  - GET https://api.mobileaction.co/ -> 404
+undocumented:
+- No status code is published for credit exhaustion (no 429 documented, none observable without a key).
+- No machine-readable error code / reason vocabulary is published in any form.
+- No error section exists in the REST reference; each service page documents only the success response
+  fields.
+agent_guidance: 'An agent cannot distinguish "bad key", "expired key" and "endpoint not entitled" from
+  the response: all three surface as a bodyless 401. Retry logic should treat 401 as terminal, not transient,
+  and check GET /api-key for the credit balance before assuming a quota problem.'

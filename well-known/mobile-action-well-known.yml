@@ -1,19 +1,104 @@
-generated: '2026-07-20'
-method: none
-host: https://mobileaction.co
-notes: >-
-  No .well-known discovery documents were served. The docs host
-  (docs.mobileaction.co) returns HTTP 200 for arbitrary paths (SPA index
-  fallback, identical 32KB HTML), so /security.txt, /llms.txt, /openapi.json
-  and /swagger.json on that host are NOT real documents and were not saved.
+generated: '2026-08-13'
+method: probed
+source: live GET probes of every host in apis.yml plus the MCP host
+hosts_probed:
+- https://www.mobileaction.co
+- https://mobileaction.co
+- https://api.mobileaction.co
+- https://docs.mobileaction.co
+- https://app.mobileaction.co
+- https://mcp.mobileaction.co
 documents:
-- path: /.well-known/security.txt
+- host: https://www.mobileaction.co
+  path: /.well-known/openid-configuration
+  status: 200
+  content_type: application/json
+  file: mobile-action-openid-configuration.json
+  note: A real OIDC/OAuth 2.0 discovery document (issuer https://www.mobileaction.co), served by an OAuth
+    plugin on the WordPress marketing site. Its scopes are mcp:read / mcp:write / mcp:woocommerce and
+    its endpoints live under /wp-json/awfah_oauth/v1/ — it authorizes the WordPress site's own MCP plugin,
+    NOT the MobileAction intelligence API at api.mobileaction.co and NOT the documented MCP server at
+    mcp.mobileaction.co (which uses a ?token= API key and serves no OAuth metadata).
+- host: https://www.mobileaction.co
+  path: /.well-known/oauth-authorization-server
+  status: 200
+  content_type: application/json
+  file: mobile-action-openid-configuration.json
+  note: Byte-identical to /.well-known/openid-configuration; same WordPress OAuth server.
+- host: https://www.mobileaction.co
+  path: /llms.txt
+  status: 200
+  content_type: text/plain
+  file: ../llms/mobile-action-llms-published.txt
+  bytes: 635008
+  note: Provider-published llms.txt (site-wide index of pages, blog posts, success stories, guides, glossary
+    and reports). Saved verbatim under llms/.
+- host: https://www.mobileaction.co
+  path: /.well-known/security.txt
   status: 404
-- path: /.well-known/openid-configuration
+- host: https://www.mobileaction.co
+  path: /security.txt
   status: 404
-- path: /.well-known/oauth-authorization-server
+- host: https://www.mobileaction.co
+  path: /.well-known/api-catalog
   status: 404
-- path: /.well-known/api-catalog
+- host: https://www.mobileaction.co
+  path: /.well-known/ai-plugin.json
   status: 404
-- path: /.well-known/ai-plugin.json
+- host: https://www.mobileaction.co
+  path: /.well-known/agent-card.json
   status: 404
+- host: https://www.mobileaction.co
+  path: /.well-known/agent.json
+  status: 404
+- host: https://api.mobileaction.co
+  path: /.well-known/security.txt
+  status: 404
+- host: https://api.mobileaction.co
+  path: /.well-known/openid-configuration
+  status: 404
+- host: https://api.mobileaction.co
+  path: /.well-known/oauth-authorization-server
+  status: 404
+- host: https://api.mobileaction.co
+  path: /.well-known/api-catalog
+  status: 404
+- host: https://api.mobileaction.co
+  path: /.well-known/ai-plugin.json
+  status: 404
+- host: https://api.mobileaction.co
+  path: /.well-known/agent-card.json
+  status: 404
+- host: https://api.mobileaction.co
+  path: /.well-known/agent.json
+  status: 404
+- host: https://api.mobileaction.co
+  path: /llms.txt
+  status: 404
+- host: https://mcp.mobileaction.co
+  path: /.well-known/oauth-authorization-server
+  status: 404
+- host: https://mcp.mobileaction.co
+  path: /.well-known/oauth-protected-resource
+  status: 404
+- host: https://mcp.mobileaction.co
+  path: /.well-known/agent-card.json
+  status: 404
+- host: https://mcp.mobileaction.co
+  path: /.well-known/agent.json
+  status: 404
+- host: https://mcp.mobileaction.co
+  path: /.well-known/security.txt
+  status: 404
+soft_200_hosts:
+- host: https://docs.mobileaction.co
+  behaviour: Docusaurus SPA catch-all — every unknown path returns HTTP 200 with the same 29,479-byte
+    HTML shell. /.well-known/agent-card.json, /.well-known/agent.json, /openapi.json, /swagger.json and
+    /llms.txt all 200 here and NONE is a document.
+- host: https://app.mobileaction.co
+  behaviour: Application SPA catch-all — every unknown path returns HTTP 200 with the same 199,120-byte
+    HTML shell. All /.well-known/* probes and /llms.txt are soft 200s, not documents.
+summary:
+  real_documents: 3
+  not_found: 18
+  soft_200_shells_rejected: 12

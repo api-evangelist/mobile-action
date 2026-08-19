@@ -1,0 +1,4145 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "tools": [
+      {
+        "name": "adintel_get_creatives",
+        "description": "List creatives belonging to an app, filterable by date range, country, network and\nmedia type. Max 30 days of data allowed per request. Uses the unique trackId from\niTunes Connect / Play Store (e.g. Facebook iOS: 284882215, Android: com.facebook.katana).\nCredit cost: 200 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "Track id of the app."
+            },
+            "page": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Dataset start cursor, default 1, 50 items per page."
+            },
+            "start_date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Start date for the query in YYYY-MM-DD format."
+            },
+            "end_date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "End date for the query in YYYY-MM-DD format."
+            },
+            "country_code": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "2 letter country code."
+            },
+            "network": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Network name."
+            },
+            "media_type": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Media type id."
+            }
+          },
+          "required": [
+            "track_id"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "adintel_check_badge",
+        "description": "Check if the given app is an advertiser or a publisher.\nCredit cost: 5 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "Track id of the app."
+            }
+          },
+          "required": [
+            "track_id"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "adintel_country_distribution",
+        "description": "Provides country distribution data for the given app. Max 30 days of data allowed\nper request.\nCredit cost: 10 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "Track id of the app."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date in YYYY-MM-DD format."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date in YYYY-MM-DD format."
+            },
+            "media_type": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Media type (1 = Creatives, 2 = Impressions)."
+            },
+            "country_code": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Two letter country code."
+            }
+          },
+          "required": [
+            "track_id",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "adintel_creative_dimension_distribution",
+        "description": "Provides creative dimension distribution data (image, video and HTML creative\ndimensions with percentages) for the given parameters. Max 30 days of data allowed\nper request.\nCredit cost: 20 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "Track id of the app."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date in YYYY-MM-DD format."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date in YYYY-MM-DD format."
+            },
+            "media_type": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Media type (1 = Creatives, 2 = Impressions)."
+            },
+            "country_code": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Two letter country code."
+            },
+            "network": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Network name filter."
+            }
+          },
+          "required": [
+            "track_id",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "adintel_creative_type_distribution",
+        "description": "Provides creative type distribution data (image, video, HTML and playable\npercentages) for the given parameters. Max 30 days of data allowed per request.\nCredit cost: 20 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "Track id of the app."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date in YYYY-MM-DD format."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date in YYYY-MM-DD format."
+            },
+            "media_type": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Media type (1 = Creatives, 2 = Impressions)."
+            },
+            "country_code": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Two letter country code."
+            },
+            "network": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Network name filter."
+            }
+          },
+          "required": [
+            "track_id",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "adintel_language_distribution",
+        "description": "Provides language distribution data for the given app. Max 30 days of data allowed\nper request.\nCredit cost: 10 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "Track id of the app."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date in YYYY-MM-DD format."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date in YYYY-MM-DD format."
+            },
+            "country_code": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Two letter country code."
+            }
+          },
+          "required": [
+            "track_id",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "adintel_network_distribution",
+        "description": "Provides network distribution data for the given app. Max 30 days of data allowed\nper request.\nCredit cost: 10 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "Track id of the app."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date in YYYY-MM-DD format."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date in YYYY-MM-DD format."
+            },
+            "media_type": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Media type (1 = Creatives, 2 = Impressions)."
+            },
+            "country_code": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Two letter country code."
+            }
+          },
+          "required": [
+            "track_id",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "adintel_top_advertisers",
+        "description": "Provides a list of top advertisers, filterable by date range, country, platform,\ncategory and network. Max 30 days of data allowed per request.\nCredit cost: 150 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "page": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Dataset start cursor, default 1, 50 items per page."
+            },
+            "start_date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Begin date for the query in YYYY-MM-DD format."
+            },
+            "end_date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "End date for the query in YYYY-MM-DD format."
+            },
+            "country_code": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Two letter country code."
+            },
+            "platform_id": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Store platform id (1 = PlayStore, 2 = AppStore)."
+            },
+            "category": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Category filter for the query."
+            },
+            "network": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Network name filter."
+            },
+            "first_seen": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "First seen date of apps found as advertisers."
+            }
+          },
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "adintel_ad_publisher_creative_dimension_distribution",
+        "description": "Provides ad publishers' media type and dimension of the given creative with\ndimension percentages. Max 30 days of data allowed per request.\nCredit cost: 50 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "Application track id."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date in YYYY-MM-DD format."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date in YYYY-MM-DD format."
+            }
+          },
+          "required": [
+            "track_id",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_app_detail",
+        "description": "Provides detailed information for an app in AppStore (name, developer, price,\ncategory, description, screenshots, ratings, available countries).\n\nCredit cost: 5 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "AppStore track id of the app."
+            },
+            "country_code": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional two letter country code of the app. Defaults to the\nprimary country of the app if not provided."
+            }
+          },
+          "required": [
+            "track_id"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_app_simple_information",
+        "description": "Provides simplified information for given apps in AppStore (name, developer,\nprice, icon, category, rating, last update).\n\nCredit cost: 1 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code of the apps."
+            },
+            "track_ids": {
+              "type": "string",
+              "description": "Comma separated list of AppStore track ids of apps. Max. 10 apps\nare allowed."
+            }
+          },
+          "required": [
+            "country_code",
+            "track_ids"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_app_version_list",
+        "description": "Provides the version list (app update timeline) of an app in AppStore, with\nrelease notes and a list of which app properties changed in each version.\n\nCredit cost: 1 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "AppStore track id of the app."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date, history start date, inclusive."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date, history end date, exclusive."
+            }
+          },
+          "required": [
+            "track_id",
+            "country_code",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_app_version_list_detailed",
+        "description": "Provides the version list (app update timeline) with the changed old and new\nvalues of an app in AppStore. Max. 30 days of data allowed for a single request.\n\nCredit cost: 50 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "AppStore track id of the app."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date, history start date, inclusive."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date, history end date, exclusive."
+            }
+          },
+          "required": [
+            "track_id",
+            "country_code",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_developer_apps",
+        "description": "Provides a list of apps owned by the given developer in the given country.\n\nCredit cost: 5 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "developer_id": {
+              "type": "string",
+              "description": "Id of the developer."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code."
+            }
+          },
+          "required": [
+            "developer_id",
+            "country_code"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_app_discovery",
+        "description": "Queues the given App Store app for discovery. Returns a boolean value for\nconfirmation.\n\nCredit cost: 1 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "App Store track id of the app."
+            }
+          },
+          "required": [
+            "track_id"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_app_reviews",
+        "description": "Provides the review list of an app in AppStore. If the app is not crawled it\nflags the app for crawling and returns an empty list.\n\nCredit cost: 5 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "AppStore track id of the app."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date for the reviews to be listed, format: \"yyyy-MM-dd\"."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date for the reviews to be listed, format: \"yyyy-MM-dd\"."
+            },
+            "rating": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional rating star count(s) for the reviews to be listed. Value\nmust be between 1-5, e.g. \"3\" or \"1,5\"."
+            },
+            "countries": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional two letter country code(s) the reviews were posted from.\nMust be comma separated if more than one is provided."
+            },
+            "text_query": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional word to be searched in the reviews."
+            },
+            "page": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional page number to iterate; a maximum of 100 reviews are returned\nper request. Defaults to 0."
+            }
+          },
+          "required": [
+            "track_id",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_app_reviews_v2",
+        "description": "Provides the paginated review list of an app in AppStore, including totals for\nelements and pages. If the app is not crawled it flags the app for crawling and\nreturns an empty list.\n\nCredit cost: 5 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "AppStore track id of the app."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date for the reviews to be listed, format: \"yyyy-MM-dd\"."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date for the reviews to be listed, format: \"yyyy-MM-dd\"."
+            },
+            "rating": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional rating star count(s) for the reviews to be listed. Value\nmust be between 1-5, e.g. \"3\" or \"1,5\"."
+            },
+            "countries": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional two letter country code(s) the reviews were posted from.\nMust be comma separated if more than one is provided."
+            },
+            "text_query": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional word to be searched in the reviews."
+            },
+            "replied_review": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional boolean; true gets replied reviews, false gets\nunreplied reviews. Defaults to null which gets all reviews."
+            },
+            "page": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional parameter to get the next page. Defaults to 0."
+            },
+            "size": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional page size; a maximum of 100 reviews are returned per request.\nDefaults to 20."
+            }
+          },
+          "required": [
+            "track_id",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_app_review_analysis",
+        "description": "Provides word based analysis for the reviews of a given app (word frequency,\naverage rating, sentiment distribution, trend). Max. 30 days of data allowed for\na single request.\n\nCredit cost: 10 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "AppStore track id of the app."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date for the reviews to be analyzed, format: \"yyyy-MM-dd\"."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date for the reviews to be analyzed, format: \"yyyy-MM-dd\"."
+            },
+            "rating": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional rating star count(s) for the reviews to be analyzed. Value\nmust be between 1-5, e.g. \"3\" or \"1,5\"."
+            },
+            "countries": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional two letter country code(s) the reviews were posted from.\nMust be comma separated if more than one is provided."
+            },
+            "text_query": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional word to be searched in the reviews."
+            }
+          },
+          "required": [
+            "track_id",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_download_revenue_estimations",
+        "description": "Provides daily download-revenue estimations of an app in AppStore. Max 30 days\nof history is allowed for a single request.\n\nCredit cost: 100 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "AppStore track id of the app."
+            },
+            "country": {
+              "type": "string",
+              "description": "Two letter country code."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date, history start date, inclusive."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date, history end date, inclusive."
+            },
+            "device": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Device type, IPHONE or IPAD."
+            }
+          },
+          "required": [
+            "track_id",
+            "country",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_monthly_global_download_revenue_estimations",
+        "description": "Provides global download-revenue estimations of an app in AppStore for the\nlast month, with a per-country breakdown.\n\nCredit cost: 2 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "AppStore track id of the app."
+            }
+          },
+          "required": [
+            "track_id"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_featured_apps",
+        "description": "Retrieves detailed information about how an application is featured within a\nspecific category on the App Store, including the type of feature, associated\nimagery, titles, and related applications.\n\nCredit cost: 40 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "App Store track id of the app."
+            },
+            "category_id": {
+              "type": "integer",
+              "description": "Integer category id."
+            },
+            "start_date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional start date in YYYY-MM-DD format. Defaults to\n(endDate - 1 day)."
+            },
+            "end_date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional end date in YYYY-MM-DD format. Defaults to today."
+            },
+            "country_code": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional 2 letter uppercase country code. Defaults to\n'All Countries'."
+            }
+          },
+          "required": [
+            "track_id",
+            "category_id"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_featuring_analysis",
+        "description": "Analyzes the featuring of an application across different App Store categories,\nsuch as today, games, and apps, within specified or default date ranges and\ncountry codes.\n\nCredit cost: 20 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "App Store track id of the app."
+            },
+            "start_date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional start date in YYYY-MM-DD format. Defaults to\n(endDate - 1 day)."
+            },
+            "end_date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional end date in YYYY-MM-DD format. Defaults to today."
+            },
+            "country_code": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional 2 letter uppercase country code. Defaults to\n'All Countries'."
+            }
+          },
+          "required": [
+            "track_id"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_top_charts",
+        "description": "Provides top charts information for given category, country, ranking type and device.\n\nCredit cost: 10 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "version": {
+              "type": "string",
+              "description": "\"v1\" for iOS 11 and before, \"v2\" for iOS 12+ (currently only\noverall category is available)."
+            },
+            "category_id": {
+              "type": "string",
+              "description": "Integer category id (e.g. \"36\")."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code (e.g. \"US\")."
+            },
+            "ranking_type": {
+              "type": "string",
+              "description": "One of FREE, PAID, GROSSING."
+            },
+            "target_device": {
+              "type": "string",
+              "description": "One of IPHONE, IPAD."
+            },
+            "date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date."
+            }
+          },
+          "required": [
+            "version",
+            "category_id",
+            "country_code",
+            "ranking_type",
+            "target_device",
+            "date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_category_ranking",
+        "description": "Provides category rankings history of an app in the App Store. Max 30 days\nof history is allowed for a single request.\n\nCredit cost: 10 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "version": {
+              "type": "string",
+              "description": "\"v1\" for iOS 11 and before, \"v2\" for iOS 12+ (currently only\noverall category is available)."
+            },
+            "track_id": {
+              "type": "string",
+              "description": "App Store track id of the app."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code (e.g. \"US\")."
+            },
+            "hourly": {
+              "type": "string",
+              "description": "\"true\" for exact values, \"false\" for aggregated daily average values."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date, history start date, inclusive."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date, history end date, exclusive."
+            }
+          },
+          "required": [
+            "version",
+            "track_id",
+            "country_code",
+            "hourly",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_global_last_day_category_rankings",
+        "description": "Provides global category rankings of an app in the App Store for the last day.\n\nCredit cost: 20 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "App Store track id of the app."
+            },
+            "device": {
+              "type": "string",
+              "description": "One of IPHONE, IPAD."
+            }
+          },
+          "required": [
+            "track_id",
+            "device"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_keyword_ranking",
+        "description": "Provides single day's keyword ranking for given keyword and track id of an app in AppStore.\n\nCredit cost: 3 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "AppStore track id of the app."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code."
+            },
+            "keywords": {
+              "type": "string",
+              "description": "Comma separated keyword list (max 100 keywords are allowed)."
+            },
+            "date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional YYYY-MM-DD formatted date; yesterday is used if omitted."
+            }
+          },
+          "required": [
+            "track_id",
+            "country_code",
+            "keywords"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_keyword_history",
+        "description": "Provides historic keyword ranking for given keyword and track id of an app in AppStore.\nMax 30 days of history is allowed for a single request.\n\nCredit cost: 10 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "AppStore track id of the app."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code."
+            },
+            "keyword": {
+              "type": "string",
+              "description": "Keyword to get ranking history."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date, history start date, inclusive."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date, history end date, inclusive (max 30 days range)."
+            }
+          },
+          "required": [
+            "track_id",
+            "country_code",
+            "keyword",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_top_keywords",
+        "description": "Provides single day's top keywords for given track id of an app in AppStore.\n\nCredit cost: 20 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "AppStore track id of the app."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code."
+            },
+            "date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date."
+            },
+            "device": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional device type (IPHONE, IPAD); IPHONE is used if omitted."
+            },
+            "limit": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional requested number of keywords in result; default value is 100."
+            }
+          },
+          "required": [
+            "track_id",
+            "country_code",
+            "date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_keyword_metadata",
+        "description": "Provides last day's keyword meta-data (search volume, chance scores, app counts,\npopularity) for given keyword for AppStore.\n\nCredit cost: 5 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code."
+            },
+            "keyword": {
+              "type": "string",
+              "description": "Keyword."
+            }
+          },
+          "required": [
+            "country_code",
+            "keyword"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_list_of_apps",
+        "description": "Provides app list (IPHONE and IPAD track ids) for given keyword for AppStore.\n\nCredit cost: 5 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code."
+            },
+            "keyword": {
+              "type": "string",
+              "description": "Keyword."
+            }
+          },
+          "required": [
+            "country_code",
+            "keyword"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_organic_keywords",
+        "description": "Provides organic keywords and their rankings for given app in AppStore.\n\nCredit cost: 50 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "Track id of the app."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code."
+            },
+            "device": {
+              "type": "string",
+              "description": "Device type (IPHONE, IPAD)."
+            },
+            "date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date."
+            }
+          },
+          "required": [
+            "track_id",
+            "country_code",
+            "device",
+            "date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_organic_impression_share",
+        "description": "Provides a list of organic impression shares of a keyword for App Store.\n\nCredit cost: 20 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "keyword": {
+              "type": "string",
+              "description": "Keyword."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code."
+            },
+            "device": {
+              "type": "string",
+              "description": "Device type (IPHONE, IPAD)."
+            }
+          },
+          "required": [
+            "keyword",
+            "country_code",
+            "device"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "appstore_share_of_category",
+        "description": "Provides the top categories the searched keyword is used in metadata of apps.\n\nCredit cost: 5 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "keyword": {
+              "type": "string",
+              "description": "Keyword."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code."
+            },
+            "device": {
+              "type": "string",
+              "description": "Device type (IPHONE, IPAD)."
+            }
+          },
+          "required": [
+            "keyword",
+            "country_code",
+            "device"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "cpp_by_app",
+        "description": "Search for CPPs (Custom Product Pages) based on the application and retrieve their\nscreenshots, promotional texts, and videos, along with the impression share of each CPP\nfor that app.\n\nCredit cost: 200 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "AppStore track id of the app."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date in ISO format (yyyy-MM-dd); max date range is 30 days. If the\nrange exceeds it, the end date is automatically set 30 days from the start date."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date in ISO format (yyyy-MM-dd); max date range is 30 days. If the\nrange exceeds it, the end date is automatically set 30 days from the start date."
+            },
+            "page": {
+              "type": "integer",
+              "description": "Page number for iteration; returns a maximum of 100 CPPs per request,\ndefaults to 0."
+            },
+            "country": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional two-letter country code; if not specified, returns for all countries."
+            }
+          },
+          "required": [
+            "track_id",
+            "start_date",
+            "end_date",
+            "page"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "cpp_by_keyword",
+        "description": "Search for CPPs (Custom Product Pages) by keyword, showing which apps are running\ncampaigns for the keyword, with their screenshots, promotional texts, videos, and the\nimpression share of each CPP for that keyword.\n\nCredit cost: 200 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "keyword": {
+              "type": "string",
+              "description": "Keyword related with the CPPs."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date in ISO format (yyyy-MM-dd); max date range is 30 days. If the\nrange exceeds it, the end date is automatically set 30 days from the start date."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date in ISO format (yyyy-MM-dd); max date range is 30 days. If the\nrange exceeds it, the end date is automatically set 30 days from the start date."
+            },
+            "page": {
+              "type": "integer",
+              "description": "Page number for iteration; returns a maximum of 100 CPPs per request,\ndefaults to 0."
+            },
+            "country": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional two-letter country code; if not specified, returns for all countries."
+            }
+          },
+          "required": [
+            "keyword",
+            "start_date",
+            "end_date",
+            "page"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "cpp_by_category",
+        "description": "Search for CPPs (Custom Product Pages) by category and retrieve their screenshots,\npromotional texts, and videos.\n\nCredit cost: 200 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "category_id": {
+              "type": "string",
+              "description": "Category id of the app."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date in ISO format (yyyy-MM-dd); max date range is 30 days. If the\nrange exceeds it, the end date is automatically set 30 days from the start date."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date in ISO format (yyyy-MM-dd); max date range is 30 days. If the\nrange exceeds it, the end date is automatically set 30 days from the start date."
+            },
+            "page": {
+              "type": "integer",
+              "description": "Page number for iteration; returns a maximum of 100 CPPs per request,\ndefaults to 0."
+            },
+            "country": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional two-letter country code; if not specified, returns for all countries."
+            }
+          },
+          "required": [
+            "category_id",
+            "start_date",
+            "end_date",
+            "page"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "cpp_keywords",
+        "description": "Retrieve a searched app's paid keywords associated with one of its CPPs.\n\nCredit cost: 200 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "AppStore track id of the app."
+            },
+            "cpp_id": {
+              "type": "string",
+              "description": "CPP id."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date in ISO format (yyyy-MM-dd); max date range is 30 days. If the\nrange exceeds it, the end date is automatically set 30 days from the start date."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date in ISO format (yyyy-MM-dd); max date range is 30 days. If the\nrange exceeds it, the end date is automatically set 30 days from the start date."
+            },
+            "page": {
+              "type": "integer",
+              "description": "Page number for iteration; returns a maximum of 100 keywords per request,\ndefaults to 0."
+            },
+            "country": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional two-letter country code."
+            }
+          },
+          "required": [
+            "track_id",
+            "cpp_id",
+            "start_date",
+            "end_date",
+            "page"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "get_credit_status",
+        "description": "Get the API key's credit status: total credits per period, remaining\ncredits, credit reset period (hours) and time until reset (seconds).\n\nCredit cost: free. Use this before planning many or expensive calls.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "dashboard_apps",
+        "description": "Get info of all apps added to the MobileAction dashboard by the user. Track ids\nreturned here can be used in the daily keyword rankings service.\n\nCredit cost: 5 credits per request.\n\nArgs:\n    (no parameters)",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "dashboard_daily_keyword_rankings",
+        "description": "Get keyword rankings and keyword metadata of the apps the user added to the\ndashboard.\n\nCredit cost: 50 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "AppStore/PlayStore track id of the app."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code."
+            },
+            "device": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Device identifier for iOS apps, either \"iphone\" or \"ipad\"\n(default \"iphone\")."
+            },
+            "date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Date in YYYY-MM-DD format that rankings are gathered (default today)."
+            }
+          },
+          "required": [
+            "track_id",
+            "country_code"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "dashboard_add_keywords",
+        "description": "Add keywords to the dashboard account; also starts tracking the app on the\ndashboard service if it is not already tracked.\n\nCredit cost: 1 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "Unique app id from iTunes Connect / Play Store (e.g. \"284882215\"\nfor Facebook iOS, \"com.facebook.katana\" for Facebook Android)."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code."
+            },
+            "keywords": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "description": "List of keywords to add. Limited to 200 keywords per request and\neach keyword must be less than 255 characters."
+            }
+          },
+          "required": [
+            "track_id",
+            "country_code",
+            "keywords"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "dashboard_delete_keywords",
+        "description": "Remove keywords previously added to the given app on the dashboard.\n\nCredit cost: 1 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "AppStore/PlayStore track id of the app."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code."
+            },
+            "keywords": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "description": "List of keywords to remove."
+            }
+          },
+          "required": [
+            "track_id",
+            "country_code",
+            "keywords"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "dashboard_number_of_keywords",
+        "description": "Get the number of tracked keywords by country for the app.\n\nCredit cost: 1 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "AppStore/PlayStore track id of the app."
+            }
+          },
+          "required": [
+            "track_id"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "dashboard_app_search",
+        "description": "Get a list of apps that match the given search string.\n\nCredit cost: 1 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "App name query to search apps."
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "dashboard_app_search_by_company_url",
+        "description": "Get a list of apps that have a company url matching the given search string.\nThe response contains both appstore (ios) and playstore (play) data.\n\nCredit cost: 10 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Url query to search apps (e.g. \"airbnb.com\")."
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "dashboard_sales_metrics",
+        "description": "Get download history, revenue history and product page view data.\n\nCredit cost: 1 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "AppStore/PlayStore track id of the app."
+            },
+            "context": {
+              "type": "string",
+              "description": "One of \"DOWNLOAD\", \"REVENUE_TOTAL\" or \"PAGE_VIEW\"."
+            },
+            "start": {
+              "type": "string",
+              "description": "History start date in YYYY-MM-DD format, inclusive."
+            },
+            "end": {
+              "type": "string",
+              "description": "History end date in YYYY-MM-DD format, inclusive."
+            },
+            "country_code": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Two letter country code (default \"all\")."
+            },
+            "device": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "\"IPHONE\" or \"IPAD\" (same data for PlayStore)."
+            }
+          },
+          "required": [
+            "track_id",
+            "context",
+            "start",
+            "end"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "dashboard_retention_history",
+        "description": "Get retention history data for the app.\n\nCredit cost: 1 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "AppStore/PlayStore track id of the app."
+            },
+            "start": {
+              "type": "string",
+              "description": "History start date in YYYY-MM-DD format, inclusive."
+            },
+            "end": {
+              "type": "string",
+              "description": "History end date in YYYY-MM-DD format, inclusive."
+            },
+            "device": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "\"IPHONE\" or \"IPAD\" (same data for PlayStore)."
+            }
+          },
+          "required": [
+            "track_id",
+            "start",
+            "end"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "dashboard_keyword_spot",
+        "description": "Get keywords that describe your app on the iTunes Connect app profile.\n\nCredit cost: 3 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "App Store track id of the app."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code."
+            }
+          },
+          "required": [
+            "track_id",
+            "country_code"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "dashboard_max_reach_and_install_estimations",
+        "description": "Retrieve Conversion Rate, Max Reach, and Install estimations for a list of up\nto 100 keywords based on a specific track id and country.\n\nCredit cost: 20 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "AppStore/PlayStore track id of the app."
+            },
+            "country": {
+              "type": "string",
+              "description": "Two letter country code."
+            },
+            "keywords": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "description": "List of search terms to analyze; minimum 1 and maximum 100\nkeywords per request."
+            }
+          },
+          "required": [
+            "track_id",
+            "country",
+            "keywords"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "dashboard_historical_max_reach_and_install_estimation",
+        "description": "Retrieve historical Max Reach, Conversion Rate, and Install estimations for a\nspecific keyword and app within a requested country and date range (maximum 30\ndays).\n\nCredit cost: 30 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "AppStore/PlayStore track id of the app."
+            },
+            "country": {
+              "type": "string",
+              "description": "Two letter country code."
+            },
+            "keyword": {
+              "type": "string",
+              "description": "The specific keyword to retrieve historical data for; must be a\nsingle string (e.g. \"photo editor\")."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "History start date in YYYY-MM-DD format, inclusive."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "History end date in YYYY-MM-DD format, inclusive (max range is\n30 days)."
+            }
+          },
+          "required": [
+            "track_id",
+            "country",
+            "keyword",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_app_detail",
+        "description": "Provides detailed info of the apps in PlayStore.\n\nCredit cost: 5 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "PlayStore track id of the app."
+            },
+            "lang_code": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional two letter language code of the app; EN is the\ndefault. Supported codes: EN, EN_AU, EN_GB, EN_CA, ZH, ZH_TW, TR,\nES, ES_MX, DE, IT, JA, NL, RU, KO, AR, FR, PT_PT, PT_BR, ID, VI,\nTH, CS, DA, FI, EL, HE, HU, MS, NO, PL, RO, SK, SV."
+            }
+          },
+          "required": [
+            "track_id"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_app_simple_information",
+        "description": "Provides simplified information for given apps in PlayStore.\n\nCredit cost: 1 credit per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "lang_code": {
+              "type": "string",
+              "description": "Two letter language code of the app."
+            },
+            "track_ids": {
+              "type": "string",
+              "description": "Comma separated list of PlayStore track ids of apps.\nMax. 10 apps are allowed."
+            }
+          },
+          "required": [
+            "lang_code",
+            "track_ids"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_app_version_list",
+        "description": "Provides version list (app update timeline) of the apps in PlayStore.\n\nCredit cost: 1 credit per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "PlayStore track id of the app."
+            },
+            "lang_code": {
+              "type": "string",
+              "description": "Two letter language code."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date, history start date, inclusive."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date, history end date, exclusive."
+            }
+          },
+          "required": [
+            "track_id",
+            "lang_code",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_app_version_list_detailed",
+        "description": "Provides version list (app update timeline) with changed values of the\napps in PlayStore. Max. 30 days of data allowed for a single request.\n\nCredit cost: 50 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "PlayStore track id of the app."
+            },
+            "lang_code": {
+              "type": "string",
+              "description": "Two letter language code."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date, history start date, inclusive."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date, history end date, exclusive\n(max 30 days range)."
+            }
+          },
+          "required": [
+            "track_id",
+            "lang_code",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_developer_apps",
+        "description": "Provides app details for the given developer and country in PlayStore.\n\nCredit cost: 5 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "developer_name": {
+              "type": "string",
+              "description": "Name of the developer."
+            },
+            "lang_code": {
+              "type": "string",
+              "description": "Two letter language code."
+            }
+          },
+          "required": [
+            "developer_name",
+            "lang_code"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_app_discovery",
+        "description": "Queues the given Google Play Store app for discovery. Returns a boolean\nvalue for confirmation.\n\nCredit cost: 1 credit per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "Google Play Store track id of the app."
+            },
+            "country": {
+              "type": "string",
+              "description": "Two letter country code."
+            }
+          },
+          "required": [
+            "track_id",
+            "country"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_app_reviews",
+        "description": "Provides review list of the apps in PlayStore. If the app is not crawled\nit flags the app for crawling and returns an empty list.\n\nCredit cost: 5 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "PlayStore track id of the app."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date for the reviews to be listed, format yyyy-MM-dd."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date for the reviews to be listed, format yyyy-MM-dd."
+            },
+            "rating": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional rating star count(s) for the reviews to be listed.\nValue must be between 1-5, e.g. \"3\" or \"1,5\"."
+            },
+            "languages": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional two letter language code(s) of the reviews posted\nfrom. Must be comma separated if provided more than one."
+            },
+            "text_query": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional word to be searched in the reviews."
+            },
+            "page": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional page index; returns a maximum of 100 reviews per\nrequest, use this parameter to iterate. Defaults to 0."
+            }
+          },
+          "required": [
+            "track_id",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_app_reviews_v2",
+        "description": "Provides paginated review list of the apps. If the app is not crawled it\nflags the app for crawling and returns an empty list.\n\nCredit cost: 5 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "Play Store track id of the app."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date for the reviews to be listed, format yyyy-MM-dd."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date for the reviews to be listed, format yyyy-MM-dd."
+            },
+            "rating": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional rating star count(s) for the reviews to be listed.\nValue must be between 1-5, e.g. \"3\" or \"1,5\"."
+            },
+            "countries": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional two letter country code(s) of the reviews posted\nfrom. Must be comma separated if provided more than one."
+            },
+            "text_query": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional word to be searched in the reviews."
+            },
+            "replied_review": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional boolean; true gets replied reviews, false gets\nunreplied reviews, defaults to null which gets all reviews."
+            },
+            "page": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional page index to get the next page, defaults to 0."
+            },
+            "size": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional page size; returns a maximum of 100 reviews per request,\ndefaults to 20."
+            }
+          },
+          "required": [
+            "track_id",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_app_review_analysis",
+        "description": "Provides word based analysis for the reviews of a given app. Max. 30\ndays of data allowed for a single request.\n\nCredit cost: 10 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "PlayStore track id of the app."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date for the reviews to be listed, format yyyy-MM-dd."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date for the reviews to be listed, format yyyy-MM-dd\n(max 30 days range)."
+            },
+            "rating": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional rating star count(s) for the reviews to be listed.\nValue must be between 1-5, e.g. \"3\" or \"1,5\"."
+            },
+            "languages": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional two letter language code(s) of the reviews posted\nfrom. Must be comma separated if provided more than one."
+            },
+            "text_query": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional word to be searched in the reviews."
+            }
+          },
+          "required": [
+            "track_id",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_download_revenue_estimations",
+        "description": "Provides download-revenue estimations of an app in Google Play. Max 30\ndays of history is allowed for a single request.\n\nCredit cost: 100 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "Google Play track id of the app."
+            },
+            "country": {
+              "type": "string",
+              "description": "Two letter country code."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date, history start date, inclusive."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date, history end date, inclusive\n(max 30 days range)."
+            }
+          },
+          "required": [
+            "track_id",
+            "country",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_monthly_global_download_revenue_estimations",
+        "description": "Provides global download-revenue estimations of an app in PlayStore for\nthe last month.\n\nCredit cost: 2 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "PlayStore track id of the app."
+            }
+          },
+          "required": [
+            "track_id"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_featured_apps",
+        "description": "Retrieves a list of featured applications within a specific category\nfrom the Play Store, potentially filtered by date and country.\n\nCredit cost: 40 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "PlayStore track id of the app."
+            },
+            "category_id": {
+              "type": "integer",
+              "description": "Integer category id."
+            },
+            "start_date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional start date in YYYY-MM-DD format; defaults to\n(end_date - 1 day)."
+            },
+            "end_date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional end date in YYYY-MM-DD format; defaults to today."
+            },
+            "country_code": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional 2 letter uppercase country code; defaults to\n'All Countries'."
+            }
+          },
+          "required": [
+            "track_id",
+            "category_id"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_featuring_analysis",
+        "description": "Analyzes the featuring of an application across different Play Store\ncategories (games, general apps, kids' apps) within specified or default\ndate ranges and country codes.\n\nCredit cost: 20 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "PlayStore track id of the app."
+            },
+            "start_date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional start date in YYYY-MM-DD format; defaults to\n(end_date - 1 day)."
+            },
+            "end_date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional end date in YYYY-MM-DD format; defaults to today."
+            },
+            "country_code": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional 2 letter uppercase country code; defaults to\n'All Countries'."
+            }
+          },
+          "required": [
+            "track_id"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_top_charts",
+        "description": "Provides top charts information for given category, country, ranking type and device.\n\nCredit cost: 10 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "category": {
+              "type": "string",
+              "description": "Category name (e.g. FAMILY)."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code (e.g. US)."
+            },
+            "category_type": {
+              "type": "string",
+              "description": "Ranking type: FREE, PAID, or GROSSING."
+            },
+            "date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date."
+            }
+          },
+          "required": [
+            "category",
+            "country_code",
+            "category_type",
+            "date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_category_ranking",
+        "description": "Provides category rankings history of an app in Google Play. Max 30 days of\nhistory is allowed for a single request.\n\nCredit cost: 10 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "Google Play track id of the app (e.g. com.facebook.katana)."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code (e.g. US)."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date, history start date, inclusive."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date, history end date, exclusive."
+            }
+          },
+          "required": [
+            "track_id",
+            "country_code",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_global_last_day_category_rankings",
+        "description": "Provides global category rankings of an app in PlayStore for the last day.\n\nCredit cost: 20 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "Google Play track id of the app (e.g. com.facebook.katana)."
+            }
+          },
+          "required": [
+            "track_id"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_keyword_ranking",
+        "description": "Provides single day's keyword ranking for given keyword list and track id of an app in Google Play.\n\nCredit cost: 3 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "Google Play track id of the app (e.g. com.facebook.katana)."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code (e.g. US)."
+            },
+            "keywords": {
+              "type": "string",
+              "description": "Comma separated keyword list (max 100 keywords are allowed)."
+            },
+            "date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "YYYY-MM-DD formatted date; yesterday is used if omitted."
+            }
+          },
+          "required": [
+            "track_id",
+            "country_code",
+            "keywords"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_keyword_history",
+        "description": "Provides historic keyword ranking for given keyword and track id of an app in Google Play.\nMax 30 days of history is allowed for a single request.\n\nCredit cost: 10 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "Google Play track id of the app (e.g. com.facebook.katana)."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code (e.g. US)."
+            },
+            "keyword": {
+              "type": "string",
+              "description": "Keyword to fetch ranking history for."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date, history start date, inclusive."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date, history end date, inclusive."
+            }
+          },
+          "required": [
+            "track_id",
+            "country_code",
+            "keyword",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_top_keywords",
+        "description": "Provides single day's top keywords for given track id of an app in Google Play.\n\nCredit cost: 20 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "Google Play track id of the app (e.g. com.facebook.katana)."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code (e.g. US)."
+            },
+            "date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date."
+            },
+            "limit": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Requested number of keywords in result; default value is 100."
+            }
+          },
+          "required": [
+            "track_id",
+            "country_code",
+            "date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_keyword_metadata",
+        "description": "Provides last day's keyword meta-data (search volume, chance, number of apps,\ndetected language, brand app) for given keyword for Google Play.\n\nCredit cost: 5 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code (e.g. US)."
+            },
+            "keyword": {
+              "type": "string",
+              "description": "Keyword to fetch metadata for."
+            }
+          },
+          "required": [
+            "country_code",
+            "keyword"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_list_of_apps",
+        "description": "Provides app list (track ids of ranked Play Store apps) for given keyword for Google Play.\n\nCredit cost: 5 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code (e.g. US)."
+            },
+            "keyword": {
+              "type": "string",
+              "description": "Keyword to fetch the app list for."
+            }
+          },
+          "required": [
+            "country_code",
+            "keyword"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_organic_keywords",
+        "description": "Provides list of organic keywords and their rankings for Google Play.\n\nCredit cost: 50 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "Google Play track id of the app (e.g. com.facebook.katana)."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code (e.g. US)."
+            },
+            "date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted date."
+            }
+          },
+          "required": [
+            "track_id",
+            "country_code",
+            "date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_organic_impression_share",
+        "description": "Provides a list of organic impression shares of a keyword for Google Play.\n\nCredit cost: 20 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "keyword": {
+              "type": "string",
+              "description": "Keyword to fetch organic impression shares for."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code (e.g. US)."
+            }
+          },
+          "required": [
+            "keyword",
+            "country_code"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "googleplay_share_of_category",
+        "description": "Provides the top categories in which the searched keyword is used in the metadata of apps.\n\nCredit cost: 5 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "keyword": {
+              "type": "string",
+              "description": "Keyword to fetch category shares for."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code (e.g. US)."
+            }
+          },
+          "required": [
+            "keyword",
+            "country_code"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "ma_app_match",
+        "description": "Provides the track id of the given app's opposite market counterpart.\nCredit cost: 10 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "store": {
+              "type": "string",
+              "description": "Store name (\"ios\" or \"play\")."
+            },
+            "track_id": {
+              "type": "string",
+              "description": "Track id of the app."
+            }
+          },
+          "required": [
+            "store",
+            "track_id"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "ma_visibility_score",
+        "description": "Provides visibility scores of the apps for the given store and country.\nCredit cost: 10 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "store": {
+              "type": "string",
+              "description": "Store name (\"appstore\" or \"playstore\")."
+            },
+            "country": {
+              "type": "string",
+              "description": "Two letter country code."
+            },
+            "track_ids": {
+              "type": "string",
+              "description": "Comma separated track ids."
+            }
+          },
+          "required": [
+            "store",
+            "country",
+            "track_ids"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "ma_historical_app_store_visibility_score",
+        "description": "Provides historical App Store visibility scores of the apps for the given\ncountry within a given date range.\nCredit cost: 10 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_ids": {
+              "type": "string",
+              "description": "Comma separated App Store track ids of the apps (sent as a\nJSON list in the request body, e.g. \"571800810\")."
+            },
+            "countries": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Comma separated list of 2 letter uppercase country codes\n(single country also accepted)."
+            },
+            "start_date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Start date in YYYY-MM-DD format."
+            },
+            "end_date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "End date in YYYY-MM-DD format."
+            }
+          },
+          "required": [
+            "track_ids"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "ma_historical_google_play_visibility_score",
+        "description": "Provides historical Google Play visibility scores of the apps for the given\ncountry within a given date range.\nCredit cost: 10 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_ids": {
+              "type": "string",
+              "description": "Comma separated Google Play track ids (package names) of the\napps (sent as a JSON list in the request body, e.g. \"com.calm.android\")."
+            },
+            "countries": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Comma separated list of 2 letter uppercase country codes\n(single country also accepted)."
+            },
+            "start_date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Start date in YYYY-MM-DD format."
+            },
+            "end_date": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "End date in YYYY-MM-DD format."
+            }
+          },
+          "required": [
+            "track_ids"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "searchads_get_search_ads_integrations",
+        "description": "List the Search Ads API integrations you have on SearchAds.com, including\norganization (campaign group) ids to use on the reporting endpoint.\n\nCredit cost: 1 credit per request.\n\nArgs:\n    None.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "searchads_get_mmp_integrations",
+        "description": "List the MMP integrations you have on SearchAds.com.\n\nCredit cost: 1 credit per request.\n\nArgs:\n    None.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "searchads_get_goals",
+        "description": "List the goals you created on SearchAds.com. Goal ids can be used to\nfetch MMP reports.\n\nCredit cost: 1 credit per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_ids": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional comma separated track ids to filter goals by app."
+            }
+          },
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "searchads_get_goal",
+        "description": "Get details of a specific goal you created on SearchAds.com.\n\nCredit cost: 1 credit per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "goal_id": {
+              "type": "string",
+              "description": "Goal id (as returned by the goals list endpoint)."
+            }
+          },
+          "required": [
+            "goal_id"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "searchads_get_apps",
+        "description": "List the apps you run campaigns for on SearchAds.com.\n\nCredit cost: 1 credit per request.\n\nArgs:\n    None.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "searchads_get_bid_history_logs",
+        "description": "Get logs of bid changes on SearchAds.com.\n\nCredit cost: 20 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "org_id": {
+              "type": "string",
+              "description": "Organization (campaign group) id."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date of logs in ISO date format (yyyy-MM-dd)."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date of logs in ISO date format (yyyy-MM-dd). The max\nallowed date range is 1 week."
+            }
+          },
+          "required": [
+            "org_id",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "searchads_get_reports",
+        "description": "Get ASA + MMP reports for different data levels.\n\nFor TOP_APPS reports use searchads_get_top_apps_report instead \u2014 that\nreport type requires an additional keywordList field.\n\nCredit cost: 20 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "report_type": {
+              "type": "string",
+              "description": "Type of report: REPORT, DAILY or SUMMARY. For TOP_APPS\nuse searchads_get_top_apps_report."
+            },
+            "report_level": {
+              "type": "string",
+              "description": "Level of report: ACCOUNT, APP, CAMPAIGN, AD_GROUP, AD,\nCPP, KEYWORD, NEGATIVE or SEARCH_TERM."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date of reports in ISO date format (yyyy-MM-dd)."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date of reports in ISO date format (yyyy-MM-dd). The max\ndate range is 1 month per request."
+            },
+            "org_ids": {
+              "anyOf": [
+                {
+                  "items": {
+                    "type": "integer"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "List of organization (campaign group) ids. May be omitted for\nACCOUNT and APP level reports but is required for other levels. At\nmost 1 orgId is allowed for CAMPAIGN, AD_GROUP, AD, CPP, KEYWORD,\nNEGATIVE or SEARCH_TERM reports."
+            },
+            "goal_id": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Goal id for MMP reports. Without it only ASA reports are\nreturned."
+            },
+            "app_id": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "App id for MMP (goal) reports. Required when goal_id is provided.\nWithout it, goal reports cannot be fetched."
+            },
+            "re_attr_type": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Whether to use re-attribution data when calculating\nmetrics. Options: WITH, WITHOUT, ONLY. Default: WITH."
+            },
+            "currency": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Three letter currency code for the metrics. Default: USD."
+            },
+            "page": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Cursor of the report data. Default is 0."
+            }
+          },
+          "required": [
+            "report_type",
+            "report_level",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "searchads_get_top_apps_report",
+        "description": "Get a Search Ads TOP_APPS report: top advertising apps for the given\nkeywords. Unlike other report types, TOP_APPS requires a keywordList with\none entry per keyword.\n\nCredit cost: 20 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "start_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted report start date, inclusive."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "YYYY-MM-DD formatted report end date, inclusive."
+            },
+            "keyword_list": {
+              "items": {
+                "description": "One keyword entry for a TOP_APPS report.",
+                "properties": {
+                  "keyword": {
+                    "type": "string"
+                  },
+                  "keywordId": {
+                    "type": "integer"
+                  },
+                  "appId": {
+                    "type": "integer"
+                  },
+                  "orgId": {
+                    "type": "integer"
+                  },
+                  "country": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "keyword",
+                  "keywordId",
+                  "appId",
+                  "orgId",
+                  "country"
+                ],
+                "type": "object"
+              },
+              "type": "array",
+              "description": "Keywords to report on. Each entry requires: keyword\n(text), keywordId, appId (track id of the app the keyword belongs\nto), orgId (Search Ads organization id) and country (two letter\ncountry code), e.g. {\"keyword\": \"flowers\", \"keywordId\": 1707347165,\n\"appId\": 418870703, \"orgId\": 26320, \"country\": \"US\"}."
+            },
+            "org_ids": {
+              "anyOf": [
+                {
+                  "items": {
+                    "type": "integer"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional list of Search Ads organization (campaign group) ids."
+            },
+            "report_level": {
+              "default": "KEYWORD",
+              "type": "string",
+              "description": "Level of the report, defaults to KEYWORD."
+            },
+            "page": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional page cursor for paginated results."
+            }
+          },
+          "required": [
+            "start_date",
+            "end_date",
+            "keyword_list"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "searchads_paid_keywords",
+        "description": "Get paid Apple Search Ads keywords and their impression shares for the\ngiven app. appShare is the app's total share across all ad impressions;\nslotShares is the app's share within a specific slot.\n\nCredit cost: 50 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "track_id": {
+              "type": "string",
+              "description": "App Store track id of the app."
+            },
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date of the date range, YYYY-MM-DD formatted. The\nrange between start_date and end_date can be at most 14 days."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date of the date range, YYYY-MM-DD formatted."
+            }
+          },
+          "required": [
+            "track_id",
+            "country_code",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      },
+      {
+        "name": "searchads_paying_apps",
+        "description": "Get the track ids and impression shares of apps paying for the given\nkeyword. share is the app's total share across all ad impressions;\nslotShares is the app's share within a specific slot.\n\nCredit cost: 50 credits per request.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "country_code": {
+              "type": "string",
+              "description": "Two letter country code."
+            },
+            "keyword": {
+              "type": "string",
+              "description": "Keyword to look up paying apps for."
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date of the date range, YYYY-MM-DD formatted. The\nrange between start_date and end_date can be at most 14 days."
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date of the date range, YYYY-MM-DD formatted."
+            }
+          },
+          "required": [
+            "country_code",
+            "keyword",
+            "start_date",
+            "end_date"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      }
+    ]
+  }
+}

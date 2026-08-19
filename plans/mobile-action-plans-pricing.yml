@@ -1,0 +1,141 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.mobileaction.co/pricing/
+docs: https://www.mobileaction.co/pricing/
+currency: USD
+billing_periods:
+- monthly
+- yearly
+note: 'MobileAction prices SIX products separately on one pricing page. Only ASO Intelligence and MobileAction
+  CMP publish list prices; Ad Intelligence, Search Ads Intelligence, CPP Intelligence, API Solutions and
+  Managed Services are quote-only ("Contact us / Book a Demo"). The API itself has NO published price:
+  API Solutions is sold as a custom enterprise plan, which the API introduction guide confirms ("This
+  feature is available for enterprise customers. Contact sales for further information.").'
+plan_count: 8
+products:
+- product: ASO Intelligence
+  plans:
+  - name: Lite
+    price_monthly: 15.0
+    price_yearly_per_month: 12.5
+    currency: USD
+    trial: 7-day free trial
+    limits:
+      keywords: 100
+      apps: 5
+      competitors_per_app: 3
+      historical_data: 3 months
+      seats: 1
+      total_competitor_tracking: 15
+  - name: Basic
+    price_monthly: 69.0
+    price_yearly_per_month: 59.0
+    currency: USD
+    trial: 7-day free trial
+    most_popular: true
+    limits:
+      keywords: 500
+      apps: 8
+      competitors_per_app: 10
+      historical_data: 6 months
+      seats: 1
+      total_competitor_tracking: 80
+  - name: Pro
+    price_monthly: 239.0
+    price_yearly_per_month: 199.0
+    currency: USD
+    trial: 7-day free trial
+    limits:
+      keywords: 1500
+      apps: 10
+      competitors_per_app: 15
+      historical_data: 12 months
+      seats: 3
+      total_competitor_tracking: 150
+  - name: Enterprise
+    price: contact-us
+    currency: USD
+    limits:
+      keywords: flexible
+      apps: 20
+      competitors_per_app: unlimited
+      seats: unlimited
+      total_competitor_tracking: unlimited
+    includes:
+    - Ad creative insights in 40+ ad networks
+    - Paid keyword insights
+    - Impression share analysis
+    - Dedicated customer success manager
+    - Single Sign-On (SSO)
+- product: MobileAction CMP (Apple Ads campaign management)
+  plans:
+  - name: Free
+    price_monthly: 0.0
+    currency: USD
+    limits:
+      monthly_ad_spend: $10,000
+      data_retention: unlimited
+      seats: 1
+    includes:
+    - Advanced Ads Manager
+    - Multi-layered automations
+    - 20+ automation templates
+    - 8+ MMP integrations
+    - Automated Slack + email notifications
+  - name: Enterprise
+    price: contact-us
+    currency: USD
+    limits:
+      monthly_ad_spend: unlimited
+      seats: customized
+    includes:
+    - Scheduled reports
+    - Custom product pages A/B testing
+    - AI Smart Bidding
+    - Budget scheduling
+    - Dedicated customer success manager
+- product: Ad Intelligence
+  plans:
+  - name: Custom
+    price: contact-us
+    currency: USD
+    includes:
+    - Creative data on 90M+ ad creatives
+    - Data on 45+ ad networks and DSPs
+    - Creative data across 10+ countries
+- product: Search Ads Intelligence
+  plans:
+  - name: Custom
+    price: contact-us
+    currency: USD
+- product: CPP Intelligence
+  plans:
+  - name: Custom
+    price: contact-us
+    currency: USD
+- product: API Solutions
+  plans:
+  - name: Custom
+    price: contact-us
+    currency: USD
+    metering: credits
+    includes:
+    - 80+ API datapoints
+    - Apple Ads insights
+    - MobileAction CMP integration
+    - Custom goals integration
+    - App Store data on 2M keywords
+    - Google Play Store data on 2M+ keywords
+    - Daily keyword rankings
+    - Dedicated customer success manager
+    note: The API is metered in credits, not requests. Credit allowance per period is set per contract;
+      see rate-limits/mobile-action-rate-limits.yml for the per-endpoint credit table and the balance
+      endpoint.
+- product: Managed Services
+  plans:
+  - name: ASO Services
+    price: contact-us
+    currency: USD
+  - name: Apple Ads Services
+    price: contact-us
+    currency: USD

@@ -1,6 +1,6 @@
-generated: '2026-07-20'
+generated: '2026-08-13'
 method: searched
-source: https://docs.mobileaction.co/guide/introduction
+source: https://docs.mobileaction.co/guide/introduction + live probes of https://api.mobileaction.co
 docs: https://docs.mobileaction.co/guide/introduction
 api_base_url: https://api.mobileaction.co
 authentication:
@@ -8,36 +8,93 @@ authentication:
   location: query
   parameter: token
   ref: authentication/mobile-action-authentication.yml
+  note: The same key is carried in the MCP endpoint URL (https://mcp.mobileaction.co/mcp?token=...).
 idempotency:
   supported: false
-  notes: No idempotency-key mechanism is documented; the API is predominantly
-    read-oriented intelligence data.
+  note: No idempotency-key header or parameter is documented, and none appears in any of the 88 probed
+    MCP tool input schemas. The surface is 84 read operations plus four writes (dashboard_add_keywords,
+    dashboard_delete_keywords, appstore_app_discovery, googleplay_app_discovery); the two keyword writes
+    are set-semantics (add/remove named keywords) and the two discovery writes queue a crawl and return
+    a boolean, so all four are naturally repeatable. There is no idempotency contract to point at.
 pagination:
-  documented: false
-  notes: Result sets are scoped per endpoint by explicit parameters (app id,
-    country, date range, keyword); no global cursor/offset pagination
-    convention is published.
+  documented: true
+  style: page-number
+  params:
+  - page
+  - size
+  response_fields:
+  - totalPages
+  - pageNumber
+  - pageSize
+  applies_to:
+  - appstore_app_reviews_v2
+  - googleplay_app_reviews_v2
+  - adintel_get_creatives
+  - adintel_top_advertisers
+  - cpp_by_app
+  - cpp_by_keyword
+  - cpp_by_category
+  - cpp_keywords
+  - searchads_get_top_apps_report
+  note: 'Zero-indexed page numbers. Pagination is NOT global: most endpoints are scoped instead by explicit
+    filters (trackId, country, date range, keyword) and return a bare JSON array with no envelope or cursor.'
+windowing:
+  max_range_days: 30
+  note: Most time-series endpoints cap a single request at 30 days of data (creatives, distributions,
+    review analysis, download/revenue estimations, keyword and category history). Longer ranges must be
+    paged by date range client-side.
+field_expansion:
+  supported: false
+metadata:
+  supported: false
+request_tracing:
+  header: null
+  body_field: requestId
+  note: The gateway's Spring Boot error body carries a requestId. No request-id request header is documented
+    and none was returned on success.
 rate_limiting:
   model: credit-based
   signaling: response-headers
   headers:
-  - name: X-Credit-Remaining
-    meaning: Credits left in the account balance after the call.
   - name: X-Credit-Cost
-    meaning: Credits consumed by the current call (1-200 depending on service).
+    meaning: Credits consumed by the current call (1-200 depending on the endpoint)
+  - name: X-Credit-Remaining
+    meaning: Credits left in the account balance for the current period
   - name: X-Credit-Reset
-    meaning: When the credit allotment resets.
+    meaning: Seconds until the credit allotment resets
   balance_endpoint: /api-key
-  notes: Usage is metered in credits rather than requests-per-window; each
-    endpoint has a published per-call credit cost.
+  ref: rate-limits/mobile-action-rate-limits.yml
+  note: 'Observed live: x-credit-cost is returned even on a 401. MCP calls draw from the same allowance.'
 versioning:
-  scheme: unversioned-host
-  notes: The production host https://api.mobileaction.co carries no version path
-    segment; changes are communicated via the docs and status page.
+  scheme: unversioned-host-with-per-service-suffix
+  note: 'The host carries no version segment. Versioning is expressed per service in the path instead:
+    -v2 service prefixes (appstore-appinfo-v2, playstore-appinfo-v2), a /v2/ segment (appstore-app-reviews/v2/),
+    an explicit {version} path variable on the category endpoints, and /v1/ on the keyword-estimation
+    gateway. Several service families therefore sit at different versions simultaneously.'
+  ref: lifecycle/mobile-action-lifecycle.yml
 error_envelope:
-  format: json
+  format: http-status
   documented: false
-  ref: null
+  note: Errors are signalled by HTTP status. A rejected call returns a bodyless 401; an unrouted path
+    returns the default Spring Boot error JSON. There is no problem+json and no error-code vocabulary.
+  ref: errors/mobile-action-problem-types.yml
+response_shape:
+  primary: bare JSON array
+  envelope:
+    success: boolean
+    data: object
+  note: The success/data envelope is used by GET /api-key; the data endpoints return bare arrays or objects.
+    The shape is not uniform across the API.
+agent_surface:
+  mcp: https://mcp.mobileaction.co/mcp
+  tools: 88
+  ref: mcp/mobile-action-mcp.yml
+  note: MobileAction ships a remote MCP server whose tools/list is readable anonymously; parameter names
+    there are snake_case while the REST reference uses camelCase.
 cross_links:
   authentication: authentication/mobile-action-authentication.yml
   lifecycle: lifecycle/mobile-action-lifecycle.yml
+  errors: errors/mobile-action-problem-types.yml
+  rate_limits: rate-limits/mobile-action-rate-limits.yml
+  mcp: mcp/mobile-action-mcp.yml
+  data_model: data-model/mobile-action-data-model.yml
