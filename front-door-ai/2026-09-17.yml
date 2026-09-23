@@ -1,0 +1,35 @@
+# Front Door AI Index — mobile-action — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: mobile-action
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: mobileaction.co
+  final_host: www.mobileaction.co
+  ownership: own
+  owner: mobile-action
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 25
+  host_score: 25
+  density: 17.47
+  words: 1431
+  tiers:
+    agentic: 4
+    core: 18
+    model: 3
+  ambiguous: 18
+  top_terms:
+    AI: 18
+    intelligence: 13
+    automation: 3
+    MCP: 2
+    AI agent: 1
+    AI assistant: 1
+    ChatGPT: 1
+    Claude: 1
+    Gemini: 1
+    agent: 1
+    predictive: 1
