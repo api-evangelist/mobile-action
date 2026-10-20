@@ -52,443 +52,819 @@ tools_manifest: mcp/mobile-action-mcp-tools-list.json
 initialize_manifest: mcp/mobile-action-mcp-initialize.json
 tools:
 - name: adintel_get_creatives
+  description: 'List creatives belonging to an app, filterable by date range, country, network and
+
+    media type. Max 30 days of data allowed per request. Uses the unique trackId from
+
+    iTunes Connect / Play Store (e.g. Facebook iOS: 284882215, Android: com.facebook.katana).
+
+    Credit cost: 200 credits per request.'
   family: ad-intelligence
-  description: List creatives belonging to an app, filterable by date range, country, network and
   credits: 200
   rest: GET /ad-intelligence/get-creatives-by-track-id
 - name: adintel_check_badge
+  description: 'Check if the given app is an advertiser or a publisher.
+
+    Credit cost: 5 credits per request.'
   family: ad-intelligence
-  description: Check if the given app is an advertiser or a publisher.
   credits: 5
   rest: GET /ad-intelligence/check-badge
 - name: adintel_country_distribution
+  description: 'Provides country distribution data for the given app. Max 30 days of data allowed
+
+    per request.
+
+    Credit cost: 10 credits per request.'
   family: ad-intelligence
-  description: Provides country distribution data for the given app. Max 30 days of data allowed
   credits: 10
   rest: GET /ad-intelligence/country_distribution
 - name: adintel_creative_dimension_distribution
+  description: 'Provides creative dimension distribution data (image, video and HTML creative
+
+    dimensions with percentages) for the given parameters. Max 30 days of data allowed
+
+    per request.
+
+    Credit cost: 20 credits per request.'
   family: ad-intelligence
-  description: Provides creative dimension distribution data (image, video and HTML creative
   credits: 20
   rest: GET /ad-intelligence/creative_dimension_distribution
 - name: adintel_creative_type_distribution
+  description: 'Provides creative type distribution data (image, video, HTML and playable
+
+    percentages) for the given parameters. Max 30 days of data allowed per request.
+
+    Credit cost: 20 credits per request.'
   family: ad-intelligence
-  description: Provides creative type distribution data (image, video, HTML and playable
   credits: 20
   rest: GET /ad-intelligence/creative_type_distribution
 - name: adintel_language_distribution
+  description: 'Provides language distribution data for the given app. Max 30 days of data allowed
+
+    per request.
+
+    Credit cost: 10 credits per request.'
   family: ad-intelligence
-  description: Provides language distribution data for the given app. Max 30 days of data allowed
   credits: 10
   rest: GET /ad-intelligence/language_distribution
 - name: adintel_network_distribution
+  description: 'Provides network distribution data for the given app. Max 30 days of data allowed
+
+    per request.
+
+    Credit cost: 10 credits per request.'
   family: ad-intelligence
-  description: Provides network distribution data for the given app. Max 30 days of data allowed
   credits: 10
   rest: GET /ad-intelligence/network_distribution
 - name: adintel_top_advertisers
+  description: 'Provides a list of top advertisers, filterable by date range, country, platform,
+
+    category and network. Max 30 days of data allowed per request.
+
+    Credit cost: 150 credits per request.'
   family: ad-intelligence
-  description: Provides a list of top advertisers, filterable by date range, country, platform,
   credits: 150
   rest: GET /ad-intelligence/top-advertisers
 - name: adintel_ad_publisher_creative_dimension_distribution
+  description: 'Provides ad publishers'' media type and dimension of the given creative with
+
+    dimension percentages. Max 30 days of data allowed per request.
+
+    Credit cost: 50 credits per request.'
   family: ad-intelligence
-  description: Provides ad publishers' media type and dimension of the given creative with
   credits: 50
   rest: GET /ad-intelligence/ad-publisher/creative_dimension_distribution
 - name: appstore_app_detail
+  description: 'Provides detailed information for an app in AppStore (name, developer, price,
+
+    category, description, screenshots, ratings, available countries).
+
+
+    Credit cost: 5 credits per request.'
   family: app-store
-  description: Provides detailed information for an app in AppStore (name, developer, price,
   credits: 5
   rest: GET /appstore-appinfo-v2/app/detailed/{trackId}/{countryCode}
 - name: appstore_app_simple_information
+  description: 'Provides simplified information for given apps in AppStore (name, developer,
+
+    price, icon, category, rating, last update).
+
+
+    Credit cost: 1 credits per request.'
   family: app-store
-  description: Provides simplified information for given apps in AppStore (name, developer,
   credits: 1
   rest: GET /appstore-appinfo-v2/app/simple/{countryCode}
 - name: appstore_app_version_list
+  description: 'Provides the version list (app update timeline) of an app in AppStore, with
+
+    release notes and a list of which app properties changed in each version.
+
+
+    Credit cost: 1 credits per request.'
   family: app-store
-  description: Provides the version list (app update timeline) of an app in AppStore, with
   credits: 1
   rest: GET /appstore-appinfo-v2/versions/{trackId}/{countryCode}
 - name: appstore_app_version_list_detailed
+  description: 'Provides the version list (app update timeline) with the changed old and new
+
+    values of an app in AppStore. Max. 30 days of data allowed for a single request.
+
+
+    Credit cost: 50 credits per request.'
   family: app-store
-  description: Provides the version list (app update timeline) with the changed old and new
   credits: 50
   rest: GET /appstore-appinfo-v2/versions/detailed/{trackId}/{countryCode}
 - name: appstore_developer_apps
+  description: 'Provides a list of apps owned by the given developer in the given country.
+
+
+    Credit cost: 5 credits per request.'
   family: app-store
-  description: Provides a list of apps owned by the given developer in the given country.
   credits: 5
   rest: GET /appstore-appinfo-v2/app/developer/{developerId}/{countryCode}
 - name: appstore_app_discovery
+  description: 'Queues the given App Store app for discovery. Returns a boolean value for
+
+    confirmation.
+
+
+    Credit cost: 1 credits per request.'
   family: app-store
-  description: Queues the given App Store app for discovery. Returns a boolean value for
   credits: 1
   rest: POST /appstore-appinfo-v2/app/discover/{trackId}
 - name: appstore_app_reviews
+  description: 'Provides the review list of an app in AppStore. If the app is not crawled it
+
+    flags the app for crawling and returns an empty list.
+
+
+    Credit cost: 5 credits per request.'
   family: app-store
-  description: Provides the review list of an app in AppStore. If the app is not crawled it
   credits: 5
   rest: GET /appstore-app-reviews/{trackId}/{startDate}/{endDate}
 - name: appstore_app_reviews_v2
+  description: 'Provides the paginated review list of an app in AppStore, including totals for
+
+    elements and pages. If the app is not crawled it flags the app for crawling and
+
+    returns an empty list.
+
+
+    Credit cost: 5 credits per request.'
   family: app-store
-  description: Provides the paginated review list of an app in AppStore, including totals for
   credits: 5
   rest: GET /appstore-app-reviews/v2/{trackId}/{startDate}/{endDate}
 - name: appstore_app_review_analysis
+  description: 'Provides word based analysis for the reviews of a given app (word frequency,
+
+    average rating, sentiment distribution, trend). Max. 30 days of data allowed for
+
+    a single request.
+
+
+    Credit cost: 10 credits per request.'
   family: app-store
-  description: Provides word based analysis for the reviews of a given app (word frequency,
   credits: 10
   rest: GET /appstore-app-reviews/word-analysis/{trackId}/{startDate}/{endDate}
 - name: appstore_download_revenue_estimations
+  description: 'Provides daily download-revenue estimations of an app in AppStore. Max 30 days
+
+    of history is allowed for a single request.
+
+
+    Credit cost: 100 credits per request.'
   family: app-store
-  description: Provides daily download-revenue estimations of an app in AppStore. Max 30 days
   credits: 100
   rest: GET /market-estimations/appstore/estimation/download-revenue
 - name: appstore_monthly_global_download_revenue_estimations
+  description: 'Provides global download-revenue estimations of an app in AppStore for the
+
+    last month, with a per-country breakdown.
+
+
+    Credit cost: 2 credits per request.'
   family: app-store
-  description: Provides global download-revenue estimations of an app in AppStore for the
   credits: 2
   rest: GET /market-estimations/appstore/estimation/download-revenue-last-month/{trackId}
 - name: appstore_featured_apps
+  description: 'Retrieves detailed information about how an application is featured within a
+
+    specific category on the App Store, including the type of feature, associated
+
+    imagery, titles, and related applications.
+
+
+    Credit cost: 40 credits per request.'
   family: app-store
-  description: Retrieves detailed information about how an application is featured within a
   credits: 40
   rest: GET /appstore-category-v2/featured-app/{trackId}/{categoryId}
 - name: appstore_featuring_analysis
+  description: 'Analyzes the featuring of an application across different App Store categories,
+
+    such as today, games, and apps, within specified or default date ranges and
+
+    country codes.
+
+
+    Credit cost: 20 credits per request.'
   family: app-store
-  description: Analyzes the featuring of an application across different App Store categories,
   credits: 20
   rest: GET /appstore-category-v2/featuring-analysis/{trackId}
 - name: appstore_top_charts
+  description: 'Provides top charts information for given category, country, ranking type and device.
+
+
+    Credit cost: 10 credits per request.'
   family: app-store
-  description: Provides top charts information for given category, country, ranking type and device.
   credits: 10
   rest: GET /appstore-category-v2/topcharts/{version}/{categoryId}/{countryCode}/{rankingType}/{targetDevice}
 - name: appstore_category_ranking
+  description: 'Provides category rankings history of an app in the App Store. Max 30 days
+
+    of history is allowed for a single request.
+
+
+    Credit cost: 10 credits per request.'
   family: app-store
-  description: Provides category rankings history of an app in the App Store. Max 30 days
   credits: 10
   rest: GET /appstore-category-v2/rankings/{version}/{trackId}/{countryCode}
 - name: appstore_global_last_day_category_rankings
+  description: 'Provides global category rankings of an app in the App Store for the last day.
+
+
+    Credit cost: 20 credits per request.'
   family: app-store
-  description: Provides global category rankings of an app in the App Store for the last day.
   credits: 20
   rest: GET /appstore-category-v2/global-rankings-last-day/{trackId}/{device}
 - name: appstore_keyword_ranking
+  description: 'Provides single day''s keyword ranking for given keyword and track id of an app in AppStore.
+
+
+    Credit cost: 3 credits per request.'
   family: app-store
-  description: Provides single day's keyword ranking for given keyword and track id of an app in AppStore.
   credits: 3
   rest: GET /appstore-keyword-ranking/{trackId}/{countryCode}/keywordrankings
 - name: appstore_keyword_history
+  description: 'Provides historic keyword ranking for given keyword and track id of an app in AppStore.
+
+    Max 30 days of history is allowed for a single request.
+
+
+    Credit cost: 10 credits per request.'
   family: app-store
-  description: Provides historic keyword ranking for given keyword and track id of an app in AppStore.
   credits: 10
   rest: GET /appstore-keyword-ranking/{trackId}/{countryCode}/{keyword}/keywordrankings
 - name: appstore_top_keywords
+  description: 'Provides single day''s top keywords for given track id of an app in AppStore.
+
+
+    Credit cost: 20 credits per request.'
   family: app-store
-  description: Provides single day's top keywords for given track id of an app in AppStore.
   credits: 20
   rest: GET /appstore-keyword-ranking/{trackId}/{countryCode}/top-keywords
 - name: appstore_keyword_metadata
+  description: 'Provides last day''s keyword meta-data (search volume, chance scores, app counts,
+
+    popularity) for given keyword for AppStore.
+
+
+    Credit cost: 5 credits per request.'
   family: app-store
-  description: Provides last day's keyword meta-data (search volume, chance scores, app counts,
   credits: 5
   rest: GET /appstore-keyword-ranking/{countryCode}/keyword-metadata
 - name: appstore_list_of_apps
+  description: 'Provides app list (IPHONE and IPAD track ids) for given keyword for AppStore.
+
+
+    Credit cost: 5 credits per request.'
   family: app-store
-  description: Provides app list (IPHONE and IPAD track ids) for given keyword for AppStore.
   credits: 5
   rest: GET /appstore-keyword-ranking/{countryCode}/keyword-apps
 - name: appstore_organic_keywords
+  description: 'Provides organic keywords and their rankings for given app in AppStore.
+
+
+    Credit cost: 50 credits per request.'
   family: app-store
-  description: Provides organic keywords and their rankings for given app in AppStore.
   credits: 50
   rest: GET /appstore-keyword-ranking/{trackId}/{countryCode}/{device}/organic-keywords
 - name: appstore_organic_impression_share
+  description: 'Provides a list of organic impression shares of a keyword for App Store.
+
+
+    Credit cost: 20 credits per request.'
   family: app-store
-  description: Provides a list of organic impression shares of a keyword for App Store.
   credits: 20
   rest: GET /appstore-keyword-ranking/organic-impression-share/keyword/{keyword}/{countryCode}/{device}
 - name: appstore_share_of_category
+  description: 'Provides the top categories the searched keyword is used in metadata of apps.
+
+
+    Credit cost: 5 credits per request.'
   family: app-store
-  description: Provides the top categories the searched keyword is used in metadata of apps.
   credits: 5
   rest: GET /appstore-keyword-ranking/share-of-category/keyword/{keyword}/{countryCode}/{device}
 - name: cpp_by_app
+  description: 'Search for CPPs (Custom Product Pages) based on the application and retrieve their
+
+    screenshots, promotional texts, and videos, along with the impression share of each CPP
+
+    for that app.
+
+
+    Credit cost: 200 credits per request.'
   family: cpp-intelligence
-  description: Search for CPPs (Custom Product Pages) based on the application and retrieve their
   credits: 200
   rest: GET /searchads-stats/cpps-by-app/{trackId}
 - name: cpp_by_keyword
+  description: 'Search for CPPs (Custom Product Pages) by keyword, showing which apps are running
+
+    campaigns for the keyword, with their screenshots, promotional texts, videos, and the
+
+    impression share of each CPP for that keyword.
+
+
+    Credit cost: 200 credits per request.'
   family: cpp-intelligence
-  description: Search for CPPs (Custom Product Pages) by keyword, showing which apps are running
   credits: 200
   rest: GET /searchads-stats/cpps-by-keyword
 - name: cpp_by_category
+  description: 'Search for CPPs (Custom Product Pages) by category and retrieve their screenshots,
+
+    promotional texts, and videos.
+
+
+    Credit cost: 200 credits per request.'
   family: cpp-intelligence
-  description: Search for CPPs (Custom Product Pages) by category and retrieve their screenshots,
   credits: 200
   rest: GET /searchads-stats/cpps-by-category
 - name: cpp_keywords
+  description: 'Retrieve a searched app''s paid keywords associated with one of its CPPs.
+
+
+    Credit cost: 200 credits per request.'
   family: cpp-intelligence
-  description: Retrieve a searched app's paid keywords associated with one of its CPPs.
   credits: 200
   rest: GET /searchads-stats/cpp-keywords/{trackId}/{cppId}
 - name: get_credit_status
+  description: 'Get the API key''s credit status: total credits per period, remaining
+
+    credits, credit reset period (hours) and time until reset (seconds).
+
+
+    Credit cost: free. Use this before planning many or expensive calls.'
   family: account
-  description: 'Get the API key''s credit status: total credits per period, remaining'
   rest: GET /api-key
 - name: dashboard_apps
+  description: "Get info of all apps added to the MobileAction dashboard by the user. Track ids\nreturned\
+    \ here can be used in the daily keyword rankings service.\n\nCredit cost: 5 credits per request.\n\
+    \nArgs:\n    (no parameters)"
   family: dashboard
-  description: Get info of all apps added to the MobileAction dashboard by the user. Track ids
   credits: 5
   rest: GET /gateway/account/app/tracked
 - name: dashboard_daily_keyword_rankings
+  description: 'Get keyword rankings and keyword metadata of the apps the user added to the
+
+    dashboard.
+
+
+    Credit cost: 50 credits per request.'
   family: dashboard
-  description: Get keyword rankings and keyword metadata of the apps the user added to the
   credits: 50
   rest: GET /gateway/account/app/{trackId}/keywords/rankings/{countryCode}
 - name: dashboard_add_keywords
+  description: 'Add keywords to the dashboard account; also starts tracking the app on the
+
+    dashboard service if it is not already tracked.
+
+
+    Credit cost: 1 credits per request.'
   family: dashboard
-  description: Add keywords to the dashboard account; also starts tracking the app on the
   credits: 1
   rest: POST /gateway/account/app/{trackId}/keywords/{countryCode}
 - name: dashboard_delete_keywords
+  description: 'Remove keywords previously added to the given app on the dashboard.
+
+
+    Credit cost: 1 credits per request.'
   family: dashboard
-  description: Remove keywords previously added to the given app on the dashboard.
   credits: 1
   rest: DELETE /gateway/account/app/{trackId}/keywords/{countryCode}
 - name: dashboard_number_of_keywords
+  description: 'Get the number of tracked keywords by country for the app.
+
+
+    Credit cost: 1 credits per request.'
   family: dashboard
-  description: Get the number of tracked keywords by country for the app.
   credits: 1
   rest: GET /gateway/account/app/{trackId}/keywords/count-by-country
 - name: dashboard_app_search
+  description: 'Get a list of apps that match the given search string.
+
+
+    Credit cost: 1 credits per request.'
   family: dashboard
-  description: Get a list of apps that match the given search string.
   credits: 1
   rest: GET /gateway/app/search
 - name: dashboard_app_search_by_company_url
+  description: 'Get a list of apps that have a company url matching the given search string.
+
+    The response contains both appstore (ios) and playstore (play) data.
+
+
+    Credit cost: 10 credits per request.'
   family: dashboard
-  description: Get a list of apps that have a company url matching the given search string.
   credits: 10
   rest: GET /gateway/app/search-by-company-url
 - name: dashboard_sales_metrics
+  description: 'Get download history, revenue history and product page view data.
+
+
+    Credit cost: 1 credits per request.'
   family: dashboard
-  description: Get download history, revenue history and product page view data.
   credits: 1
   rest: GET /gateway/account/app/{trackId}/data-history/{context}
 - name: dashboard_retention_history
+  description: 'Get retention history data for the app.
+
+
+    Credit cost: 1 credits per request.'
   family: dashboard
-  description: Get retention history data for the app.
   credits: 1
   rest: GET /gateway/account/app/{trackId}/data-history/retention
 - name: dashboard_keyword_spot
+  description: 'Get keywords that describe your app on the iTunes Connect app profile.
+
+
+    Credit cost: 3 credits per request.'
   family: dashboard
-  description: Get keywords that describe your app on the iTunes Connect app profile.
   credits: 3
   rest: GET /gateway/account/app/{trackId}/keyword-spots/{countryCode}
 - name: dashboard_max_reach_and_install_estimations
+  description: 'Retrieve Conversion Rate, Max Reach, and Install estimations for a list of up
+
+    to 100 keywords based on a specific track id and country.
+
+
+    Credit cost: 20 credits per request.'
   family: dashboard
-  description: Retrieve Conversion Rate, Max Reach, and Install estimations for a list of up
   credits: 20
   rest: POST /gateway/keyword-estimation/v1/conversion-rate
 - name: dashboard_historical_max_reach_and_install_estimation
+  description: 'Retrieve historical Max Reach, Conversion Rate, and Install estimations for a
+
+    specific keyword and app within a requested country and date range (maximum 30
+
+    days).
+
+
+    Credit cost: 30 credits per request.'
   family: dashboard
-  description: Retrieve historical Max Reach, Conversion Rate, and Install estimations for a
   credits: 30
   rest: GET /gateway/keyword-estimation/v1/conversion-rate/historical
 - name: googleplay_app_detail
+  description: 'Provides detailed info of the apps in PlayStore.
+
+
+    Credit cost: 5 credits per request.'
   family: google-play-store
-  description: Provides detailed info of the apps in PlayStore.
   credits: 5
   rest: GET /playstore-appinfo-v2/app/detailed/{trackId}/{langCode}
 - name: googleplay_app_simple_information
+  description: 'Provides simplified information for given apps in PlayStore.
+
+
+    Credit cost: 1 credit per request.'
   family: google-play-store
-  description: Provides simplified information for given apps in PlayStore.
   credits: 1
   rest: GET /playstore-appinfo-v2/app/simple/{langCode}
 - name: googleplay_app_version_list
+  description: 'Provides version list (app update timeline) of the apps in PlayStore.
+
+
+    Credit cost: 1 credit per request.'
   family: google-play-store
-  description: Provides version list (app update timeline) of the apps in PlayStore.
   credits: 1
   rest: GET /playstore-appinfo-v2/versions/{trackId}/{langCode}
 - name: googleplay_app_version_list_detailed
+  description: 'Provides version list (app update timeline) with changed values of the
+
+    apps in PlayStore. Max. 30 days of data allowed for a single request.
+
+
+    Credit cost: 50 credits per request.'
   family: google-play-store
-  description: Provides version list (app update timeline) with changed values of the
   credits: 50
   rest: GET /playstore-appinfo-v2/versions/detailed/{trackId}/{langCode}
 - name: googleplay_developer_apps
+  description: 'Provides app details for the given developer and country in PlayStore.
+
+
+    Credit cost: 5 credits per request.'
   family: google-play-store
-  description: Provides app details for the given developer and country in PlayStore.
   credits: 5
   rest: GET /playstore-appinfo-v2/app/developer/{developerName}/{langCode}
 - name: googleplay_app_discovery
+  description: 'Queues the given Google Play Store app for discovery. Returns a boolean
+
+    value for confirmation.
+
+
+    Credit cost: 1 credit per request.'
   family: google-play-store
-  description: Queues the given Google Play Store app for discovery. Returns a boolean
   credits: 1
   rest: POST /playstore-appinfo-v2/app/discover/{trackId}/{country}
 - name: googleplay_app_reviews
+  description: 'Provides review list of the apps in PlayStore. If the app is not crawled
+
+    it flags the app for crawling and returns an empty list.
+
+
+    Credit cost: 5 credits per request.'
   family: google-play-store
-  description: Provides review list of the apps in PlayStore. If the app is not crawled
   credits: 5
   rest: GET /playstore-app-reviews/{trackId}/{startDate}/{endDate}
 - name: googleplay_app_reviews_v2
+  description: 'Provides paginated review list of the apps. If the app is not crawled it
+
+    flags the app for crawling and returns an empty list.
+
+
+    Credit cost: 5 credits per request.'
   family: google-play-store
-  description: Provides paginated review list of the apps. If the app is not crawled it
   credits: 5
   rest: GET /appstore-app-reviews/v2/{trackId}/{startDate}/{endDate}
 - name: googleplay_app_review_analysis
+  description: 'Provides word based analysis for the reviews of a given app. Max. 30
+
+    days of data allowed for a single request.
+
+
+    Credit cost: 10 credits per request.'
   family: google-play-store
-  description: Provides word based analysis for the reviews of a given app. Max. 30
   credits: 10
   rest: GET /playstore-app-reviews/word-analysis/{trackId}/{startDate}/{endDate}
 - name: googleplay_download_revenue_estimations
+  description: 'Provides download-revenue estimations of an app in Google Play. Max 30
+
+    days of history is allowed for a single request.
+
+
+    Credit cost: 100 credits per request.'
   family: google-play-store
-  description: Provides download-revenue estimations of an app in Google Play. Max 30
   credits: 100
   rest: GET /market-estimations/playstore/estimation/download-revenue
 - name: googleplay_monthly_global_download_revenue_estimations
+  description: 'Provides global download-revenue estimations of an app in PlayStore for
+
+    the last month.
+
+
+    Credit cost: 2 credits per request.'
   family: google-play-store
-  description: Provides global download-revenue estimations of an app in PlayStore for
   credits: 2
   rest: GET /market-estimations/playstore/estimation/download-revenue-last-month/{trackId}
 - name: googleplay_featured_apps
+  description: 'Retrieves a list of featured applications within a specific category
+
+    from the Play Store, potentially filtered by date and country.
+
+
+    Credit cost: 40 credits per request.'
   family: google-play-store
-  description: Retrieves a list of featured applications within a specific category
   credits: 40
   rest: GET /playstore-category/featured-app/{trackId}/{categoryId}
 - name: googleplay_featuring_analysis
+  description: 'Analyzes the featuring of an application across different Play Store
+
+    categories (games, general apps, kids'' apps) within specified or default
+
+    date ranges and country codes.
+
+
+    Credit cost: 20 credits per request.'
   family: google-play-store
-  description: Analyzes the featuring of an application across different Play Store
   credits: 20
   rest: GET /playstore-category/featuring-analysis/{trackId}
 - name: googleplay_top_charts
+  description: 'Provides top charts information for given category, country, ranking type and device.
+
+
+    Credit cost: 10 credits per request.'
   family: google-play-store
-  description: Provides top charts information for given category, country, ranking type and device.
   credits: 10
   rest: GET /playstore-category/topcharts/{category}/{countryCode}/{categoryType}
 - name: googleplay_category_ranking
+  description: 'Provides category rankings history of an app in Google Play. Max 30 days of
+
+    history is allowed for a single request.
+
+
+    Credit cost: 10 credits per request.'
   family: google-play-store
-  description: Provides category rankings history of an app in Google Play. Max 30 days of
   credits: 10
   rest: GET /playstore-category/{trackId}/{country}
 - name: googleplay_global_last_day_category_rankings
+  description: 'Provides global category rankings of an app in PlayStore for the last day.
+
+
+    Credit cost: 20 credits per request.'
   family: google-play-store
-  description: Provides global category rankings of an app in PlayStore for the last day.
   credits: 20
   rest: GET /playstore-category/global-rankings-last-day/{trackId}
 - name: googleplay_keyword_ranking
-  family: google-play-store
-  description: Provides single day's keyword ranking for given keyword list and track id of an app in
+  description: 'Provides single day''s keyword ranking for given keyword list and track id of an app in
     Google Play.
+
+
+    Credit cost: 3 credits per request.'
+  family: google-play-store
   credits: 3
   rest: GET /playstore-keyword-ranking/{trackId}/{countryCode}/keywordrankings
 - name: googleplay_keyword_history
+  description: 'Provides historic keyword ranking for given keyword and track id of an app in Google Play.
+
+    Max 30 days of history is allowed for a single request.
+
+
+    Credit cost: 10 credits per request.'
   family: google-play-store
-  description: Provides historic keyword ranking for given keyword and track id of an app in Google Play.
   credits: 10
   rest: GET /playstore-keyword-ranking/{trackId}/{countryCode}/{keyword}/keywordrankings
 - name: googleplay_top_keywords
+  description: 'Provides single day''s top keywords for given track id of an app in Google Play.
+
+
+    Credit cost: 20 credits per request.'
   family: google-play-store
-  description: Provides single day's top keywords for given track id of an app in Google Play.
   credits: 20
   rest: GET /playstore-keyword-ranking/{trackId}/{countryCode}/top-keywords
 - name: googleplay_keyword_metadata
+  description: 'Provides last day''s keyword meta-data (search volume, chance, number of apps,
+
+    detected language, brand app) for given keyword for Google Play.
+
+
+    Credit cost: 5 credits per request.'
   family: google-play-store
-  description: Provides last day's keyword meta-data (search volume, chance, number of apps,
   credits: 5
   rest: GET /playstore-keyword-ranking/{countryCode}/keyword-metadata
 - name: googleplay_list_of_apps
+  description: 'Provides app list (track ids of ranked Play Store apps) for given keyword for Google Play.
+
+
+    Credit cost: 5 credits per request.'
   family: google-play-store
-  description: Provides app list (track ids of ranked Play Store apps) for given keyword for Google Play.
   credits: 5
   rest: GET /playstore-keyword-ranking/{countryCode}/keyword-apps
 - name: googleplay_organic_keywords
+  description: 'Provides list of organic keywords and their rankings for Google Play.
+
+
+    Credit cost: 50 credits per request.'
   family: google-play-store
-  description: Provides list of organic keywords and their rankings for Google Play.
   credits: 50
   rest: GET /playstore-keyword-ranking/{trackId}/{countryCode}/organic-keywords
 - name: googleplay_organic_impression_share
+  description: 'Provides a list of organic impression shares of a keyword for Google Play.
+
+
+    Credit cost: 20 credits per request.'
   family: google-play-store
-  description: Provides a list of organic impression shares of a keyword for Google Play.
   credits: 20
   rest: GET /playstore-keyword-ranking/organic-impression-share/keyword/{keyword}/{countryCode}
 - name: googleplay_share_of_category
+  description: 'Provides the top categories in which the searched keyword is used in the metadata of apps.
+
+
+    Credit cost: 5 credits per request.'
   family: google-play-store
-  description: Provides the top categories in which the searched keyword is used in the metadata of apps.
   credits: 5
   rest: GET /playstore-keyword-ranking/share-of-category/keyword/{keyword}/{countryCode}
 - name: ma_app_match
+  description: 'Provides the track id of the given app''s opposite market counterpart.
+
+    Credit cost: 10 credits per request.'
   family: other-services
-  description: Provides the track id of the given app's opposite market counterpart.
   credits: 10
   rest: GET /app-match/app/{store}
 - name: ma_visibility_score
+  description: 'Provides visibility scores of the apps for the given store and country.
+
+    Credit cost: 10 credits per request.'
   family: other-services
-  description: Provides visibility scores of the apps for the given store and country.
   credits: 10
   rest: GET /graph-data/{store}/app/visibility/{country}
 - name: ma_historical_app_store_visibility_score
+  description: 'Provides historical App Store visibility scores of the apps for the given
+
+    country within a given date range.
+
+    Credit cost: 10 credits per request.'
   family: other-services
-  description: Provides historical App Store visibility scores of the apps for the given
   credits: 10
   rest: POST /appstore-visibility-score/visibility-score-history/apps
 - name: ma_historical_google_play_visibility_score
+  description: 'Provides historical Google Play visibility scores of the apps for the given
+
+    country within a given date range.
+
+    Credit cost: 10 credits per request.'
   family: other-services
-  description: Provides historical Google Play visibility scores of the apps for the given
   credits: 10
   rest: POST /playstore-visibility-score/visibility-score-history/apps
 - name: searchads_get_search_ads_integrations
+  description: "List the Search Ads API integrations you have on SearchAds.com, including\norganization\
+    \ (campaign group) ids to use on the reporting endpoint.\n\nCredit cost: 1 credit per request.\n\n\
+    Args:\n    None."
   family: search-ads
-  description: List the Search Ads API integrations you have on SearchAds.com, including
   credits: 1
   rest: GET /searchads/info/sa-integrations
 - name: searchads_get_mmp_integrations
+  description: "List the MMP integrations you have on SearchAds.com.\n\nCredit cost: 1 credit per request.\n\
+    \nArgs:\n    None."
   family: search-ads
-  description: List the MMP integrations you have on SearchAds.com.
   credits: 1
   rest: GET /searchads/info/v2/mmp-integrations
 - name: searchads_get_goals
+  description: 'List the goals you created on SearchAds.com. Goal ids can be used to
+
+    fetch MMP reports.
+
+
+    Credit cost: 1 credit per request.'
   family: search-ads
-  description: List the goals you created on SearchAds.com. Goal ids can be used to
   credits: 1
   rest: GET /searchads/info/goals
 - name: searchads_get_goal
+  description: 'Get details of a specific goal you created on SearchAds.com.
+
+
+    Credit cost: 1 credit per request.'
   family: search-ads
-  description: Get details of a specific goal you created on SearchAds.com.
   credits: 1
   rest: GET /searchads/info/goals/{id}
 - name: searchads_get_apps
+  description: "List the apps you run campaigns for on SearchAds.com.\n\nCredit cost: 1 credit per request.\n\
+    \nArgs:\n    None."
   family: search-ads
-  description: List the apps you run campaigns for on SearchAds.com.
   credits: 1
   rest: GET /searchads/info/apps
 - name: searchads_get_bid_history_logs
+  description: 'Get logs of bid changes on SearchAds.com.
+
+
+    Credit cost: 20 credits per request.'
   family: search-ads
-  description: Get logs of bid changes on SearchAds.com.
   credits: 20
   rest: GET /searchads/bid-history-logs
 - name: searchads_get_reports
+  description: 'Get ASA + MMP reports for different data levels.
+
+
+    For TOP_APPS reports use searchads_get_top_apps_report instead — that
+
+    report type requires an additional keywordList field.
+
+
+    Credit cost: 20 credits per request.'
   family: search-ads
-  description: Get ASA + MMP reports for different data levels.
   credits: 20
   rest: POST /searchads/reports
 - name: searchads_get_top_apps_report
+  description: 'Get a Search Ads TOP_APPS report: top advertising apps for the given
+
+    keywords. Unlike other report types, TOP_APPS requires a keywordList with
+
+    one entry per keyword.
+
+
+    Credit cost: 20 credits per request.'
   family: search-ads
-  description: 'Get a Search Ads TOP_APPS report: top advertising apps for the given'
   credits: 20
   rest: POST /searchads/reports
 - name: searchads_paid_keywords
+  description: 'Get paid Apple Search Ads keywords and their impression shares for the
+
+    given app. appShare is the app''s total share across all ad impressions;
+
+    slotShares is the app''s share within a specific slot.
+
+
+    Credit cost: 50 credits per request.'
   family: search-ads
-  description: Get paid Apple Search Ads keywords and their impression shares for the
   credits: 50
   rest: GET /searchads-stats/paid-keywords/{trackId}/{countryCode}
 - name: searchads_paying_apps
+  description: 'Get the track ids and impression shares of apps paying for the given
+
+    keyword. share is the app''s total share across all ad impressions;
+
+    slotShares is the app''s share within a specific slot.
+
+
+    Credit cost: 50 credits per request.'
   family: search-ads
-  description: Get the track ids and impression shares of apps paying for the given
   credits: 50
   rest: GET /searchads-stats/paying-apps/{countryCode}
 x-evidence:
@@ -537,3 +913,4 @@ tool_quality:
   scored: false
   note: Facts from the saved tools/list capture (mcp_tool_quality.py); recorded, not scored. Checks learned
     from Glimind's agent-readiness audit.
+tools_count: 88
