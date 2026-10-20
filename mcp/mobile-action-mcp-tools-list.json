@@ -1,6 +1,12 @@
 {
-  "jsonrpc": "2.0",
-  "id": 1,
+  "endpoint": "https://mcp.mobileaction.co/mcp",
+  "captured": "2026-10-20",
+  "method": "initialize + tools/list (anonymous, no tool called; roadmap#992)",
+  "protocol_version": "2025-06-18",
+  "server_info": {
+    "name": "MobileAction",
+    "version": "3.4.7"
+  },
   "result": {
     "tools": [
       {
@@ -1755,23 +1761,16 @@
               "description": "Page number for iteration; returns a maximum of 100 CPPs per request,\ndefaults to 0."
             },
             "country": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "default": null,
-              "description": "Optional two-letter country code; if not specified, returns for all countries."
+              "type": "string",
+              "description": "Two-letter country code (required), e.g. US."
             }
           },
           "required": [
             "track_id",
             "start_date",
             "end_date",
-            "page"
+            "page",
+            "country"
           ],
           "type": "object"
         },
@@ -1808,23 +1807,16 @@
               "description": "Page number for iteration; returns a maximum of 100 CPPs per request,\ndefaults to 0."
             },
             "country": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "default": null,
-              "description": "Optional two-letter country code; if not specified, returns for all countries."
+              "type": "string",
+              "description": "Two-letter country code (required), e.g. US."
             }
           },
           "required": [
             "keyword",
             "start_date",
             "end_date",
-            "page"
+            "page",
+            "country"
           ],
           "type": "object"
         },
@@ -1861,23 +1853,16 @@
               "description": "Page number for iteration; returns a maximum of 100 CPPs per request,\ndefaults to 0."
             },
             "country": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "default": null,
-              "description": "Optional two-letter country code; if not specified, returns for all countries."
+              "type": "string",
+              "description": "Two-letter country code (required), e.g. US."
             }
           },
           "required": [
             "category_id",
             "start_date",
             "end_date",
-            "page"
+            "page",
+            "country"
           ],
           "type": "object"
         },
@@ -3848,7 +3833,7 @@
       },
       {
         "name": "searchads_get_reports",
-        "description": "Get ASA + MMP reports for different data levels.\n\nFor TOP_APPS reports use searchads_get_top_apps_report instead \u2014 that\nreport type requires an additional keywordList field.\n\nCredit cost: 20 credits per request.",
+        "description": "Get ASA + MMP reports for different data levels.\n\nFor TOP_APPS reports use searchads_get_top_apps_report instead — that\nreport type requires an additional keywordList field.\n\nCredit cost: 20 credits per request.",
         "inputSchema": {
           "additionalProperties": false,
           "properties": {
@@ -3882,6 +3867,36 @@
               ],
               "default": null,
               "description": "List of organization (campaign group) ids. May be omitted for\nACCOUNT and APP level reports but is required for other levels. At\nmost 1 orgId is allowed for CAMPAIGN, AD_GROUP, AD, CPP, KEYWORD,\nNEGATIVE or SEARCH_TERM reports."
+            },
+            "campaign_ids": {
+              "anyOf": [
+                {
+                  "items": {
+                    "type": "integer"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional list of campaign ids to filter the reports.\nApplicable to CAMPAIGN, AD_GROUP, AD, KEYWORD, NEGATIVE or\nSEARCH_TERM level reports."
+            },
+            "ad_group_ids": {
+              "anyOf": [
+                {
+                  "items": {
+                    "type": "integer"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Optional list of ad group ids to filter the reports.\nApplicable to AD_GROUP, AD, KEYWORD, NEGATIVE or SEARCH_TERM\nlevel reports."
             },
             "goal_id": {
               "anyOf": [
