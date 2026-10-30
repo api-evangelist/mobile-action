@@ -64,6 +64,124 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Mobile Action is a company surfaced as a portfolio company of 500-global and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+MobileAction is an app-store marketing intelligence platform used by 5,000+ mobile app and game companies for App Store Optimization (ASO), Apple Ads campaign management (CMP), ad-creative intelligence across 90M+ creatives, CPP (Custom Product Page) intelligence and market benchmarking. It is an InMobi Advertising company. MobileAction publishes two machine surfaces over the same intelligence core and the same credit allowance: a credit-metered REST API at https://api.mobileaction.co, authenticated with a per-account API key passed as the `token` query parameter, covering App Store and Google Play keyword and category rankings, app metadata and version timelines, reviews and review word analysis, download/revenue estimations, ad creatives, Apple Ads reporting and dashboard data; and a remote MCP server at https://mcp.mobileaction.co/mcp exposing 88 tools whose catalogue is readable anonymously. No OpenAPI document is published. API access is enterprise-only, arranged through sales, with keys issued by a Customer Success Manager. Backed by 500 Global.
 
-Backed by: 500-global — https://mobileaction.co
+**Areas:** Company · App Store Optimization · ASO · Mobile Marketing · Apple Search Ads · App Intelligence · Ad Intelligence · Market Intelligence · Analytics · MCP · Agent Tools · App Store Intelligence
+
+## Mobile Action on APIs.io
+
+Everything profiled for Mobile Action is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/mobile-action/](https://apis.io/providers/mobile-action/)** — or go straight to one of the APIs or properties below.
+
+### APIs (2)
+
+- [MobileAction API](https://apis.io/apis/mobile-action/mobileaction-api/) — Credit-metered REST intelligence API exposing App Store and Google Play keyword rankings, app metadata, ad creatives, Apple Search Ads / CPP data, and…
+- [MobileAction MCP Server](https://apis.io/apis/mobile-action/mobileaction-mcp-server/) — Remote Model Context Protocol server exposing 88 MobileAction tools (App Store and Google Play keyword/category/app intelligence, Ad Intelligence, CPP…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [MobileAction](https://apis.io/servers/mobile-action/mobileaction/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Mobile Action Authentication](https://apis.io/security/mobile-action/mobile-action-authentication/)
+- [Mobile Action Domain Security](https://apis.io/security/mobile-action/mobile-action-domain-security/)
+- [Mobile Action Trust Center](https://apis.io/security/mobile-action/mobile-action-trust-center/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Mobile Action Scopes](https://apis.io/scopes/mobile-action/mobile-action-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Mobile Action Plans Pricing](https://apis.io/plans/mobile-action/mobile-action-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Mobile Action Rate Limits](https://apis.io/rate-limits/mobile-action/mobile-action-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://mobileaction.co)
+- [Documentation](https://docs.mobileaction.co/)
+- [Getting started](https://docs.mobileaction.co/guide/introduction)
+- [API reference](https://docs.mobileaction.co/)
+- [Pricing](https://www.mobileaction.co/pricing/)
+- [Sign up](https://app.mobileaction.co/register)
+- [Support](https://helpcenter.mobileaction.co/en)
+- [Blog](https://www.mobileaction.co/blog/)
+- [Compliance](https://trust.mobileaction.co/)
+- [Terms of service](https://www.mobileaction.co/terms-of-service/)
+- [Privacy policy](https://www.mobileaction.co/privacy-policy/)
+- [GitHub](https://github.com/mobileaction)
+- [Status](https://status.mobileaction.co)
+
+## API Evangelist rating
+
+**Kin Score 38.0** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 42.1 |
+| Developer ergonomics | 42.3 |
+| Access clarity | 53.9 |
+
+**Agent readiness 12.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 39.2** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/mobile-action/](https://apis.io/providers/mobile-action/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Mobile Action: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/mobile-action/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
